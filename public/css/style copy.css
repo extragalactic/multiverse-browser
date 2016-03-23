@@ -1,0 +1,255 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #000;
+  color: #fff;
+  font-size: 1.2em;
+  font-family: 'Raleway', sans-serif; 
+  line-height: 110%;
+  padding: 30px;
+}
+
+body a {
+  text-decoration: none;    
+}
+
+h1 {
+    color: #fff;   
+    font-family: 'Arimo', sans-serif;     
+    line-height: 120%;
+}
+
+h2 {
+    font-size: 1.4em;
+    color: #ccc;
+    font-family: 'Arimo', sans-serif;    
+}
+
+h3, p {
+    color: #ddd;
+}
+
+h4 {
+    color: #ddd;
+    font-size: 0.8em;
+}
+
+h5 {
+    color: #ddd;
+    font-size: 0.6em;
+}
+
+.textColourData {
+    color: #c388ff;
+}
+
+.search {
+    padding: 0px 0px 20px 0px;
+}
+
+.search label {
+    font-size: 0.7em;   
+}
+
+.clearfix {
+    overflow: auto;
+}
+
+.galaxyThumb {
+    float: left;
+}
+
+.galaxyDetailsThumb {
+    float: left;
+    border-radius: 5px;
+}
+
+.galaxyInfo a {
+    color: #ddd;
+}
+
+.largeImage {
+    border-radius: 30px;
+    border: 2px solid #777;
+}
+
+.galaxy.ng-enter.ng-enter-active,
+.galaxy.ng-leave {
+    opacity: 1;
+    height: 140px;
+    overflow: hidden;
+}
+
+.galaxy.ng-leave.ng-leave-active,
+.galaxy.ng-enter {
+    opacity: 0;
+    height: 0px;
+    overflow: hidden;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
+
+/* ----------------------------------------------- */
+
+.masonryList {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.galaxyList {
+ -moz-column-count: 3;
+ -moz-column-gap: 0px;
+ -webkit-column-count: 3;
+ -webkit-column-gap: 0px;
+ column-count: 3;
+ column-gap: 0px;
+ width: 1200px;
+}
+
+.galaxyList img {
+ display: inline-block;
+ margin-bottom: 0px;
+ width: 100%;
+}
+
+@media only screen and (max-width : 1199px),
+only screen and (max-device-width : 1199px){
+ .galaxyList {
+ -moz-column-count: 5;
+ -moz-column-gap: 0px;
+ -webkit-column-count: 5;
+ -webkit-column-gap: 0px;
+ column-count: 5;
+ column-gap: 0px;
+ width: 1000px;
+ }
+ 
+ .masonryList {
+ width: 1000px;
+ }
+}
+ 
+ 
+@media only screen and (max-width : 999px),
+only screen and (max-device-width : 999px){
+ .galaxyList {
+ -moz-column-count: 4;
+ -moz-column-gap: 0px;
+ -webkit-column-count: 4;
+ -webkit-column-gap: 0px;
+ column-count: 4;
+ column-gap: 0px;
+ width: 800px;
+ }
+ 
+ .masonryList {
+ width: 800px;
+ }
+}
+ 
+@media only screen and (max-width : 799px),
+only screen and (max-device-width : 799px){
+ .galaxyList {
+ -moz-column-count: 3;
+ -moz-column-gap: 0px;
+ -webkit-column-count: 3;
+ -webkit-column-gap: 0px;
+ column-count: 3;
+ column-gap: 0px;
+ width: 600px;
+ }
+ 
+ .masonryList {
+ width: 600px;
+ }
+}
+ 
+@media only screen and (max-width : 599px),
+only screen and (max-device-width : 599px){
+ .galaxyList {
+ -moz-column-count: 2;
+ -moz-column-gap: 0px;
+ -webkit-column-count: 2;
+ -webkit-column-gap: 0px;
+ column-count: 2;
+ column-gap: 0px;
+ width: 400px;
+ }
+ 
+ .masonryList {
+ width: 400px;
+ }
+}
+
+.galaxyList a {
+    display: block;
+    text-decoration: none;
+}
+
+.galaxyList li {   
+    display: block;
+    /*display: inline;
+    list-style-type: none;*/
+    padding: 0px 0px 0px 0px;*/
+    margin: 0;
+    border-bottom: 1px dotted black;
+    opacity: .9;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.galaxyList li:hover {
+    background: #111;
+    opacity: 1;
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05); 
+}
+
+/* ----------------------------------------------- */
+
+
+.galaxyListLinear {
+}
+
+.galaxyListLinear a {
+    display: block;
+    text-decoration: none;
+}
+
+.galaxyListLinear img {
+   display: block;
+   margin-bottom: 0px;
+   width: 100%;
+}
+
+.galaxyListLinear li {   
+    display: block;
+    padding: 0px 0px 0px 0px;
+    margin: 0;
+    border-bottom: 1px dotted black;
+    opacity: .9;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+.galaxyListLinear li:hover {
+    background: #111;
+    opacity: 1;
+    -webkit-transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05); 
+}
+
+

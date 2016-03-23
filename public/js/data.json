@@ -1,0 +1,26 @@
+{"galaxyInfo" : [
+{
+    "name"  : "M81",    
+    "shortname" : "M81",
+    "title" : "Bode's Galaxy",
+    "type"  : "spiral"
+},
+{
+    "name"  : "NGC 5128",
+    "shortname" : "NGC_5128",
+    "title" : "Centaurus-A",
+    "type"  : "elliptical"
+},
+{
+    "name"  : "NGC 253",
+    "shortname" : "NGC_253",
+    "title" : "Sculptor",
+    "type"  : "spiral"
+},
+{
+    "name"  : "M83",  
+    "shortname" : "M83",
+    "title" : "Southern Pinwheel",
+    "type"  : "spiral"
+}
+]}
