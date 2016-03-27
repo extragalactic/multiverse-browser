@@ -14,10 +14,11 @@ var socketio = require('socket.io-client');
 // init Angular
 var myApp = angular.module('myApp', [
   'ngRoute',
-  'galacticController',
   'ui.bootstrap',
-  'ngRangeFilter'
+  'ngRangeFilter',
+  'ngAnimate'
 ]);
+
 
 // create Socket
 console.log('--------------- creating socket connection ------------------');

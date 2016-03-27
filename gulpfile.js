@@ -2,12 +2,17 @@ var gulp = require('gulp'),
     gutil = require('gulp-util'),
     concat = require('gulp-concat'),
     minify = require('gulp-minify'),
-    jshint = require('gulp-jshint'),    
+    jshint = require('gulp-jshint'),
     browserify = require('gulp-browserify');
 
 var jsSources = [
   'public/js/app.js',
-  'public/js/controllers.js'
+  'public/js/listCtrl.js',
+  'public/js/detailsCtrl.js',
+  'public/js/headerCtrl.js',
+  'public/js/optionsCtrl.js',
+  'public/js/videoCtrl.js',
+  'public/js/aboutCtrl.js'
 ];
 
 var moduleSources = [
@@ -15,13 +20,13 @@ var moduleSources = [
 ];
 
 var htmlSources = [
-  'public/*.html'    
+  'public/*.html'
 ];
 
 gulp.task('jshint', function() {
   gulp.src(jsSources)
     .pipe(jshint())
-    .pipe(jshint.reporter('jshint-stylish-ex'))  
+    .pipe(jshint.reporter('jshint-stylish-ex'))
     .pipe(jshint.reporter('fail'));
 });
 

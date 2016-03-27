@@ -24516,10 +24516,11 @@ var socketio = require('socket.io-client');
 // init Angular
 var myApp = angular.module('myApp', [
   'ngRoute',
-  'galacticController',
   'ui.bootstrap',
-  'ngRangeFilter'
+  'ngRangeFilter',
+  'ngAnimate'
 ]);
+
 
 // create Socket
 console.log('--------------- creating socket connection ------------------');
@@ -24599,7 +24600,7 @@ $(document).on('click', '#menuCollapseButton', function (e) {
 });
 
 // ----------------------------------------------------
-//  Controller code (for all pages)
+//  ListController
 // ----------------------------------------------------
 
 global.jQuery = $ = require('jquery');
@@ -24609,13 +24610,8 @@ require('ng-range-filter');
 //var users = require('./galaxyInfo');
 //var fs = require('browserify-fs');
 
-var galacticController = angular.module('galacticController', [
-  'ngAnimate',
-  'ui.bootstrap'
-]);
-
 // ListController
-galacticController.controller('ListController', ['$scope', '$http', 'socket', 'appVars', function ($scope, $http, socket, appVars) {
+angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket', 'appVars', function ($scope, $http, socket, appVars) {
 
   this.socket = socket;
   this.appVars = appVars;
@@ -24631,7 +24627,6 @@ galacticController.controller('ListController', ['$scope', '$http', 'socket', 'a
   // listen for socket messages from server
 
   // hmmm... this logic is suspicious since it will do a config for every client connection
-
   socket.on('connect', function () {
     // sends to socket.io server the host/port of oscServer and oscClient
     socket.emit('config', {
@@ -24821,8 +24816,10 @@ galacticController.controller('ListController', ['$scope', '$http', 'socket', 'a
   socket.emit('galaxyGroupsRequest');
 }]);
 
+//
 // DetailsController
-galacticController.controller('DetailsController', ['$scope', '$http', '$routeParams', 'appVars', 'socket', function ($scope, $http, $routeParams, appVars, socket) {
+//
+angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$routeParams', 'appVars', 'socket', function ($scope, $http, $routeParams, appVars, socket) {
 
   this.appVars = appVars;
   this.socket = socket;
@@ -24868,18 +24865,22 @@ galacticController.controller('DetailsController', ['$scope', '$http', '$routePa
 
 }]);
 
-// VideoController
-galacticController.controller('VideoController', ['$scope', '$http', function ($scope, $http) {
+//
+// HeaderController
+//
+angular.module('myApp').controller('HeaderController', ['$scope', '$http', function ($scope, $http) {
 
+  // create functionality for nav buttons
+  $scope.isActive = function (viewLocation) {
+    var active = (viewLocation === $location.path());
+    return active;
+  };
 }]);
 
-// AboutController
-galacticController.controller('AboutController', ['$scope', '$http', function ($scope, $http) {
-
-}]);
-
+//
 // OptionsController
-galacticController.controller('OptionsController', ['$scope', '$http', 'appVars', function ($scope, $http, appVars) {
+//
+angular.module('myApp').controller('OptionsController', ['$scope', '$http', 'appVars', function ($scope, $http, appVars) {
 
   this.appVars = appVars;
   $scope.listSelectStyle = appVars.globalOptions.listSelectStyle;
@@ -24902,34 +24903,19 @@ galacticController.controller('OptionsController', ['$scope', '$http', 'appVars'
 
 }]);
 
-// HeaderController
-galacticController.controller('HeaderController', ['$scope', '$http', function ($scope, $http) {
-
-  $scope.isActive = function (viewLocation) {
-    var active = (viewLocation === $location.path());
-    return active;
-  };
+//
+// VideoController
+//
+angular.module('myApp').controller('VideoController', ['$scope', '$http', function ($scope, $http) {
+  // ...
 }]);
 
-/* An example of using $routeParams info ...
-
-  $http.get('js/data.json').success(function(data) {
-      $scope.galaxies = data.galaxyInfo;
-      $scope.whichItem = $routeParams.itemId;
-
-      if($routeParams.itemId > 0) {
-          $scope.prevItem = Number($routeParams.itemId) - 1;
-      } else {
-          $scope.prevItem = $scope.galaxies.length - 1;
-      }
-      if($routeParams.itemId < $scope.galaxies.length - 1) {
-          $scope.nextItem = Number($routeParams.itemId) + 1;
-      } else {
-          $scope.nextItem = 0;
-      }
-
-  });
- */
+//
+// AboutController
+//
+angular.module('myApp').controller('AboutController', ['$scope', '$http', function ($scope, $http) {
+  // ...
+}]);
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"angular-ui-bootstrap":2,"jquery":4,"ng-range-filter":5,"socket.io-client":7}]},{},[54])
