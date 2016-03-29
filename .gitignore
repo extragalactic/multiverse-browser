@@ -2,4 +2,6 @@ node_modules/
 public/images/
 .DS_Store
 .tmp
+.git
+multiverse-browser.git
 npm-debug.log
