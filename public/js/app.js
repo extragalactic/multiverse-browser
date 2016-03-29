@@ -15,14 +15,13 @@ var socketio = require('socket.io-client');
 var myApp = angular.module('myApp', [
   'ngRoute',
   'ui.bootstrap',
-  'ngRangeFilter',
   'ngAnimate'
 ]);
 
 
 // create Socket
 console.log('--------------- creating socket connection ------------------');
-var socket = socketio("http://192.168.1.65:3100");
+var socket = socketio("http://192.168.1.67:3100");
 socket.emit('login');
 
 myApp.value('socket', socket);

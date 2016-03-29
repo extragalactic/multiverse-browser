@@ -1,0 +1,325 @@
+
+$primaryColorLight: #ba6fe8;
+$primaryColorMedium: #7d3ca3;
+$primaryColorDark: #3c1c4e;
+
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    overflow-x: hidden;
+}
+body {
+    background: black;
+    color: white;
+    font-size: 2.2em;
+    font-family: 'Raleway', sans-serif;
+    line-height: 90%;
+    padding: 0px 0px 5px 0px;
+    position: relative;
+    overflow-x: hidden;
+    margin-left: auto;
+    margin-right: auto;
+
+    label {
+        font-size: 0.6em;
+    }
+    input {
+        font-size: 0.6em;
+    }
+    a {
+        text-decoration: none;
+    }
+    p {
+        color: #ddd;
+        font-size: 0.7em;
+        line-height: 120%;
+    }
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid #888;
+    margin: 1em 0;
+    padding: 0;
+}
+h1 {
+    color: white;
+    font-family: 'Arimo', sans-serif;
+    line-height: 90%;
+    font-size: 1.2em;
+}
+h2 {
+    font-size: 1.2em;
+    color: #ccc;
+    font-family: 'Arimo', sans-serif;
+}
+h3 {
+    color: #ddd;
+    font-size: 0.7em;
+    line-height: 120%;
+}
+h4 {
+    color: #ddd;
+    font-size: 0.7em;
+    line-height: 90%;
+}
+h5 {
+    color: #ddd;
+    font-size: 0.6em;
+}
+
+div {
+    button {
+        color: black;
+        font-size: 0.6em;
+        padding: 2px;
+    }
+    label {
+        font-size: 0.7em;
+    }
+}
+
+.main {
+    margin-top: -30px;
+    padding-right: 20px;
+    padding-left: 7px;
+}
+
+.btn-link {
+    color: $primaryColorLight;
+    text-decoration: none;
+
+    &:hover {
+        color: white;
+        text-decoration: none;
+    }
+}
+
+.textColourData {
+    color: $primaryColorLight;
+}
+
+.search {
+    padding: 0px 0px 15px 0px;
+
+    label {
+        font-size: 0.7em;
+    }
+}
+
+.clearfix {
+    overflow: auto;
+}
+
+.galaxyThumb {
+    min-height: 100px;
+    min-width: 150px;
+    float: left;
+}
+.galaxyDetailsThumb {
+    min-width: 150px;
+    border-radius: 5px;
+    padding-bottom: 15px;
+}
+
+.galaxyInfo {
+    a {
+        color: #ddd;
+    }
+}
+
+.largeImageWrapper {
+    padding-bottom: 30px;
+}
+.largeImage {
+    border-radius: 30px;
+    border: 2px solid #777;
+}
+.galaxy.ng-enter.ng-enter-active, .galaxy.ng-leave {
+    opacity: 1;
+    height: 140px;
+    overflow: hidden;
+}
+.galaxy.ng-leave.ng-leave-active, .galaxy.ng-enter {
+    opacity: 0;
+    height: 0px;
+    overflow: hidden;
+}
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+/* ----------------------------------------------- */
+
+.multiList {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.galaxyList {
+    -moz-column-gap: 0px;
+    -webkit-column-gap: 0px;
+    column-gap: 0px;
+
+    a {
+        display: block;
+        text-decoration: none;
+    }
+    li {
+        display: inline-block;
+        padding: 0px 0px 0px 0px;
+        margin: 0;
+        border: 1px solid black;
+        border-radius: 10px;
+
+        &:hover {
+            background: #111;
+            border: 1px solid $primaryColorLight;
+        }
+    }
+}
+
+@mixin setListFormat ($numCols:4, $width:800px) {
+    .galaxyList {
+        -moz-column-count: $numCols;
+        -webkit-column-count: $numCols;
+        column-count: $numCols;
+        width: $width;
+    }
+    .multiList {
+        width: $width;
+    }
+}
+
+@media only screen and (max-width: 1799px), only screen and (max-device-width: 1799px) {
+    @include setListFormat (6, 1200px);
+}
+
+@media only screen and (max-width: 1199px), only screen and (max-device-width: 1199px) {
+    @include setListFormat (5, 1000px);
+}
+
+@media only screen and (max-width: 991px), only screen and (max-device-width: 991px) {
+    @include setListFormat (4, 800px);
+}
+
+@media only screen and (max-width: 767px), only screen and (max-device-width: 767px) {
+    @include setListFormat (3, 600px);
+}
+
+@media only screen and (max-width: 599px), only screen and (max-device-width: 599px) {
+    @include setListFormat (2, 400px);
+}
+
+/* ----------------------------------------------- */
+
+.galaxyListLinear {
+    width: 338px;
+    a {
+        display: block;
+        text-decoration: none;
+    }
+    li {
+        width: auto;
+        display: block;
+        padding: 0px 0px 0px 0px;
+        margin: 0;
+        border: 1px solid black;
+        border-radius: 10px;
+        opacity: 1;
+        -webkit-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
+
+        &:hover {
+            background: #111;
+            border: 1px solid $primaryColorLight;
+            -webkit-transform: scale(1.05);
+            -moz-transform: scale(1.05);
+            -o-transform: scale(1.05);
+            transform: scale(1.05);
+        }
+    }
+}
+
+select {
+    color: white;
+    background-color: #222;
+}
+
+/* ----------------------------------------------- */
+
+#navigationBar {
+    li {
+        font-size: 0.7em;
+    }
+}
+
+/* custom navbar class used for skinning the navbar */
+.navbar-custom {
+    background: linear-gradient(#393939, #111111);
+}
+
+.footer {
+    h4 {
+        color: #888;
+    }
+}
+
+.btn {
+  background: $primaryColorMedium;
+  background-image: -webkit-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
+  background-image: -moz-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
+  background-image: -ms-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
+  background-image: -o-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
+  background-image: linear-gradient(to bottom, $primaryColorMedium, $primaryColorDark);
+  -webkit-border-radius: 12;
+  -moz-border-radius: 12;
+  border-radius: 12px;
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  font-size: 0.7em;
+  padding: 5px 10px 5px 10px;
+  border: solid #c8aed9 1px;
+  text-decoration: none;
+
+  &:focus {
+      color: white;
+  }
+
+  &:hover {
+    background: $primaryColorLight;
+    background-image: -webkit-linear-gradient(top, $primaryColorLight, $primaryColorMedium);
+    background-image: -moz-linear-gradient(top, $primaryColorLight, $primaryColorMedium);
+    background-image: -ms-linear-gradient(top, $primaryColorLight, $primaryColorMedium);
+    background-image: -o-linear-gradient(top, $primaryColorLight, $primaryColorMedium);
+    background-image: linear-gradient(to bottom, $primaryColorLight, $primaryColorMedium);
+    text-decoration: none;
+  }
+}
+
+
+
+atom-text-editor {
+  &, &::shadow {
+    atom-text-editor-minimap {
+      display: none;
+    }
+  }
+
+  &.is-focused {
+    &, &::shadow {
+      atom-text-editor-minimap {
+        display: block;
+      }
+    }
+  }
+}

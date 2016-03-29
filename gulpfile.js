@@ -3,6 +3,7 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     minify = require('gulp-minify'),
     jshint = require('gulp-jshint'),
+    sass = require('gulp-sass'),
     browserify = require('gulp-browserify');
 
 var jsSources = [
@@ -23,11 +24,21 @@ var htmlSources = [
   'public/*.html'
 ];
 
+var scssSources = [
+  'public/scss/*.scss'
+];
+
 gulp.task('jshint', function() {
   gulp.src(jsSources)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish-ex'))
     .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('sass', function() {
+  return gulp.src(scssSources)
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('js', function() {
@@ -46,7 +57,8 @@ gulp.task('minify', function() {
 gulp.task('watch', function() {
   gulp.watch(moduleSources, ['jshint', 'js']);
   gulp.watch(jsSources, ['jshint', 'js']);
+  gulp.watch(scssSources, ['sass']);
 });
 
 
-gulp.task('default', ['jshint', 'js', 'watch']);
+gulp.task('default', ['jshint', 'sass', 'js', 'watch']);

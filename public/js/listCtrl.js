@@ -3,7 +3,6 @@
 // ----------------------------------------------------
 
 global.jQuery = $ = require('jquery');
-require('ng-range-filter');
 
 //require('socket.io-client');
 //var users = require('./galaxyInfo');
@@ -31,11 +30,11 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
     socket.emit('config', {
       server: {
         port: 3333,
-        host: '192.168.1.65'
+        host: '192.168.1.67'
       },
       client: {
         port: 3334,
-        host: '192.168.1.65'
+        host: '192.168.1.67'
       }
     });
   });

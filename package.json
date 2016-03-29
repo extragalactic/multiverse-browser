@@ -1,7 +1,7 @@
 {
   "name": "Galactic_Database",
   "version": "0.0.1",
-  "description": "Node.js galactic database",
+  "description": "Node.js multiverse database browser",
   "main": "galaxy-server.js",
   "dependencies": {
     "angular-ui-bootstrap": "^1.2.4",
@@ -9,7 +9,6 @@
     "cors": "^2.7.1",
     "express": "^4.13.4",
     "mongodb": "^2.1.7",
-    "ng-range-filter": "^0.1.0",
     "node-osc": "^1.2.0",
     "socket.io": "^1.4.5",
     "socket.io-client": "^1.4.5",
@@ -24,6 +23,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-jshint": "^2.0.0",
     "gulp-minify": "0.0.5",
+    "gulp-sass": "^2.2.0",
     "gulp-util": "^3.0.7",
     "jquery": "^2.2.0",
     "jshint": "^2.9.1",
