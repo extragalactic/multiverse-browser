@@ -1,4 +1,5 @@
 node_modules/
+public/images/
 .DS_Store
 .tmp
 npm-debug.log
