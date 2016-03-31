@@ -21,7 +21,11 @@ body {
   body input {
     font-size: 0.6em; }
   body a {
-    text-decoration: none; }
+    text-decoration: none;
+    color: #ba6fe8; }
+    body a:hover {
+      text-decoration: none;
+      color: #9de86f; }
   body p {
     color: #ddd;
     font-size: 0.7em;
@@ -260,7 +264,8 @@ select {
     background-image: -ms-linear-gradient(top, #ba6fe8, #7d3ca3);
     background-image: -o-linear-gradient(top, #ba6fe8, #7d3ca3);
     background-image: linear-gradient(to bottom, #ba6fe8, #7d3ca3);
-    text-decoration: none; }
+    text-decoration: none;
+    color: white; }
 
 atom-text-editor atom-text-editor-minimap, atom-text-editor::shadow atom-text-editor-minimap {
   display: none; }

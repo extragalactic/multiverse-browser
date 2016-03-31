@@ -2,6 +2,7 @@
 $primaryColorLight: #ba6fe8;
 $primaryColorMedium: #7d3ca3;
 $primaryColorDark: #3c1c4e;
+$complementaryColorLight: complement($primaryColorLight);
 
 * {
     margin: 0;
@@ -30,6 +31,12 @@ body {
     }
     a {
         text-decoration: none;
+        color: $primaryColorLight;
+
+        &:hover {
+            text-decoration: none;
+            color: $complementaryColorLight;
+        }
     }
     p {
         color: #ddd;
@@ -303,6 +310,7 @@ select {
     background-image: -o-linear-gradient(top, $primaryColorLight, $primaryColorMedium);
     background-image: linear-gradient(to bottom, $primaryColorLight, $primaryColorMedium);
     text-decoration: none;
+    color: white;
   }
 }
 
