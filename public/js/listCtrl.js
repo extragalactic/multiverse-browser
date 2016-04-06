@@ -2,7 +2,7 @@
 //  ListController
 // ----------------------------------------------------
 
-global.jQuery = $ = require('jquery');
+global.jQuery = $ = require('jquery'); 
 
 //require('socket.io-client');
 //var users = require('./galaxyInfo');

@@ -1,6 +1,7 @@
-//
+// ----------------------------------------------------
 // HeaderController
-//
+// ----------------------------------------------------
+
 angular.module('myApp').controller('HeaderController', ['$scope', '$http', function ($scope, $http) {
 
   // create functionality for nav buttons

@@ -18,25 +18,25 @@ var myApp = angular.module('myApp', [
   'ngAnimate'
 ]);
 
-
 // create Socket
 console.log('--------------- creating socket connection ------------------');
 var socket = socketio("http://" + MULTIVERSE_SERVER_IP + ":3100");
 socket.emit('login');
 
+// make the socket accessible to controllers later
 myApp.value('socket', socket);
 
 // application 'globals' using Value
 myApp.value('appVars', {
   searchTerms: {
-    group: 'Local_Group',
+    group: 'Leo_II',
     galaxyType: '',
-    /* all types */
+    /* '' = all types */
     orderBy: 'Distance',
     direction: '',
-    /* ascending */
-    displayStyle: 'List',
-    resultsPerPage: '10',
+    /* '' = ascending */
+    displayStyle: 'Tiles',
+    resultsPerPage: '20',
     resultsStartPosition: 0
   },
   globalOptions: {

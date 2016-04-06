@@ -1,6 +1,7 @@
-//
+// ----------------------------------------------------
 // OptionsController
-//
+// ----------------------------------------------------
+
 angular.module('myApp').controller('OptionsController', ['$scope', '$http', 'appVars', function ($scope, $http, appVars) {
 
   this.appVars = appVars;

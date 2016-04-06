@@ -3,6 +3,11 @@ $primaryColorLight: #ba6fe8;
 $primaryColorMedium: #7d3ca3;
 $primaryColorDark: #3c1c4e;
 $complementaryColorLight: complement($primaryColorLight);
+$textColorLight: #ddd;
+$textColorDark: #777;
+$backgroundColorLight: #444;
+$backgroundColorMedium: #222;
+$backgroundColorDark: #111;
 
 * {
     margin: 0;
@@ -39,7 +44,7 @@ body {
         }
     }
     p {
-        color: #ddd;
+        color: $textColorLight;
         font-size: 0.7em;
         line-height: 120%;
     }
@@ -49,7 +54,7 @@ hr {
     display: block;
     height: 1px;
     border: 0;
-    border-top: 1px solid #888;
+    border-top: 1px solid $textColorDark;
     margin: 1em 0;
     padding: 0;
 }
@@ -61,21 +66,21 @@ h1 {
 }
 h2 {
     font-size: 1.2em;
-    color: #ccc;
+    color: $textColorLight;
     font-family: 'Arimo', sans-serif;
 }
 h3 {
-    color: #ddd;
+    color: $textColorLight;
     font-size: 0.7em;
     line-height: 120%;
 }
 h4 {
-    color: #ddd;
+    color: $textColorLight;
     font-size: 0.7em;
     line-height: 90%;
 }
 h5 {
-    color: #ddd;
+    color: $textColorLight;
     font-size: 0.6em;
 }
 
@@ -118,6 +123,11 @@ div {
     }
 }
 
+.searchBarLeft {
+    float: left;
+    min-width: 300px;
+}
+
 .clearfix {
     overflow: auto;
 }
@@ -135,8 +145,29 @@ div {
 
 .galaxyInfo {
     a {
-        color: #ddd;
+        color: $textColorLight;
     }
+}
+
+.galaxyDetailsLeft {
+    float: left;
+    padding-right: 15px;
+}
+
+.galaxyDetailsRight {
+    padding-top: 13px;
+    padding-left: 8px;
+}
+
+.galaxyDetailsBox1 {
+    float: left;
+    min-width: 150px;
+    padding-right: 8px;
+}
+
+.galaxyDetailsBox2 {
+    min-width: 150px;
+    float: left;
 }
 
 .largeImageWrapper {
@@ -144,7 +175,7 @@ div {
 }
 .largeImage {
     border-radius: 30px;
-    border: 2px solid #777;
+    border: 2px solid $textColorDark;
 }
 .galaxy.ng-enter.ng-enter-active, .galaxy.ng-leave {
     opacity: 1;
@@ -187,7 +218,7 @@ div {
         border-radius: 10px;
 
         &:hover {
-            background: #111;
+            background: $backgroundColorDark;
             border: 1px solid $primaryColorLight;
         }
     }
@@ -247,7 +278,7 @@ div {
         transition: all 0.3s ease-out;
 
         &:hover {
-            background: #111;
+            background: $backgroundColorDark;
             border: 1px solid $primaryColorLight;
             -webkit-transform: scale(1.05);
             -moz-transform: scale(1.05);
@@ -259,7 +290,7 @@ div {
 
 select {
     color: white;
-    background-color: #222;
+    background-color: $backgroundColorMedium;
 }
 
 /* ----------------------------------------------- */
@@ -272,12 +303,12 @@ select {
 
 /* custom navbar class used for skinning the navbar */
 .navbar-custom {
-    background: linear-gradient(#393939, #111111);
+    background: linear-gradient($backgroundColorLight, $backgroundColorDark);
 }
 
 .footer {
     h4 {
-        color: #888;
+        color: $textColorDark;
     }
 }
 

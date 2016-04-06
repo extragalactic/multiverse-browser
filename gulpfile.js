@@ -1,3 +1,4 @@
+// require modules
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     concat = require('gulp-concat'),
@@ -6,6 +7,7 @@ var gulp = require('gulp'),
     sass = require('gulp-sass'),
     browserify = require('gulp-browserify');
 
+// list source files
 var jsSources = [
   'public/js/app.js',
   'public/js/listCtrl.js',
@@ -15,19 +17,17 @@ var jsSources = [
   'public/js/videoCtrl.js',
   'public/js/aboutCtrl.js'
 ];
-
 var moduleSources = [
   'public/js/galaxyInfo.js'
 ];
-
 var htmlSources = [
   'public/*.html'
 ];
-
 var scssSources = [
   'public/scss/*.scss'
 ];
 
+// define tasks
 gulp.task('jshint', function() {
   gulp.src(jsSources)
     .pipe(jshint())
@@ -60,5 +60,5 @@ gulp.task('watch', function() {
   gulp.watch(scssSources, ['sass']);
 });
 
-
+//  run tasks
 gulp.task('default', ['jshint', 'sass', 'js', 'watch']);

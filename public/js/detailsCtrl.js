@@ -1,6 +1,7 @@
-//
+// ----------------------------------------------------
 // DetailsController
-//
+// ----------------------------------------------------
+
 angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$routeParams', 'appVars', 'socket', function ($scope, $http, $routeParams, appVars, socket) {
 
   this.appVars = appVars;

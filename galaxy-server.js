@@ -4,30 +4,28 @@
 
 (function() {
 
-// npm modules
+// define external modules
 var express = require("express");
 var http = require("http");
 var app = express();
 var server = http.createServer(app).listen(3100);
 var io = require("socket.io")(server);
 var fs = require("fs");
+var osc = require('node-osc');
 
+// init MongoDB vars
 var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
 var url = 'mongodb://localhost:27017/multiverse';
 
-var osc = require('node-osc');
-
-var oscServer, oscClient;
-
 // custom modules or data structures
 var users = require('./public/js/galaxyInfo');
 
-// init vars
+// init application vars
 var userList = [];
-
 var connectedDB = null;
+var oscServer, oscClient;
 
 // connect to db
 MongoClient.connect(url, function(err, db) {
@@ -36,8 +34,10 @@ MongoClient.connect(url, function(err, db) {
   console.log("Connected correctly to database.");
 });
 
+// set root folder for Express web server
 app.use(express.static("./public"));
 
+// define handlers for all incoming messages
 io.on("connection", function(socket) {
 
    // ----------------------------------------------------
@@ -46,11 +46,10 @@ io.on("connection", function(socket) {
       console.log('configure OSC socket');
       oscServer = new osc.Server(obj.server.port, obj.server.host);
       oscClient = new osc.Client(obj.client.host, obj.client.port);
-
     //  oscClient.send('/status', socket.sessionId + ' connected');
 
       oscServer.on('message', function(msg, rinfo) {
-        var OSCmsg = msg[2][0];
+        var OSCmsg = msg[2][0]; // trim the data out of the message
         console.log('OSC server received message: ' + OSCmsg);
         io.emit("messageOSC", OSCmsg);
       });
@@ -64,7 +63,6 @@ io.on("connection", function(socket) {
 
     // ----------------------------------------------------
     socket.on("galaxyListRequest", function(groupSelect, typeSelect) {
-
         findGalaxies(connectedDB, groupSelect, typeSelect, function(data) {
           cleanData(data);
           socket.emit('galaxyList', data);
@@ -91,7 +89,6 @@ io.on("connection", function(socket) {
 
     // ----------------------------------------------------
     socket.on("galaxyDetailsRequest", function(searchData) {
-
       findGalaxyDetails(connectedDB, searchData, function(data) {
           cleanData(data);
           socket.emit('galaxyDetails', data);
@@ -175,7 +172,6 @@ var findGalaxyGroups = function(db, callback) {
   });
 };
 
-
 var findGalaxyTypes = function(db, callback) {
   db.collection('galaxies2').distinct('Type_Text', function(err, doc) {
     assert.equal(err, null);
@@ -185,7 +181,6 @@ var findGalaxyTypes = function(db, callback) {
     }
   });
 };
-
 
 var findGalaxyDetails = function(db, searchData, callback) {
    console.log('searching for... ' + searchData);
@@ -230,6 +225,5 @@ function cleanData(data) {
 console.log("Starting Sigma-1 Socket App on http://localhost:3100");
 
 exports.mainApp = app;
-
 
 }());

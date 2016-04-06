@@ -24477,25 +24477,25 @@ var myApp = angular.module('myApp', [
   'ngAnimate'
 ]);
 
-
 // create Socket
 console.log('--------------- creating socket connection ------------------');
 var socket = socketio("http://" + MULTIVERSE_SERVER_IP + ":3100");
 socket.emit('login');
 
+// make the socket accessible to controllers later
 myApp.value('socket', socket);
 
 // application 'globals' using Value
 myApp.value('appVars', {
   searchTerms: {
-    group: 'Local_Group',
+    group: 'Leo_II',
     galaxyType: '',
-    /* all types */
+    /* '' = all types */
     orderBy: 'Distance',
     direction: '',
-    /* ascending */
-    displayStyle: 'List',
-    resultsPerPage: '10',
+    /* '' = ascending */
+    displayStyle: 'Tiles',
+    resultsPerPage: '20',
     resultsStartPosition: 0
   },
   globalOptions: {
@@ -24559,7 +24559,7 @@ $(document).on('click', '#menuCollapseButton', function (e) {
 //  ListController
 // ----------------------------------------------------
 
-global.jQuery = $ = require('jquery');
+global.jQuery = $ = require('jquery'); 
 
 //require('socket.io-client');
 //var users = require('./galaxyInfo');
@@ -24771,9 +24771,10 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
   socket.emit('galaxyGroupsRequest');
 }]);
 
-//
+// ----------------------------------------------------
 // DetailsController
-//
+// ----------------------------------------------------
+
 angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$routeParams', 'appVars', 'socket', function ($scope, $http, $routeParams, appVars, socket) {
 
   this.appVars = appVars;
@@ -24820,9 +24821,10 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
 
 }]);
 
-//
+// ----------------------------------------------------
 // HeaderController
-//
+// ----------------------------------------------------
+
 angular.module('myApp').controller('HeaderController', ['$scope', '$http', function ($scope, $http) {
 
   // create functionality for nav buttons
@@ -24832,9 +24834,10 @@ angular.module('myApp').controller('HeaderController', ['$scope', '$http', funct
   };
 }]);
 
-//
+// ----------------------------------------------------
 // OptionsController
-//
+// ----------------------------------------------------
+
 angular.module('myApp').controller('OptionsController', ['$scope', '$http', 'appVars', function ($scope, $http, appVars) {
 
   this.appVars = appVars;
@@ -24858,16 +24861,18 @@ angular.module('myApp').controller('OptionsController', ['$scope', '$http', 'app
 
 }]);
 
-//
+// ----------------------------------------------------
 // VideoController
-//
+// ----------------------------------------------------
+
 angular.module('myApp').controller('VideoController', ['$scope', '$http', function ($scope, $http) {
   // ...
 }]);
 
-//
+// ----------------------------------------------------
 // AboutController
-//
+// ----------------------------------------------------
+
 angular.module('myApp').controller('AboutController', ['$scope', '$http', function ($scope, $http) {
   // ...
 }]);

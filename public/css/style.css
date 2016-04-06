@@ -35,7 +35,7 @@ hr {
   display: block;
   height: 1px;
   border: 0;
-  border-top: 1px solid #888;
+  border-top: 1px solid #777;
   margin: 1em 0;
   padding: 0; }
 
@@ -47,7 +47,7 @@ h1 {
 
 h2 {
   font-size: 1.2em;
-  color: #ccc;
+  color: #ddd;
   font-family: 'Arimo', sans-serif; }
 
 h3 {
@@ -92,6 +92,10 @@ div label {
   .search label {
     font-size: 0.7em; }
 
+.searchBarLeft {
+  float: left;
+  min-width: 300px; }
+
 .clearfix {
   overflow: auto; }
 
@@ -107,6 +111,23 @@ div label {
 
 .galaxyInfo a {
   color: #ddd; }
+
+.galaxyDetailsLeft {
+  float: left;
+  padding-right: 15px; }
+
+.galaxyDetailsRight {
+  padding-top: 13px;
+  padding-left: 8px; }
+
+.galaxyDetailsBox1 {
+  float: left;
+  min-width: 150px;
+  padding-right: 8px; }
+
+.galaxyDetailsBox2 {
+  min-width: 150px;
+  float: left; }
 
 .largeImageWrapper {
   padding-bottom: 30px; }
@@ -234,10 +255,10 @@ select {
 
 /* custom navbar class used for skinning the navbar */
 .navbar-custom {
-  background: linear-gradient(#393939, #111111); }
+  background: linear-gradient(#444, #111); }
 
 .footer h4 {
-  color: #888; }
+  color: #777; }
 
 .btn {
   background: #7d3ca3;
