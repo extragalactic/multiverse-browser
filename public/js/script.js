@@ -24463,30 +24463,23 @@ function toArray(list, index) {
 
 global.jQuery = $ = require('jquery');
 require("angular-ui-bootstrap");
-var socketio = require('socket.io-client');
 
 //var users = require('./galaxyInfo');
 //var fs = require('browserify-fs');
 //var path = require('path');
 //var http = require('http');
 
-// init Angular
+// create main Angular module
 var myApp = angular.module('myApp', [
   'ngRoute',
   'ui.bootstrap',
   'ngAnimate'
-]);
-
-// create Socket
-console.log('--------------- creating socket connection ------------------');
-var socket = socketio("http://" + MULTIVERSE_SERVER_IP + ":3100");
-socket.emit('login');
-
-// make the socket accessible to controllers later
-myApp.value('socket', socket);
-
+])
+.run(['utilities', 'socket', function(utilities, socket) {
+  socket.emit('login');
+}])
 // application 'globals' using Value
-myApp.value('appVars', {
+.value('appVars', {
   searchTerms: {
     group: 'Leo_II',
     galaxyType: '',
@@ -24503,10 +24496,9 @@ myApp.value('appVars', {
     allowExternalControl: 'true',
     isControlNode: 'true'
   }
-});
-
-// init Angular route provider
-myApp.config(['$routeProvider', function ($routeProvider) {
+})
+.config(['$routeProvider', function ($routeProvider) {
+  // ---- init Angular route provider ----
   $routeProvider.
   when('/list', {
     templateUrl: 'partials/list.html',
@@ -24533,6 +24525,9 @@ myApp.config(['$routeProvider', function ($routeProvider) {
   });
   //console.log('init router');
 }]);
+// TIP: Can define an application Constant var by appending the .constant
+// e.g.  ]).constant('APP_CONSTANT', 'some value');
+
 
 // Note: it appears that the ui-angular scripts are not fully working.
 // I must manually add behavior to the buttons.
@@ -24559,7 +24554,7 @@ $(document).on('click', '#menuCollapseButton', function (e) {
 //  ListController
 // ----------------------------------------------------
 
-global.jQuery = $ = require('jquery'); 
+global.jQuery = $ = require('jquery');
 
 //require('socket.io-client');
 //var users = require('./galaxyInfo');
@@ -24619,8 +24614,6 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
     }
 
     $scope.direction = appVars.searchTerms.direction;
-
-    $scope.$apply();
   });
 
   socket.on("galaxyTypes", function (data) {
@@ -24629,7 +24622,6 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
       $scope.galaxyTypes.push(data[i]);
     }
     $scope.galaxyType = appVars.searchTerms.galaxyType;
-    $scope.$apply();
 
     console.log('client requesting galaxy list');
     socket.emit('galaxyListRequest', $scope.galaxyGroup, $scope.galaxyType);
@@ -24647,7 +24639,6 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
       $scope.galaxyGroups.push(item);
     }
     $scope.galaxyGroup = appVars.searchTerms.group;
-    $scope.$apply();
 
     console.log('client requesting galaxy types');
     socket.emit('galaxyTypeRequest');
@@ -24697,6 +24688,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
   };
 
   $scope.changeTypeSelect = function () {
+    console.log('galaxy type: ' + $scope.galaxyType);
     appVars.searchTerms.galaxyType = $scope.galaxyType;
     appVars.searchTerms.resultsStartPosition = 0;
     socket.emit('galaxyListRequest', $scope.galaxyGroup, $scope.galaxyType);
@@ -24776,6 +24768,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
 // ----------------------------------------------------
 
 angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$routeParams', 'appVars', 'socket', function ($scope, $http, $routeParams, appVars, socket) {
+  "use strict";
 
   this.appVars = appVars;
   this.socket = socket;
@@ -24792,7 +24785,6 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
   socket.on("galaxyDetails", function (data) {
     $scope.galaxyDetails = data[0];
     $scope.extraHTML = '<< Back to library';
-    $scope.$apply();
 
     if (appVars.globalOptions.isControlNode === 'true') {
       $scope.sendOSC();
@@ -24876,6 +24868,54 @@ angular.module('myApp').controller('VideoController', ['$scope', '$http', functi
 angular.module('myApp').controller('AboutController', ['$scope', '$http', function ($scope, $http) {
   // ...
 }]);
+
+angular.module('myApp').factory('utilities', function ($rootScope) {
+   return {
+     add: function (val1, val2) {
+       return val1 + val2;
+     },
+     subtract: function (val1, val2) {
+       return val1 - val2;
+     }
+   };
+});
+
+var socketio = require('socket.io-client');
+
+angular.module('myApp').factory('socket', function ($rootScope) {
+   var socketPath = "http://" + MULTIVERSE_SERVER_IP + ":3100";
+   console.log('creating socket connection: ' + socketPath);
+   var socket = socketio.connect(socketPath);
+
+   return {
+     on: function (eventName, callback) {
+         socket.on(eventName, function () {
+             var args = arguments;
+             $rootScope.$apply(function () {
+                 callback.apply(socket, args);
+             });
+         });
+     },
+     emit: function (eventName, data, data2, callback) {
+         socket.emit(eventName, data, data2, function () {
+             var args = arguments;
+             $rootScope.$apply(function () {
+                 if (callback) {
+                     callback.apply(socket, args);
+                 }
+             });
+         });
+     },
+     removeAllListeners: function (eventName, callback) {
+       socket.removeAllListeners(eventName, function() {
+           var args = arguments;
+           $rootScope.$apply(function () {
+             callback.apply(socket, args);
+           });
+     });
+   }
+  };
+});
 
 }).call(this,typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{"angular-ui-bootstrap":2,"jquery":4,"socket.io-client":5}]},{},[52])

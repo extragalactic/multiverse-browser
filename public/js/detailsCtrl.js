@@ -3,6 +3,7 @@
 // ----------------------------------------------------
 
 angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$routeParams', 'appVars', 'socket', function ($scope, $http, $routeParams, appVars, socket) {
+  "use strict";
 
   this.appVars = appVars;
   this.socket = socket;
@@ -19,7 +20,6 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
   socket.on("galaxyDetails", function (data) {
     $scope.galaxyDetails = data[0];
     $scope.extraHTML = '<< Back to library';
-    $scope.$apply();
 
     if (appVars.globalOptions.isControlNode === 'true') {
       $scope.sendOSC();

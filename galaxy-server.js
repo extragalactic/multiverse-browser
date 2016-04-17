@@ -3,6 +3,7 @@
 // ==========================================================
 
 (function() {
+"use strict";
 
 // define external modules
 var express = require("express");
@@ -63,6 +64,7 @@ io.on("connection", function(socket) {
 
     // ----------------------------------------------------
     socket.on("galaxyListRequest", function(groupSelect, typeSelect) {
+        //console.log("Received galaxy group " + groupSelect + " request, for type: " + typeSelect);
         findGalaxies(connectedDB, groupSelect, typeSelect, function(data) {
           cleanData(data);
           socket.emit('galaxyList', data);
@@ -140,7 +142,7 @@ io.on("connection", function(socket) {
 // database operations
 
 var findGalaxies = function(db, groupSelect, typeSelect, callback) {
-   console.log('find galaxies for group: ' + groupSelect);
+   console.log('find galaxies for group: ' + groupSelect +' and type: ' + typeSelect);
    var findParam = {};
    if(groupSelect !== undefined && groupSelect !== '') {
        findParam["Group"] = groupSelect;

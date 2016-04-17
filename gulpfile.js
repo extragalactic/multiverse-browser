@@ -15,7 +15,9 @@ var jsSources = [
   'public/js/headerCtrl.js',
   'public/js/optionsCtrl.js',
   'public/js/videoCtrl.js',
-  'public/js/aboutCtrl.js'
+  'public/js/aboutCtrl.js',
+  'public/js/utilitiesFactory.js',
+  'public/js/socketFactory.js'
 ];
 var moduleSources = [
   'public/js/galaxyInfo.js'

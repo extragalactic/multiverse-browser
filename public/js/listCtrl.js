@@ -2,7 +2,7 @@
 //  ListController
 // ----------------------------------------------------
 
-global.jQuery = $ = require('jquery'); 
+global.jQuery = $ = require('jquery');
 
 //require('socket.io-client');
 //var users = require('./galaxyInfo');
@@ -62,8 +62,6 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
     }
 
     $scope.direction = appVars.searchTerms.direction;
-
-    $scope.$apply();
   });
 
   socket.on("galaxyTypes", function (data) {
@@ -72,7 +70,6 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
       $scope.galaxyTypes.push(data[i]);
     }
     $scope.galaxyType = appVars.searchTerms.galaxyType;
-    $scope.$apply();
 
     console.log('client requesting galaxy list');
     socket.emit('galaxyListRequest', $scope.galaxyGroup, $scope.galaxyType);
@@ -90,7 +87,6 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
       $scope.galaxyGroups.push(item);
     }
     $scope.galaxyGroup = appVars.searchTerms.group;
-    $scope.$apply();
 
     console.log('client requesting galaxy types');
     socket.emit('galaxyTypeRequest');
@@ -140,6 +136,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
   };
 
   $scope.changeTypeSelect = function () {
+    console.log('galaxy type: ' + $scope.galaxyType);
     appVars.searchTerms.galaxyType = $scope.galaxyType;
     appVars.searchTerms.resultsStartPosition = 0;
     socket.emit('galaxyListRequest', $scope.galaxyGroup, $scope.galaxyType);

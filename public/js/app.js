@@ -4,30 +4,23 @@
 
 global.jQuery = $ = require('jquery');
 require("angular-ui-bootstrap");
-var socketio = require('socket.io-client');
 
 //var users = require('./galaxyInfo');
 //var fs = require('browserify-fs');
 //var path = require('path');
 //var http = require('http');
 
-// init Angular
+// create main Angular module
 var myApp = angular.module('myApp', [
   'ngRoute',
   'ui.bootstrap',
   'ngAnimate'
-]);
-
-// create Socket
-console.log('--------------- creating socket connection ------------------');
-var socket = socketio("http://" + MULTIVERSE_SERVER_IP + ":3100");
-socket.emit('login');
-
-// make the socket accessible to controllers later
-myApp.value('socket', socket);
-
+])
+.run(['utilities', 'socket', function(utilities, socket) {
+  socket.emit('login');
+}])
 // application 'globals' using Value
-myApp.value('appVars', {
+.value('appVars', {
   searchTerms: {
     group: 'Leo_II',
     galaxyType: '',
@@ -44,10 +37,9 @@ myApp.value('appVars', {
     allowExternalControl: 'true',
     isControlNode: 'true'
   }
-});
-
-// init Angular route provider
-myApp.config(['$routeProvider', function ($routeProvider) {
+})
+.config(['$routeProvider', function ($routeProvider) {
+  // ---- init Angular route provider ----
   $routeProvider.
   when('/list', {
     templateUrl: 'partials/list.html',
@@ -74,6 +66,9 @@ myApp.config(['$routeProvider', function ($routeProvider) {
   });
   //console.log('init router');
 }]);
+// TIP: Can define an application Constant var by appending the .constant
+// e.g.  ]).constant('APP_CONSTANT', 'some value');
+
 
 // Note: it appears that the ui-angular scripts are not fully working.
 // I must manually add behavior to the buttons.
