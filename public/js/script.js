@@ -24458,16 +24458,11 @@ function toArray(list, index) {
 },{}],52:[function(require,module,exports){
 (function (global){
 // ----------------------------------------------------
-//  Main application script
+//  Main application script for Galaxy Browser
 // ----------------------------------------------------
 
 global.jQuery = $ = require('jquery');
 require("angular-ui-bootstrap");
-
-//var users = require('./galaxyInfo');
-//var fs = require('browserify-fs');
-//var path = require('path');
-//var http = require('http');
 
 // create main Angular module
 var myApp = angular.module('myApp', [
@@ -24475,18 +24470,16 @@ var myApp = angular.module('myApp', [
   'ui.bootstrap',
   'ngAnimate'
 ])
-.run(['utilities', 'socket', function(utilities, socket) {
+.run(['socket', function(socket) {
   socket.emit('login');
 }])
 // application 'globals' using Value
 .value('appVars', {
   searchTerms: {
     group: 'Leo_II',
-    galaxyType: '',
-    /* '' = all types */
+    galaxyType: '', /* '' = all types */
     orderBy: 'Distance',
-    direction: '',
-    /* '' = ascending */
+    direction: '', /* '' = ascending */
     displayStyle: 'Tiles',
     resultsPerPage: '20',
     resultsStartPosition: 0
@@ -24523,7 +24516,6 @@ var myApp = angular.module('myApp', [
   otherwise({
     redirectTo: '/list'
   });
-  //console.log('init router');
 }]);
 // TIP: Can define an application Constant var by appending the .constant
 // e.g.  ]).constant('APP_CONSTANT', 'some value');
@@ -24883,7 +24875,7 @@ angular.module('myApp').factory('utilities', function ($rootScope) {
 var socketio = require('socket.io-client');
 
 angular.module('myApp').factory('socket', function ($rootScope) {
-   var socketPath = "http://" + MULTIVERSE_SERVER_IP + ":3100";
+   var socketPath = "http://" + MULTIVERSE_SERVER_IP + ":" + MULTIVERSE_SERVER_PORT;
    console.log('creating socket connection: ' + socketPath);
    var socket = socketio.connect(socketPath);
 

@@ -5,3 +5,5 @@ public/images/
 .git
 multiverse-browser.git
 npm-debug.log
+._*
+/._*

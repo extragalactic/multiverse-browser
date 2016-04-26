@@ -1,14 +1,9 @@
 // ----------------------------------------------------
-//  Main application script
+//  Main application script for Galaxy Browser
 // ----------------------------------------------------
 
 global.jQuery = $ = require('jquery');
 require("angular-ui-bootstrap");
-
-//var users = require('./galaxyInfo');
-//var fs = require('browserify-fs');
-//var path = require('path');
-//var http = require('http');
 
 // create main Angular module
 var myApp = angular.module('myApp', [
@@ -16,18 +11,16 @@ var myApp = angular.module('myApp', [
   'ui.bootstrap',
   'ngAnimate'
 ])
-.run(['utilities', 'socket', function(utilities, socket) {
+.run(['socket', function(socket) {
   socket.emit('login');
 }])
 // application 'globals' using Value
 .value('appVars', {
   searchTerms: {
     group: 'Leo_II',
-    galaxyType: '',
-    /* '' = all types */
+    galaxyType: '', /* '' = all types */
     orderBy: 'Distance',
-    direction: '',
-    /* '' = ascending */
+    direction: '', /* '' = ascending */
     displayStyle: 'Tiles',
     resultsPerPage: '20',
     resultsStartPosition: 0
@@ -64,7 +57,6 @@ var myApp = angular.module('myApp', [
   otherwise({
     redirectTo: '/list'
   });
-  //console.log('init router');
 }]);
 // TIP: Can define an application Constant var by appending the .constant
 // e.g.  ]).constant('APP_CONSTANT', 'some value');

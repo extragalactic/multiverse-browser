@@ -9,7 +9,8 @@
 var express = require("express");
 var http = require("http");
 var app = express();
-var server = http.createServer(app).listen(3100);
+var settings = require("./../public/serverIP");
+var server = http.createServer(app).listen(settings.MULTIVERSE_SERVER_PORT);
 var io = require("socket.io")(server);
 var fs = require("fs");
 var osc = require('node-osc');
@@ -19,9 +20,6 @@ var MongoClient = require('mongodb').MongoClient;
 var assert = require('assert');
 var ObjectId = require('mongodb').ObjectID;
 var url = 'mongodb://localhost:27017/multiverse';
-
-// custom modules or data structures
-var users = require('./public/js/galaxyInfo');
 
 // init application vars
 var userList = [];
@@ -36,7 +34,7 @@ MongoClient.connect(url, function(err, db) {
 });
 
 // set root folder for Express web server
-app.use(express.static("./public"));
+app.use(express.static("./../public"));
 
 // define handlers for all incoming messages
 io.on("connection", function(socket) {

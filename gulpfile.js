@@ -10,15 +10,15 @@ var gulp = require('gulp'),
 // list source files
 var jsSources = [
   'public/js/app.js',
-  'public/js/listCtrl.js',
-  'public/js/detailsCtrl.js',
-  'public/js/headerCtrl.js',
-  'public/js/optionsCtrl.js',
-  'public/js/videoCtrl.js',
-  'public/js/aboutCtrl.js',
-  'public/js/utilitiesFactory.js',
-  'public/js/socketFactory.js'
-];
+  'public/js/controllers/listCtrl.js',
+  'public/js/controllers/detailsCtrl.js',
+  'public/js/controllers/headerCtrl.js',
+  'public/js/controllers/optionsCtrl.js',
+  'public/js/controllers/videoCtrl.js',
+  'public/js/controllers/aboutCtrl.js',
+  'public/js/services/utilitiesFactory.js',
+  'public/js/services/socketFactory.js'
+]; 
 var moduleSources = [
   'public/js/galaxyInfo.js'
 ];
