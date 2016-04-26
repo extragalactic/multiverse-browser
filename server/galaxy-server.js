@@ -16,22 +16,11 @@ var fs = require("fs");
 var osc = require('node-osc');
 
 // init MongoDB vars
-var MongoClient = require('mongodb').MongoClient;
-var assert = require('assert');
-var ObjectId = require('mongodb').ObjectID;
-var url = 'mongodb://localhost:27017/multiverse';
+var DBconnect = require("./modules/DBconnect");
 
 // init application vars
 var userList = [];
-var connectedDB = null;
 var oscServer, oscClient;
-
-// connect to db
-MongoClient.connect(url, function(err, db) {
-  connectedDB = db;
-  assert.equal(null, err);
-  console.log("Connected correctly to database.");
-});
 
 // set root folder for Express web server
 app.use(express.static("./../public"));
@@ -63,7 +52,7 @@ io.on("connection", function(socket) {
     // ----------------------------------------------------
     socket.on("galaxyListRequest", function(groupSelect, typeSelect) {
         //console.log("Received galaxy group " + groupSelect + " request, for type: " + typeSelect);
-        findGalaxies(connectedDB, groupSelect, typeSelect, function(data) {
+        DBconnect.findGalaxies(groupSelect, typeSelect, function(data) {
           cleanData(data);
           socket.emit('galaxyList', data);
         });
@@ -72,7 +61,7 @@ io.on("connection", function(socket) {
     // ----------------------------------------------------
     socket.on("galaxyGroupsRequest", function() {
       console.log('find galaxy groups');
-      findGalaxyGroups(connectedDB, function(data) {
+      DBconnect.findGalaxyGroups(function(data) {
           console.log('emiting galaxy groups');
           socket.emit('galaxyGroups', data);
       });
@@ -81,7 +70,7 @@ io.on("connection", function(socket) {
     // ----------------------------------------------------
     socket.on("galaxyTypeRequest", function() {
       console.log('find galaxy types');
-      findGalaxyTypes(connectedDB, function(data) {
+      DBconnect.findGalaxyTypes(function(data) {
           console.log('emiting galaxy types');
           socket.emit('galaxyTypes', data);
       });
@@ -89,7 +78,7 @@ io.on("connection", function(socket) {
 
     // ----------------------------------------------------
     socket.on("galaxyDetailsRequest", function(searchData) {
-      findGalaxyDetails(connectedDB, searchData, function(data) {
+      DBconnect.findGalaxyDetails(searchData, function(data) {
           cleanData(data);
           socket.emit('galaxyDetails', data);
       });
@@ -137,66 +126,6 @@ io.on("connection", function(socket) {
 
 });
 
-// database operations
-
-var findGalaxies = function(db, groupSelect, typeSelect, callback) {
-   console.log('find galaxies for group: ' + groupSelect +' and type: ' + typeSelect);
-   var findParam = {};
-   if(groupSelect !== undefined && groupSelect !== '') {
-       findParam["Group"] = groupSelect;
-   }
-   if(typeSelect !== undefined && typeSelect !== '') {
-       findParam["Type_Text"] = typeSelect;
-   }
-   var cursor = db.collection('galaxies2').find( findParam );
-   var returnData = [];
-   cursor.each(function(err, doc) {
-      assert.equal(err, null);
-      if (doc !== null) {
-         returnData.push(doc);
-      } else {
-         console.log('end of db read: list');
-         callback(returnData);
-      }
-   });
-};
-
-var findGalaxyGroups = function(db, callback) {
-  db.collection('galaxies2').distinct('Group', function(err, doc) {
-    assert.equal(err, null);
-    if (doc !== null) {
-      doc.splice(doc.indexOf('-'), 1);
-      console.log('end of db read: groups');
-      callback(doc);
-    }
-  });
-};
-
-var findGalaxyTypes = function(db, callback) {
-  db.collection('galaxies2').distinct('Type_Text', function(err, doc) {
-    assert.equal(err, null);
-    if (doc !== null) {
-      console.log('end of db read: types');
-      callback(doc);
-    }
-  });
-};
-
-var findGalaxyDetails = function(db, searchData, callback) {
-   console.log('searching for... ' + searchData);
-   var cursor = db.collection('galaxies2').find( {"Common_Name":searchData} );
-   var returnData = [];
-   cursor.each(function(err, doc) {
-      assert.equal(err, null);
-      if (doc !== null) {
-         returnData.push(doc);
-      } else {
-         console.log('end of db read: details');
-         callback(returnData);
-      }
-   });
-};
-
 // utility functions
 /*
 function getUserNameArray() {
@@ -222,7 +151,7 @@ function cleanData(data) {
     }
 }
 
-console.log("Starting Sigma-1 Socket App on http://localhost:3100");
+console.log("Starting Sigma-1 Socket App on http://localhost:" + settings.MULTIVERSE_SERVER_PORT);
 
 exports.mainApp = app;
 

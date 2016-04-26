@@ -3,7 +3,8 @@
 // ----------------------------------------------------
 
 angular.module('myApp').controller('OptionsController', ['$scope', '$http', 'appVars', function ($scope, $http, appVars) {
-
+  "use strict";
+  
   this.appVars = appVars;
   $scope.listSelectStyle = appVars.globalOptions.listSelectStyle;
   $scope.allowExternalControl = appVars.globalOptions.allowExternalControl;

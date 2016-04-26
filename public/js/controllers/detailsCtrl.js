@@ -10,12 +10,11 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
 
   $scope.allowExternalControl = appVars.globalOptions.allowExternalControl;
 
-  // Listen for messages from server
-
-  // Note: I should move my sockets into an Angular-style socket factory
   $scope.$on('$destroy', function (event) {
     socket.removeAllListeners();
   });
+
+  // Listen for messages from server
 
   socket.on("galaxyDetails", function (data) {
     $scope.galaxyDetails = data[0];

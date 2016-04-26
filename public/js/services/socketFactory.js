@@ -1,6 +1,8 @@
 var socketio = require('socket.io-client');
 
 angular.module('myApp').factory('socket', function ($rootScope) {
+  "use strict";
+  
    var socketPath = "http://" + MULTIVERSE_SERVER_IP + ":" + MULTIVERSE_SERVER_PORT;
    console.log('creating socket connection: ' + socketPath);
    var socket = socketio.connect(socketPath);
@@ -24,13 +26,8 @@ angular.module('myApp').factory('socket', function ($rootScope) {
              });
          });
      },
-     removeAllListeners: function (eventName, callback) {
-       socket.removeAllListeners(eventName, function() {
-           var args = arguments;
-           $rootScope.$apply(function () {
-             callback.apply(socket, args);
-           });
-     });
-   }
+     removeAllListeners: function () {
+       socket.removeAllListeners();
+     }
   };
 });

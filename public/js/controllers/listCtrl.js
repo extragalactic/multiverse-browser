@@ -4,12 +4,10 @@
 
 global.jQuery = $ = require('jquery');
 
-//require('socket.io-client');
-//var users = require('./galaxyInfo');
-//var fs = require('browserify-fs');
 
 // ListController
 angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket', 'appVars', function ($scope, $http, socket, appVars) {
+  "use strict";
 
   this.socket = socket;
   this.appVars = appVars;

@@ -24548,12 +24548,10 @@ $(document).on('click', '#menuCollapseButton', function (e) {
 
 global.jQuery = $ = require('jquery');
 
-//require('socket.io-client');
-//var users = require('./galaxyInfo');
-//var fs = require('browserify-fs');
 
 // ListController
 angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket', 'appVars', function ($scope, $http, socket, appVars) {
+  "use strict";
 
   this.socket = socket;
   this.appVars = appVars;
@@ -24767,12 +24765,11 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
 
   $scope.allowExternalControl = appVars.globalOptions.allowExternalControl;
 
-  // Listen for messages from server
-
-  // Note: I should move my sockets into an Angular-style socket factory
   $scope.$on('$destroy', function (event) {
     socket.removeAllListeners();
   });
+
+  // Listen for messages from server
 
   socket.on("galaxyDetails", function (data) {
     $scope.galaxyDetails = data[0];
@@ -24810,7 +24807,8 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
 // ----------------------------------------------------
 
 angular.module('myApp').controller('HeaderController', ['$scope', '$http', function ($scope, $http) {
-
+  "use strict";
+  
   // create functionality for nav buttons
   $scope.isActive = function (viewLocation) {
     var active = (viewLocation === $location.path());
@@ -24823,7 +24821,8 @@ angular.module('myApp').controller('HeaderController', ['$scope', '$http', funct
 // ----------------------------------------------------
 
 angular.module('myApp').controller('OptionsController', ['$scope', '$http', 'appVars', function ($scope, $http, appVars) {
-
+  "use strict";
+  
   this.appVars = appVars;
   $scope.listSelectStyle = appVars.globalOptions.listSelectStyle;
   $scope.allowExternalControl = appVars.globalOptions.allowExternalControl;
@@ -24875,6 +24874,8 @@ angular.module('myApp').factory('utilities', function ($rootScope) {
 var socketio = require('socket.io-client');
 
 angular.module('myApp').factory('socket', function ($rootScope) {
+  "use strict";
+  
    var socketPath = "http://" + MULTIVERSE_SERVER_IP + ":" + MULTIVERSE_SERVER_PORT;
    console.log('creating socket connection: ' + socketPath);
    var socket = socketio.connect(socketPath);
@@ -24898,14 +24899,9 @@ angular.module('myApp').factory('socket', function ($rootScope) {
              });
          });
      },
-     removeAllListeners: function (eventName, callback) {
-       socket.removeAllListeners(eventName, function() {
-           var args = arguments;
-           $rootScope.$apply(function () {
-             callback.apply(socket, args);
-           });
-     });
-   }
+     removeAllListeners: function () {
+       socket.removeAllListeners();
+     }
   };
 });
 
