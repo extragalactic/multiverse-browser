@@ -19,7 +19,9 @@ body {
   body label {
     font-size: 0.6em; }
   body input {
-    font-size: 0.6em; }
+    font-size: 0.8em;
+    color: black;
+    font-weight: bold; }
   body a {
     text-decoration: none;
     color: #ba6fe8; }
@@ -98,6 +100,9 @@ div label {
 
 .clearfix {
   overflow: auto; }
+
+.returnToList {
+  clear: both; }
 
 .galaxyThumb {
   min-height: 100px;

@@ -151,7 +151,7 @@ function cleanData(data) {
     }
 }
 
-console.log("Starting Sigma-1 Socket App on http://localhost:" + settings.MULTIVERSE_SERVER_PORT);
+console.log("Starting Multiverse Browser server on http://" + settings.MULTIVERSE_SERVER_IP + ":" + settings.MULTIVERSE_SERVER_PORT);
 
 exports.mainApp = app;
 

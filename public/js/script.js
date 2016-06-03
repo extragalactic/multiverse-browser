@@ -24773,7 +24773,7 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
 
   socket.on("galaxyDetails", function (data) {
     $scope.galaxyDetails = data[0];
-    $scope.extraHTML = '<< Back to library';
+    $scope.extraHTML = '<< Back to List';
 
     if (appVars.globalOptions.isControlNode === 'true') {
       $scope.sendOSC();

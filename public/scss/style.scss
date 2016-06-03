@@ -34,7 +34,9 @@ body {
         font-size: 0.6em;
     }
     input {
-        font-size: 0.6em;
+        font-size: 0.8em;
+        color: black;
+        font-weight: bold;
     }
     a {
         text-decoration: none;
@@ -132,6 +134,10 @@ div {
 
 .clearfix {
     overflow: auto;
+}
+
+.returnToList {
+    clear: both;
 }
 
 .galaxyThumb {

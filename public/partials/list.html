@@ -8,10 +8,6 @@
                <h1>Galactic Library</h1>
                <h3>A directory of most major galaxies within 100 million light years.</h3></br>
                <div class="searchBarLeft">
-                  <!--
-                  <label>Search: </label>
-                  <input ng-model="query" placeholder="Enter search text" autofocus>
-                  -->
                   <label> Group:
                      <select ng-model="galaxyGroup" id="groupSelect" ng-change="changeGroupSelect()">
                         <option value="">All</option>
@@ -33,7 +29,11 @@
                         <option value="Tiles">Tiles</option>
                      </select>
                   </label>
-               </div>
+                  </br>
+                  <label>Search: </label>
+                  <input ng-model="query" placeholder="Enter search text" autofocus>
+                  </br>
+            </div>
                <div>
                   <label>Order by:
                      <select ng-model="galaxyOrder" ng-change="changeOrderBy()">
@@ -72,7 +72,7 @@
             </div>
             <div class="multiList">
                <ul class="galaxyListLinear" ng-cloak>
-                  <li ng-animate="animate" class="galaxyListItem clearfix" ng-repeat="item in filtered = (galaxies | filter: query | orderBy: galaxyOrder:direction | limitTo:limitNum:limitStart)">
+                  <li tooltip-placement="top-left" uib-tooltip="{{item.Common_Name}}" ng-animate="animate" class="galaxyListItem clearfix" ng-repeat="item in filtered = (galaxies | filter: query | orderBy: galaxyOrder:direction | limitTo:limitNum:limitStart)">
                      <a ng-href="" ng-click="onGalaxyClicked(item._Common_Name);" style="cursor:pointer;">
                         <div class="galaxyThumb">
                            <img ng-src="images/galaxies 150/{{item.ImageFile}}" alt="">
