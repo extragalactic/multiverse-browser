@@ -11,30 +11,37 @@
                         <h1><span ng-bind="galaxyDetails.Common_Name"></span></h1>
                         <h4><span ng-bind="galaxyDetails.Council_Name"></span></h4>
                      </div>
-                     <div class="galaxyDetailsThumb">
-                        <img ng-src="images/galaxies 150/{{galaxyDetails.ImageFile}}" alt="">
+                     <div class="galaxyDetailsThumb ng-cloak">
+                        <img ng-src={{galaxyDetails.ImageFile_fulltext}} alt="">
                      </div>
                   </div>
                   <div class="galaxyDetailsRight">
                      <div class="galaxyDetailsBox1">
                         <h4>Group: <span class="textColourData" ng-bind="galaxyDetails.Group"></span></h4>
-                        <h4>Diameter: <span class="textColourData"><span ng-bind="galaxyDetails.Diameter"> </span> kly</span></h4>
-                        <h4>Distance: <span class="textColourData"><span ng-bind="galaxyDetails.Distance"></span> mly</span></h4>
+                        <h4>Diameter: <span class="textColourData"><span ng-bind="galaxyDetails.Diameter_fulltext"> </span></span></h4>
+                        <h4>Distance: <span class="textColourData"><span ng-bind="galaxyDetails.Distance_fulltext"></span></span></h4>
                         <h4>Visual Mag: <span class="textColourData" ng-bind="galaxyDetails.VisualMag"></span></h4>
                      </div>
                      <div class="galaxyDetailsBox2">
-                        <h4>RA: <span class="textColourData"><span ng-bind="galaxyDetails.RA_h"></span>h <span ng-bind="galaxyDetails.RA_m"></span>m <span ng-bind="galaxyDetails.RA_s"></span>s</span></h4>
-                        <h4>Decl: <span class="textColourData"><span ng-bind="galaxyDetails.Decl_h"></span>d <span ng-bind="galaxyDetails.Decl_m"></span>' <span ng-bind="galaxyDetails.Decl_s"></span></span></h4>
+                        <h4>RA: <span class="textColourData"><span ng-bind="galaxyDetails.RA_fulltext"></span></span></h4>
+                        <h4>Decl: <span class="textColourData"><span ng-bind="galaxyDetails.Decl_fulltext"></span></span></h4>
                         <h4>Type: <span class="textColourData" ng-bind="galaxyDetails.Type_Text"></span></h4>
                         <h4><span class="textColourData"  ng-bind="galaxyDetails.Type"></span></h4>
                      </div>
-                  </div>
-                  <div class="returnToList">
-                     <h4><a href="#/list"><span ng-bind="extraHTML"></span></a></h4>
-                     </br>
+                     <div class="galaxyDetailsBox3">
+                        <div class="searchDescriptor">
+                           <h4><span class="textColourData2">{{galaxyDetails.searchDescriptor}}</span></h4>                       </div>
+                        <div class="galaxyNextPrev">
+                           <button class="btn btn-primary raised" ng-click="prevGalaxy()">
+                              << Prev</button>
+                           <button class="btn btn-primary raised" ng-click="nextGalaxy()">Next >></button>                                                             </div>
+                        <div class="returnToList">
+                           <h4><a href="#/list"><span ng-bind="extraHTML"></span></a></h4>
+                        </div>
+                     </div>
                   </div>
                </div>
-               <div class="largeImageWrapper pull-left">
+               <div class="largeImageWrapper pull-left clearfix">
                   <img class="img-responsive largeImage" ng-src="images/galaxy originals 800/{{galaxyDetails.Common_Name}}.jpg" alt="">
                </div>
             </div>

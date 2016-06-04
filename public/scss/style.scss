@@ -66,7 +66,7 @@ h1 {
     color: white;
     font-family: 'Arimo', sans-serif;
     line-height: 90%;
-    font-size: 1.2em;
+    font-size: 1.3em;
 }
 h2 {
     font-size: 1.2em;
@@ -118,6 +118,10 @@ div {
 .textColourData {
     color: $primaryColorLight;
 }
+.textColourData2 {
+    color: $primaryColorLight;
+    line-height: 1.3em;
+}
 
 .search {
     padding: 0px 0px 15px 0px;
@@ -134,10 +138,19 @@ div {
 
 .clearfix {
     overflow: auto;
+    clear: both;
 }
 
 .returnToList {
     clear: both;
+}
+
+.prevNextButtons {
+    margin-top: 15px;
+}
+
+#backToTopButton {
+    margin-top: 12px;
 }
 
 .galaxyThumb {
@@ -149,6 +162,7 @@ div {
     min-width: 150px;
     border-radius: 5px;
     padding-bottom: 15px;
+    margin-top: -25px;
 }
 
 .galaxyInfo {
@@ -159,12 +173,16 @@ div {
 
 .galaxyDetailsLeft {
     float: left;
+    min-width: 180px;
     padding-right: 15px;
+    margin-bottom: -10px;
 }
 
 .galaxyDetailsRight {
+    float: left;
     padding-top: 13px;
     padding-left: 8px;
+    margin-bottom: 10px;
 }
 
 .galaxyDetailsBox1 {
@@ -176,6 +194,18 @@ div {
 .galaxyDetailsBox2 {
     min-width: 150px;
     float: left;
+}
+
+.galaxyDetailsBox3 {
+    width: 190px;
+    float: left;
+    border: 2px solid grey;
+    border-radius: 10px;
+    padding: 0px 8px;;
+}
+
+.searchDescriptor {
+    height: 2em;
 }
 
 .largeImageWrapper {
@@ -210,6 +240,10 @@ div {
 }
 
 .galaxyList {
+    border: 2px solid grey;
+    border-radius: 30px;
+    padding-top: 32px;
+
     -moz-column-gap: 0px;
     -webkit-column-gap: 0px;
     column-gap: 0px;

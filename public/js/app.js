@@ -17,8 +17,8 @@ var myApp = angular.module('myApp', [
 // application 'globals' using Value
 .value('appVars', {
   searchTerms: {
-    group: 'Leo_II',
-    galaxyType: '', /* '' = all types */
+    group: 'Virgo',
+    galaxyType: 'Elliptical', /* '' = all types */
     orderBy: 'Distance',
     direction: '', /* '' = ascending */
     displayStyle: 'Tiles',
@@ -29,7 +29,8 @@ var myApp = angular.module('myApp', [
     listSelectStyle: 'SingleClick',
     allowExternalControl: 'true',
     isControlNode: 'true'
-  }
+  },
+  galaxyList: []
 })
 .config(['$routeProvider', function ($routeProvider) {
   // ---- init Angular route provider ----

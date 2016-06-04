@@ -45,7 +45,7 @@ h1 {
   color: white;
   font-family: 'Arimo', sans-serif;
   line-height: 90%;
-  font-size: 1.2em; }
+  font-size: 1.3em; }
 
 h2 {
   font-size: 1.2em;
@@ -89,6 +89,10 @@ div label {
 .textColourData {
   color: #ba6fe8; }
 
+.textColourData2 {
+  color: #ba6fe8;
+  line-height: 1.3em; }
+
 .search {
   padding: 0px 0px 15px 0px; }
   .search label {
@@ -99,10 +103,17 @@ div label {
   min-width: 300px; }
 
 .clearfix {
-  overflow: auto; }
+  overflow: auto;
+  clear: both; }
 
 .returnToList {
   clear: both; }
+
+.prevNextButtons {
+  margin-top: 15px; }
+
+#backToTopButton {
+  margin-top: 12px; }
 
 .galaxyThumb {
   min-height: 100px;
@@ -112,18 +123,23 @@ div label {
 .galaxyDetailsThumb {
   min-width: 150px;
   border-radius: 5px;
-  padding-bottom: 15px; }
+  padding-bottom: 15px;
+  margin-top: -25px; }
 
 .galaxyInfo a {
   color: #ddd; }
 
 .galaxyDetailsLeft {
   float: left;
-  padding-right: 15px; }
+  min-width: 180px;
+  padding-right: 15px;
+  margin-bottom: -10px; }
 
 .galaxyDetailsRight {
+  float: left;
   padding-top: 13px;
-  padding-left: 8px; }
+  padding-left: 8px;
+  margin-bottom: 10px; }
 
 .galaxyDetailsBox1 {
   float: left;
@@ -133,6 +149,16 @@ div label {
 .galaxyDetailsBox2 {
   min-width: 150px;
   float: left; }
+
+.galaxyDetailsBox3 {
+  width: 190px;
+  float: left;
+  border: 2px solid grey;
+  border-radius: 10px;
+  padding: 0px 8px; }
+
+.searchDescriptor {
+  height: 2em; }
 
 .largeImageWrapper {
   padding-bottom: 30px; }
@@ -163,6 +189,9 @@ div label {
   margin: 0 auto; }
 
 .galaxyList {
+  border: 2px solid grey;
+  border-radius: 30px;
+  padding-top: 32px;
   -moz-column-gap: 0px;
   -webkit-column-gap: 0px;
   column-gap: 0px; }

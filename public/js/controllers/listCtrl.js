@@ -40,6 +40,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
   // get returned list of galaxies
   socket.on("galaxyList", function (data) {
     $scope.galaxies = data;
+    appVars.galaxyList = data;
     $scope.numGalaxies = data.length;
 
     $scope.galaxyOrder = appVars.searchTerms.orderBy;
@@ -77,6 +78,9 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
   // (which triggers a call to get the Local Group galaxies list, and sets view start values)
   socket.on("galaxyGroups", function (data) {
     $scope.galaxyGroups = [];
+    //
+    // .... TODO: this backslash remover should be inside a "utils" service, since i need to use it in the detailsCtrl file
+    //
     for (var i = 0; i < data.length; i++) {
       var item = {
         name: data[i],

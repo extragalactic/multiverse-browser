@@ -24476,8 +24476,8 @@ var myApp = angular.module('myApp', [
 // application 'globals' using Value
 .value('appVars', {
   searchTerms: {
-    group: 'Leo_II',
-    galaxyType: '', /* '' = all types */
+    group: 'Virgo',
+    galaxyType: 'Elliptical', /* '' = all types */
     orderBy: 'Distance',
     direction: '', /* '' = ascending */
     displayStyle: 'Tiles',
@@ -24488,7 +24488,8 @@ var myApp = angular.module('myApp', [
     listSelectStyle: 'SingleClick',
     allowExternalControl: 'true',
     isControlNode: 'true'
-  }
+  },
+  galaxyList: []
 })
 .config(['$routeProvider', function ($routeProvider) {
   // ---- init Angular route provider ----
@@ -24584,6 +24585,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
   // get returned list of galaxies
   socket.on("galaxyList", function (data) {
     $scope.galaxies = data;
+    appVars.galaxyList = data;
     $scope.numGalaxies = data.length;
 
     $scope.galaxyOrder = appVars.searchTerms.orderBy;
@@ -24621,6 +24623,9 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
   // (which triggers a call to get the Local Group galaxies list, and sets view start values)
   socket.on("galaxyGroups", function (data) {
     $scope.galaxyGroups = [];
+    //
+    // .... TODO: this backslash remover should be inside a "utils" service, since i need to use it in the detailsCtrl file
+    //
     for (var i = 0; i < data.length; i++) {
       var item = {
         name: data[i],
@@ -24763,21 +24768,66 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
   this.appVars = appVars;
   this.socket = socket;
 
+  // keep track of the next and previous galaxies in the current search list
+  var indexPointers = {
+    current: 0,
+    next: 0,
+    prev: 0
+  };
+
   $scope.allowExternalControl = appVars.globalOptions.allowExternalControl;
 
   $scope.$on('$destroy', function (event) {
     socket.removeAllListeners();
   });
 
+  // ----------------------------------------------------------
   // Listen for messages from server
 
   socket.on("galaxyDetails", function (data) {
+
     $scope.galaxyDetails = data[0];
+    var galaxy =   $scope.galaxyDetails;
+    galaxy.Diameter_fulltext = galaxy.Diameter + ' kly';
+    galaxy.Distance_fulltext = galaxy.Distance + ' mly';
+    galaxy.RA_fulltext = galaxy.RA_h + 'h ' + galaxy.RA_m + 'm ' + galaxy.RA_s + 's';
+    galaxy.Decl_fulltext = galaxy.Decl_h + 'd ' + galaxy.Decl_m + "' " + galaxy.Decl_s + '""';
+    galaxy.ImageFile_fulltext = 'images/galaxies 150/' + galaxy.ImageFile;
+
+    if(appVars.galaxyList.length > 0) {
+      galaxy.searchDescriptor = appVars.galaxyList.length + ' ' + appVars.searchTerms.galaxyType + ' galaxies';
+      if(appVars.searchTerms.group != 'All') {
+        galaxy.searchDescriptor += ' in ' + appVars.searchTerms.group;
+      }
+    } else {
+      galaxy.searchDescriptor = "";
+    }
+
+    console.log(galaxy.searchDescriptor);
+
     $scope.extraHTML = '<< Back to List';
+
+    // find the next & previous galaxies in the search list (if it exists)
+    if(appVars.galaxyList.length > 0) {
+      $('.galaxyNextPrev').removeClass('hidden');
+      for (var i = 0, len = appVars.galaxyList.length; i < len; i++) {
+        if(appVars.galaxyList[i].Common_Name == $scope.galaxyDetails.Common_Name) {
+          indexPointers.current = i;
+          indexPointers.prev = i-1;
+          if(indexPointers.prev < 0) indexPointers.prev = appVars.galaxyList.length-1;
+          indexPointers.next = i+1;
+          if(indexPointers.next >= appVars.galaxyList.length) indexPointers.next = 0;
+          break;
+        }
+      }
+    } else {
+      $('.galaxyNextPrev').addClass('hidden');
+    }
 
     if (appVars.globalOptions.isControlNode === 'true') {
       $scope.sendOSC();
     }
+
   });
 
   socket.on("messageOSC", function (message) {
@@ -24788,7 +24838,24 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
     }
   });
 
+  // ----------------------------------------------------------
   // Listen for messages from view
+
+  $scope.prevGalaxy = function () {
+    if(appVars.galaxyList.length === 0) return;
+
+    console.log(appVars.galaxyList.length, indexPointers.prev, indexPointers.current, indexPointers.next);
+    var itemName = appVars.galaxyList[indexPointers.prev]._Common_Name;
+    window.location.href = '#/details/' + itemName;
+  };
+
+  $scope.nextGalaxy = function () {
+    if(appVars.galaxyList.length === 0) return;
+
+    console.log(appVars.galaxyList.length, indexPointers.prev, indexPointers.current, indexPointers.next);
+    var itemName = appVars.galaxyList[indexPointers.next]._Common_Name;
+    window.location.href = '#/details/' + itemName;
+  };
 
   $scope.sendOSC = function () {
     var msgOSC = '/' + $scope.galaxyDetails._Common_Name;
@@ -24796,7 +24863,8 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
     socket.emit('messageOSC', msgOSC);
   };
 
-  // Initialize view
+  // ----------------------------------------------------------
+  // Initialize page with DB request
 
   socket.emit('galaxyDetailsRequest', $routeParams.itemId);
 
