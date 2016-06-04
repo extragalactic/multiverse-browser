@@ -30,14 +30,19 @@
                      </div>
                      <div class="galaxyDetailsBox3">
                         <div class="searchDescriptor">
-                           <h4><span class="textColourData2">{{galaxyDetails.searchDescriptor}}</span></h4>                       </div>
+                           <h4><span class="textColourData2">{{galaxyDetails.searchDescriptor}}</span></h4>
+                        </div>
                         <div class="galaxyNextPrev">
                            <button class="btn btn-primary raised" ng-click="prevGalaxy()">
                               << Prev</button>
                            <button class="btn btn-primary raised" ng-click="nextGalaxy()">Next >></button>                                                             </div>
-                        <div class="returnToList">
-                           <h4><a href="#/list"><span ng-bind="extraHTML"></span></a></h4>
-                        </div>
+                     </div>
+                  </div>
+                  <div class="galaxyDetailsBox4">
+                     <div class="returnToList">
+                        <button id="backToListButton" type="button" class="btn btn-link" ng-click="returnToList()"><< Return to List</button>
+
+                        <!-- <h4><a href="#/list"><span ng-bind="extraHTML"></span></a></h4> -->
                      </div>
                   </div>
                </div>

@@ -3,6 +3,7 @@
 $primaryColorLight: #ba6fe8;
 $primaryColorMedium: #7d3ca3;
 $primaryColorDark: #3c1c4e;
+$primaryColorDarkest: #281334;
 $complementaryColorLight: complement($primaryColorLight);
 $textColorLight: #ddd;
 $textColorDark: #777;
@@ -24,7 +25,7 @@ body {
     font-size: 2.2em;
     font-family: 'Raleway', sans-serif;
     line-height: 90%;
-    padding: 0px 0px 5px 0px;
+    padding: 0px 0px 0px 0px;
     position: relative;
     overflow-x: hidden;
     margin-left: auto;
@@ -159,7 +160,7 @@ div {
     float: left;
 }
 .galaxyDetailsThumb {
-    min-width: 150px;
+    width: 150px;
     border-radius: 5px;
     padding-bottom: 15px;
     margin-top: -25px;
@@ -174,6 +175,7 @@ div {
 .galaxyDetailsLeft {
     float: left;
     min-width: 180px;
+    height: 200px;
     padding-right: 15px;
     margin-bottom: -10px;
 }
@@ -187,21 +189,27 @@ div {
 
 .galaxyDetailsBox1 {
     float: left;
-    min-width: 150px;
+    width: 180px;
     padding-right: 8px;
 }
 
 .galaxyDetailsBox2 {
-    min-width: 150px;
+    min-width: 160px;
+    min-height: 115px;
     float: left;
 }
 
 .galaxyDetailsBox3 {
     width: 190px;
     float: left;
-    border: 2px solid grey;
+    border: 2px solid $textColorDark;
     border-radius: 10px;
-    padding: 0px 8px;;
+    padding: 0px 8px 12px 8px;
+}
+
+.galaxyDetailsBox4 {
+    padding-left: 8px;
+    padding-bottom: 8px;
 }
 
 .searchDescriptor {
@@ -240,7 +248,9 @@ div {
 }
 
 .galaxyList {
-    border: 2px solid grey;
+    border-color: grey;
+    border-style: solid;
+    border-width: 2px;
     border-radius: 30px;
     padding-top: 32px;
 
@@ -266,6 +276,13 @@ div {
     }
 }
 
+@media only screen and (max-width: 699px), only screen and (max-device-width: 699px) {
+    .galaxyList {
+        border-color: black;
+    }
+}
+
+
 @mixin setListFormat ($numCols:4, $width:800px) {
     .galaxyList {
         -moz-column-count: $numCols;
@@ -278,23 +295,23 @@ div {
     }
 }
 
-@media only screen and (max-width: 1799px), only screen and (max-device-width: 1799px) {
-    @include setListFormat (6, 1200px);
+@media only screen and (max-width: 1899px), only screen and (max-device-width: 1899px) {
+    @include setListFormat (6, 1100px);
 }
 
 @media only screen and (max-width: 1199px), only screen and (max-device-width: 1199px) {
-    @include setListFormat (5, 1000px);
+    @include setListFormat (5, 950px);
 }
 
-@media only screen and (max-width: 991px), only screen and (max-device-width: 991px) {
-    @include setListFormat (4, 800px);
+@media only screen and (max-width: 1140px), only screen and (max-device-width: 1140px) {
+    @include setListFormat (4, 750px);
 }
 
-@media only screen and (max-width: 767px), only screen and (max-device-width: 767px) {
+@media only screen and (max-width: 867px), only screen and (max-device-width: 867px) {
     @include setListFormat (3, 600px);
 }
 
-@media only screen and (max-width: 599px), only screen and (max-device-width: 599px) {
+@media only screen and (max-width: 699px), only screen and (max-device-width: 699px) {
     @include setListFormat (2, 400px);
 }
 
@@ -355,12 +372,12 @@ select {
 }
 
 .btn {
-  background: $primaryColorMedium;
-  background-image: -webkit-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
-  background-image: -moz-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
-  background-image: -ms-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
-  background-image: -o-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
-  background-image: linear-gradient(to bottom, $primaryColorMedium, $primaryColorDark);
+  background: $primaryColorDark;
+  background-image: -webkit-linear-gradient(top, $primaryColorDark, $primaryColorDarkest);
+  background-image: -moz-linear-gradient(top, $primaryColorDark, $primaryColorDarkest);
+  background-image: -ms-linear-gradient(top, $primaryColorDark, $primaryColorDarkest);
+  background-image: -o-linear-gradient(top, $primaryColorDark, $primaryColorDarkest);
+  background-image: linear-gradient(to bottom, $primaryColorDark, $primaryColorDarkest);
   -webkit-border-radius: 12;
   -moz-border-radius: 12;
   border-radius: 12px;
@@ -376,12 +393,12 @@ select {
   }
 
   &:hover {
-    background: $primaryColorLight;
-    background-image: -webkit-linear-gradient(top, $primaryColorLight, $primaryColorMedium);
-    background-image: -moz-linear-gradient(top, $primaryColorLight, $primaryColorMedium);
-    background-image: -ms-linear-gradient(top, $primaryColorLight, $primaryColorMedium);
-    background-image: -o-linear-gradient(top, $primaryColorLight, $primaryColorMedium);
-    background-image: linear-gradient(to bottom, $primaryColorLight, $primaryColorMedium);
+    background: $primaryColorMedium;
+    background-image: -webkit-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
+    background-image: -moz-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
+    background-image: -ms-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
+    background-image: -o-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
+    background-image: linear-gradient(to bottom, $primaryColorMedium, $primaryColorDark);
     text-decoration: none;
     color: white;
   }

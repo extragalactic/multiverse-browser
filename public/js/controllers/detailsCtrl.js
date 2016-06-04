@@ -34,9 +34,11 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
     galaxy.Decl_fulltext = galaxy.Decl_h + 'd ' + galaxy.Decl_m + "' " + galaxy.Decl_s + '""';
     galaxy.ImageFile_fulltext = 'images/galaxies 150/' + galaxy.ImageFile;
 
+    // build the search descriptor line of text
     if(appVars.galaxyList.length > 0) {
       galaxy.searchDescriptor = appVars.galaxyList.length + ' ' + appVars.searchTerms.galaxyType + ' galaxies';
-      if(appVars.searchTerms.group != 'All') {
+      console.log('search group: ' + appVars.searchTerms.group);
+      if(appVars.searchTerms.group !== '') {
         galaxy.searchDescriptor += ' in ' + appVars.searchTerms.group;
       }
     } else {
@@ -49,7 +51,7 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
 
     // find the next & previous galaxies in the search list (if it exists)
     if(appVars.galaxyList.length > 0) {
-      $('.galaxyNextPrev').removeClass('hidden');
+      $('.galaxyDetailsBox3').removeClass('hidden');
       for (var i = 0, len = appVars.galaxyList.length; i < len; i++) {
         if(appVars.galaxyList[i].Common_Name == $scope.galaxyDetails.Common_Name) {
           indexPointers.current = i;
@@ -61,7 +63,7 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
         }
       }
     } else {
-      $('.galaxyNextPrev').addClass('hidden');
+      $('.galaxyDetailsBox3').addClass('hidden');
     }
 
     if (appVars.globalOptions.isControlNode === 'true') {
@@ -77,6 +79,11 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
       socket.emit('galaxyDetailsRequest', galaxyName);
     }
   });
+
+
+  $scope.returnToList = function () {
+      window.location.href = '#/list/';
+  };
 
   // ----------------------------------------------------------
   // Listen for messages from view
