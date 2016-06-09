@@ -6,16 +6,19 @@ global.jQuery = $ = require('jquery');
 
 
 // ListController
-angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket', 'appVars', function ($scope, $http, socket, appVars) {
+angular.module('myApp').controller('ListController', ['$scope', '$http', '$window', '$timeout', 'socket', 'appVars', function ($scope, $http, $window, $timeout, socket, appVars) {
   "use strict";
 
   this.socket = socket;
   this.appVars = appVars;
   var lastImageSelected = '';
+  var resetPageScrollPos = false;
 
   $scope.isControlNode = appVars.globalOptions.isControlNode;
 
   $scope.$on('$destroy', function (event) {
+    appVars.scrollPos = $window.document.documentElement.scrollTop || $window.document.body.scrollTop;
+
     socket.removeAllListeners();
   });
 
@@ -61,6 +64,18 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
     }
 
     $scope.direction = appVars.searchTerms.direction;
+
+    // wait until the DOM has rendered, then scroll to saved page position
+    if(resetPageScrollPos===true) {
+      appVars.scrollPos = 0;
+    } else {
+      $timeout(function () {
+        $window.document.documentElement.scrollTop = $window.document.body.scrollTop = appVars.scrollPos;
+      });
+    }
+    // set default selected galaxy (for the Details page)
+    appVars.defaultDetailsItem = $scope.galaxies[0]._Common_Name;
+
   });
 
   socket.on("galaxyTypes", function (data) {
@@ -132,12 +147,14 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
   };
 
   $scope.changeGroupSelect = function () {
+    resetPageScrollPos = true;
     appVars.searchTerms.group = $scope.galaxyGroup;
     appVars.searchTerms.resultsStartPosition = 0;
     socket.emit('galaxyListRequest', $scope.galaxyGroup, $scope.galaxyType);
   };
 
   $scope.changeTypeSelect = function () {
+    resetPageScrollPos = true;
     console.log('galaxy type: ' + $scope.galaxyType);
     appVars.searchTerms.galaxyType = $scope.galaxyType;
     appVars.searchTerms.resultsStartPosition = 0;
@@ -145,6 +162,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
   };
 
   $scope.changeSortDirection = function () {
+    resetPageScrollPos = true;
     appVars.searchTerms.direction = $scope.direction;
   };
 

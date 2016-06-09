@@ -24489,7 +24489,9 @@ var myApp = angular.module('myApp', [
     allowExternalControl: 'true',
     isControlNode: 'true'
   },
-  galaxyList: []
+  galaxyList: [],
+  defaultDetailsItem: '',
+  scrollPos: 0
 })
 .config(['$routeProvider', function ($routeProvider) {
   // ---- init Angular route provider ----
@@ -24499,6 +24501,10 @@ var myApp = angular.module('myApp', [
     controller: 'ListController'
   }).
   when('/details/:itemId', {
+    templateUrl: 'partials/details.html',
+    controller: 'DetailsController'
+  }).
+  when('/details', {
     templateUrl: 'partials/details.html',
     controller: 'DetailsController'
   }).
@@ -24551,16 +24557,19 @@ global.jQuery = $ = require('jquery');
 
 
 // ListController
-angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket', 'appVars', function ($scope, $http, socket, appVars) {
+angular.module('myApp').controller('ListController', ['$scope', '$http', '$window', '$timeout', 'socket', 'appVars', function ($scope, $http, $window, $timeout, socket, appVars) {
   "use strict";
 
   this.socket = socket;
   this.appVars = appVars;
   var lastImageSelected = '';
+  var resetPageScrollPos = false;
 
   $scope.isControlNode = appVars.globalOptions.isControlNode;
 
   $scope.$on('$destroy', function (event) {
+    appVars.scrollPos = $window.document.documentElement.scrollTop || $window.document.body.scrollTop;
+
     socket.removeAllListeners();
   });
 
@@ -24606,6 +24615,18 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
     }
 
     $scope.direction = appVars.searchTerms.direction;
+
+    // wait until the DOM has rendered, then scroll to saved page position
+    if(resetPageScrollPos===true) {
+      appVars.scrollPos = 0;
+    } else {
+      $timeout(function () {
+        $window.document.documentElement.scrollTop = $window.document.body.scrollTop = appVars.scrollPos;
+      });
+    }
+    // set default selected galaxy (for the Details page)
+    appVars.defaultDetailsItem = $scope.galaxies[0]._Common_Name;
+
   });
 
   socket.on("galaxyTypes", function (data) {
@@ -24677,12 +24698,14 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
   };
 
   $scope.changeGroupSelect = function () {
+    resetPageScrollPos = true;
     appVars.searchTerms.group = $scope.galaxyGroup;
     appVars.searchTerms.resultsStartPosition = 0;
     socket.emit('galaxyListRequest', $scope.galaxyGroup, $scope.galaxyType);
   };
 
   $scope.changeTypeSelect = function () {
+    resetPageScrollPos = true;
     console.log('galaxy type: ' + $scope.galaxyType);
     appVars.searchTerms.galaxyType = $scope.galaxyType;
     appVars.searchTerms.resultsStartPosition = 0;
@@ -24690,6 +24713,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', 'socket
   };
 
   $scope.changeSortDirection = function () {
+    resetPageScrollPos = true;
     appVars.searchTerms.direction = $scope.direction;
   };
 
@@ -24799,7 +24823,8 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
       galaxy.searchDescriptor = appVars.galaxyList.length + ' ' + appVars.searchTerms.galaxyType + ' galaxies';
       console.log('search group: ' + appVars.searchTerms.group);
       if(appVars.searchTerms.group !== '') {
-        galaxy.searchDescriptor += ' in ' + appVars.searchTerms.group;
+        galaxy.searchDescriptor += ' in ';
+        galaxy.searchDescriptor += appVars.searchTerms.group==='-'? "Field Galaxies": appVars.searchTerms.group;
       }
     } else {
       galaxy.searchDescriptor = "";
@@ -24873,7 +24898,15 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
   // ----------------------------------------------------------
   // Initialize page with DB request
 
-  socket.emit('galaxyDetailsRequest', $routeParams.itemId);
+  if($routeParams.itemId===undefined && appVars.defaultDetailsItem==='') {
+    window.location.href = '#/list/';
+  } else {
+    if($routeParams.itemId===undefined) {
+      socket.emit('galaxyDetailsRequest', appVars.defaultDetailsItem);
+    } else {
+      socket.emit('galaxyDetailsRequest', $routeParams.itemId);
+    }
+  }
 
 }]);
 

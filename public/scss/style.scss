@@ -206,6 +206,9 @@ div {
     border-radius: 10px;
     padding: 0px 8px 12px 8px;
 }
+.galaxyNextPrev {
+    padding-left: 8px;
+}
 
 .galaxyDetailsBox4 {
     padding-left: 8px;
@@ -253,6 +256,8 @@ div {
     border-width: 2px;
     border-radius: 30px;
     padding-top: 32px;
+    padding-left: 20px;
+    padding-bottom: 10px;
 
     -moz-column-gap: 0px;
     -webkit-column-gap: 0px;
@@ -279,6 +284,7 @@ div {
 @media only screen and (max-width: 699px), only screen and (max-device-width: 699px) {
     .galaxyList {
         border-color: black;
+        margin-left: -20px;
     }
 }
 
@@ -308,7 +314,7 @@ div {
 }
 
 @media only screen and (max-width: 867px), only screen and (max-device-width: 867px) {
-    @include setListFormat (3, 600px);
+    @include setListFormat (3, 625px);
 }
 
 @media only screen and (max-width: 699px), only screen and (max-device-width: 699px) {

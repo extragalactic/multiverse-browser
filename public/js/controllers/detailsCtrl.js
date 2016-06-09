@@ -39,7 +39,8 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
       galaxy.searchDescriptor = appVars.galaxyList.length + ' ' + appVars.searchTerms.galaxyType + ' galaxies';
       console.log('search group: ' + appVars.searchTerms.group);
       if(appVars.searchTerms.group !== '') {
-        galaxy.searchDescriptor += ' in ' + appVars.searchTerms.group;
+        galaxy.searchDescriptor += ' in ';
+        galaxy.searchDescriptor += appVars.searchTerms.group==='-'? "Field Galaxies": appVars.searchTerms.group;
       }
     } else {
       galaxy.searchDescriptor = "";
@@ -113,6 +114,14 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
   // ----------------------------------------------------------
   // Initialize page with DB request
 
-  socket.emit('galaxyDetailsRequest', $routeParams.itemId);
+  if($routeParams.itemId===undefined && appVars.defaultDetailsItem==='') {
+    window.location.href = '#/list/';
+  } else {
+    if($routeParams.itemId===undefined) {
+      socket.emit('galaxyDetailsRequest', appVars.defaultDetailsItem);
+    } else {
+      socket.emit('galaxyDetailsRequest', $routeParams.itemId);
+    }
+  }
 
 }]);

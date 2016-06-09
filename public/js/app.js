@@ -30,7 +30,9 @@ var myApp = angular.module('myApp', [
     allowExternalControl: 'true',
     isControlNode: 'true'
   },
-  galaxyList: []
+  galaxyList: [],
+  defaultDetailsItem: '',
+  scrollPos: 0
 })
 .config(['$routeProvider', function ($routeProvider) {
   // ---- init Angular route provider ----
@@ -40,6 +42,10 @@ var myApp = angular.module('myApp', [
     controller: 'ListController'
   }).
   when('/details/:itemId', {
+    templateUrl: 'partials/details.html',
+    controller: 'DetailsController'
+  }).
+  when('/details', {
     templateUrl: 'partials/details.html',
     controller: 'DetailsController'
   }).
