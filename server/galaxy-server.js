@@ -146,7 +146,7 @@ function cleanData(data) {
       data[i]._Group = data[i].Group;
       data[i].Group = data[i].Group.replace(/_/g, ' ');
       if(data[i].Group === '-') {
-          data[i].Group = '(Field Galaxy)';
+          data[i].Group = '(No Group)';
       }
     }
 }

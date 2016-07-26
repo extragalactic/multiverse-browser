@@ -40,7 +40,8 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
       console.log('search group: ' + appVars.searchTerms.group);
       if(appVars.searchTerms.group !== '') {
         galaxy.searchDescriptor += ' in ';
-        galaxy.searchDescriptor += appVars.searchTerms.group==='-'? "Field Galaxies": appVars.searchTerms.group;
+        galaxy.searchDescriptor += appVars.searchTerms.group==='-'? "No Group": appVars.searchTerms.group;
+        galaxy.searchDescriptor = galaxy.searchDescriptor.replace(/_/g, ' ');
       }
     } else {
       galaxy.searchDescriptor = "";
@@ -52,7 +53,7 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
 
     // find the next & previous galaxies in the search list (if it exists)
     if(appVars.galaxyList.length > 0) {
-      $('.galaxyDetailsBox3').removeClass('hidden');
+      $('.nextPrevControls').removeClass('hidden');
       for (var i = 0, len = appVars.galaxyList.length; i < len; i++) {
         if(appVars.galaxyList[i].Common_Name == $scope.galaxyDetails.Common_Name) {
           indexPointers.current = i;
@@ -64,7 +65,7 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
         }
       }
     } else {
-      $('.galaxyDetailsBox3').addClass('hidden');
+      $('.nextPrevControls').addClass('hidden');
     }
 
     if (appVars.globalOptions.isControlNode === 'true') {
@@ -83,6 +84,8 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
 
 
   $scope.returnToList = function () {
+    // Manually set the navbar to List (this is a hack; I shouldn't be modifying the DOM)
+    $('.navbar-nav li:first').addClass('active').siblings().removeClass('active');
       window.location.href = '#/list/';
   };
 
@@ -120,6 +123,7 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
     if($routeParams.itemId===undefined) {
       socket.emit('galaxyDetailsRequest', appVars.defaultDetailsItem);
     } else {
+      appVars.defaultDetailsItem = $routeParams.itemId;
       socket.emit('galaxyDetailsRequest', $routeParams.itemId);
     }
   }

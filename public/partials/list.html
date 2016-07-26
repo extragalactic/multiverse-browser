@@ -6,12 +6,12 @@
 
             <div class="search" ng-cloak>
                <h1>Galactic Directory</h1>
-               <h3>A directory of most major galaxies within 100 million light years.</h3></br>
+               <h3>This is a growing directory of most major galaxies within 100 million light years of the Milky Way. Use the filter controls below to search the database and sort your results. There are currently 480 galaxies in the database.</h3></br>
                <div class="searchBarLeft">
                   <label> Group:
                      <select ng-model="galaxyGroup" id="groupSelect" ng-change="changeGroupSelect()">
                         <option value="">All</option>
-                        <option value="-">Field Galaxies</option>
+                        <option value="-">No Group</option>
                         <option ng-repeat="group in galaxyGroups" value="{{group.name}}">{{group.name_cleaned}}</option>
                      </select>
                   </label>

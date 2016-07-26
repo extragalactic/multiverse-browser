@@ -211,8 +211,11 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
         }
       }
     }
+    // Manually set the navbar to Details (this is a hack; I shouldn't be modifying the DOM)
+    $('.navbar-nav li:first').next().addClass('active').siblings().removeClass('active');
   };
 
+  // when the user clicks the Return to Top button
   $scope.returnToTop = function () {
     scroll(0, 0);
   };
@@ -226,7 +229,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     size: false
   };
 
-  // get initial group list (which then calls the initial galaxy list request)
-  //console.log("requesting galaxy group list");
+  // begin by getting initial group list (which then calls the initial galaxy list request)
   socket.emit('galaxyGroupsRequest');
+  
 }]);

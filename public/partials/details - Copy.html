@@ -5,9 +5,9 @@
          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
             <div class="galaxy pull-left">
-               <div class="galaxyDetailsTop">
+               <div>
                   <div class="galaxyDetailsLeft">
-                     <div class="galaxyDetailsThumbTitle">
+                     <div>
                         <h1><span ng-bind="galaxyDetails.Common_Name"></span></h1>
                         <h4><span ng-bind="galaxyDetails.Council_Name"></span></h4>
                      </div>
@@ -29,18 +29,20 @@
                         <h4><span class="textColourData"  ng-bind="galaxyDetails.Type"></span></h4>
                      </div>
                      <div class="galaxyDetailsBox3">
-                        <div class="nextPrevControls">
-                           <div class="searchDescriptor">
-                              <h4><span class="textColourData2">{{galaxyDetails.searchDescriptor}}</span></h4>
-                           </div>
-                           <div class="galaxyNextPrev">
-                              <button class="btn btn-primary raised" ng-click="prevGalaxy()">
-                                 < Prev</button>
-                              <button class="btn btn-primary raised" ng-click="nextGalaxy()">Next ></button>                                                            </div>
+                        <div class="searchDescriptor">
+                           <h4><span class="textColourData2">{{galaxyDetails.searchDescriptor}}</span></h4>
                         </div>
-                        <div class="returnToList">
-                           <button id="backToListButton" type="button" class="btn btn-link" ng-click="returnToList()"><< Return to List</button>
-                        </div>
+                        <div class="galaxyNextPrev">
+                           <button class="btn btn-primary raised" ng-click="prevGalaxy()">
+                              << Prev</button>
+                           <button class="btn btn-primary raised" ng-click="nextGalaxy()">Next >></button>                                                             </div>
+                     </div>
+                  </div>
+                  <div class="galaxyDetailsBox4">
+                     <div class="returnToList">
+                        <button id="backToListButton" type="button" class="btn btn-link" ng-click="returnToList()"><< Return to List</button>
+
+                        <!-- <h4><a href="#/list"><span ng-bind="extraHTML"></span></a></h4> -->
                      </div>
                   </div>
                </div>
