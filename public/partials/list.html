@@ -5,8 +5,7 @@
          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
             <div class="search" ng-cloak>
-               <h1>Galactic Directory</h1>
-               <h3>This is a growing directory of most major galaxies within 100 million light years of the Milky Way. Use the filter controls below to search the database and sort your results. There are currently 480 galaxies in the database.</h3></br>
+               <h1>Galactic Directory</h1></br>
                <div class="searchBarLeft">
                   <label> Group:
                      <select ng-model="galaxyGroup" id="groupSelect" ng-change="changeGroupSelect()">
@@ -75,7 +74,7 @@
                   <li tooltip-placement="top-left" uib-tooltip="{{item.Common_Name}}" ng-animate="animate" class="galaxyListItem clearfix" ng-repeat="item in filtered = (galaxies | filter: query | orderBy: galaxyOrder:direction | limitTo:limitNum:limitStart)">
                      <a ng-href="" ng-click="onGalaxyClicked(item._Common_Name);" style="cursor:pointer;">
                         <div class="galaxyThumb">
-                           <img ng-src="images/galaxies 150/{{item.ImageFile}}" alt="">
+                           <img ng-src="images/galaxies 150/{{item.ImageFileJPG}}" alt="">
                         </div>
                         <div class="info" ng-show="showFlags.all">
                            <h2>{{item.Common_Name}}</h2>

@@ -148,6 +148,9 @@ function cleanData(data) {
       if(data[i].Group === '-') {
           data[i].Group = '(No Group)';
       }
+      data[i].ImageFileJPG = data[i].ImageFile;
+      data[i].ImageFileJPG = data[i].ImageFileJPG.replace(' ', '-');
+      data[i].ImageFileJPG = data[i].ImageFileJPG.replace('.png', '.jpg');
     }
 }
 

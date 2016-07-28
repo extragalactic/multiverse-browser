@@ -24477,7 +24477,7 @@ var myApp = angular.module('myApp', [
 .value('appVars', {
   searchTerms: {
     group: 'Virgo',
-    galaxyType: 'Elliptical', /* '' = all types */
+    galaxyType: '', /* '' = all types */
     orderBy: 'Distance',
     direction: '', /* '' = ascending */
     displayStyle: 'Tiles',
@@ -24496,6 +24496,10 @@ var myApp = angular.module('myApp', [
 .config(['$routeProvider', function ($routeProvider) {
   // ---- init Angular route provider ----
   $routeProvider.
+  when('/home', {
+    templateUrl: 'partials/home.html',
+    controller: 'HomeController'
+  }).
   when('/list', {
     templateUrl: 'partials/list.html',
     controller: 'ListController'
@@ -24517,7 +24521,7 @@ var myApp = angular.module('myApp', [
     controller: 'AboutController'
   }).
   otherwise({
-    redirectTo: '/list'
+    redirectTo: '/home'
   });
 }]);
 // TIP: Can define an application Constant var by appending the .constant
@@ -24533,7 +24537,8 @@ $(document).on('click', '.navbar-nav li', function (e) {
 });
 $(document).on('click', '.navbar-brand', function (e) {
   $(this).addClass('active');
-  $('.navbar-nav li:first').addClass('active').siblings().removeClass('active');
+  //$('.navbar-nav li:first').addClass('active').siblings().removeClass('active');
+  $('.navbar-nav li:first').removeClass('active').siblings().removeClass('active');
 });
 
 // init hamburger button
@@ -24544,6 +24549,32 @@ $(document).on('click', '#menuCollapseButton', function (e) {
     $('#navigationBar').addClass('collapse');
   }
 });
+
+// ----------------------------------------------------
+// HomeController
+// ----------------------------------------------------
+
+angular.module('myApp').controller('HomeController', ['$scope', '$http', 'appVars', function ($scope, $http, appVars) {
+  "use strict";
+
+  this.appVars = appVars;
+
+  $scope.myInterval = 8000;
+  $scope.noWrapSlides = false;
+  $scope.active = 0;
+
+  var slides = [
+    {image: 'images/slides/multiverse-slide-6.jpg', text: '', id: 0},
+    {image: 'images/slides/multiverse-slide-16.jpg', text: '', id: 1},
+    {image: 'images/slides/multiverse-slide-1.jpg', text: '', id: 2},
+    {image: 'images/slides/multiverse-slide-2.jpg', text: '', id: 3},
+    {image: 'images/slides/multiverse-slide-5.jpg', text: '', id: 4},
+    {image: 'images/slides/multiverse-slide-7.jpg', text: '', id: 5},
+    {image: 'images/slides/multiverse-slide-15.jpg', text: '', id: 6}
+  ];
+  $scope.slides = slides;
+
+}]);
 
 // ----------------------------------------------------
 //  ListController
@@ -24815,7 +24846,7 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
     galaxy.Distance_fulltext = galaxy.Distance + ' mly';
     galaxy.RA_fulltext = galaxy.RA_h + 'h ' + galaxy.RA_m + 'm ' + galaxy.RA_s + 's';
     galaxy.Decl_fulltext = galaxy.Decl_h + 'd ' + galaxy.Decl_m + "' " + galaxy.Decl_s + '""';
-    galaxy.ImageFile_fulltext = 'images/galaxies 150/' + galaxy.ImageFile;
+    galaxy.ImageFile_fulltext = 'images/galaxies 150 (png)/' + galaxy.ImageFile;
 
     // build the search descriptor line of text
     if(appVars.galaxyList.length > 0) {
@@ -24855,6 +24886,9 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
       $scope.sendOSC();
     }
 
+    // to prevent visual flash, the picture thumbnail element is by default hidden, then shown once the data is loaded
+    $('.galaxyDetailsThumb').show();
+
   });
 
   socket.on("messageOSC", function (message) {
@@ -24878,7 +24912,6 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
   $scope.prevGalaxy = function () {
     if(appVars.galaxyList.length === 0) return;
 
-    console.log(appVars.galaxyList.length, indexPointers.prev, indexPointers.current, indexPointers.next);
     var itemName = appVars.galaxyList[indexPointers.prev]._Common_Name;
     window.location.href = '#/details/' + itemName;
   };

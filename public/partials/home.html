@@ -1,0 +1,30 @@
+<section class="homePage">
+
+   <div class="container">
+      <div class="row">
+
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+            <div style="margin-top: 10px;">
+              <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                  <img ng-src="{{slide.image}}" style="margin:auto;">
+                  <div class="carousel-caption">
+                    <p>{{slide.text}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+         </div>
+
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <h1>The Multiverse Galactic Directory</h1>
+            <div>
+               <h3 class="textBlock">This website is a growing directory of most major galaxies within 100 million light years of the Milky Way (our galactic neighbourhood, around the Virgo Cluster). Go to the List page and use the filter controls to search the database and sort your results. There are currently 480 galaxies in the database, representing the majority of large galaxies near the Milky Way.</h3></br>
+            </div>
+         </div>
+
+      </div>
+   </div>
+
+</section>

@@ -32,7 +32,7 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
     galaxy.Distance_fulltext = galaxy.Distance + ' mly';
     galaxy.RA_fulltext = galaxy.RA_h + 'h ' + galaxy.RA_m + 'm ' + galaxy.RA_s + 's';
     galaxy.Decl_fulltext = galaxy.Decl_h + 'd ' + galaxy.Decl_m + "' " + galaxy.Decl_s + '""';
-    galaxy.ImageFile_fulltext = 'images/galaxies 150/' + galaxy.ImageFile;
+    galaxy.ImageFile_fulltext = 'images/galaxies 150 (png)/' + galaxy.ImageFile;
 
     // build the search descriptor line of text
     if(appVars.galaxyList.length > 0) {
@@ -72,6 +72,9 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
       $scope.sendOSC();
     }
 
+    // to prevent visual flash, the picture thumbnail element is by default hidden, then shown once the data is loaded
+    $('.galaxyDetailsThumb').show();
+
   });
 
   socket.on("messageOSC", function (message) {
@@ -95,7 +98,6 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
   $scope.prevGalaxy = function () {
     if(appVars.galaxyList.length === 0) return;
 
-    console.log(appVars.galaxyList.length, indexPointers.prev, indexPointers.current, indexPointers.next);
     var itemName = appVars.galaxyList[indexPointers.prev]._Common_Name;
     window.location.href = '#/details/' + itemName;
   };

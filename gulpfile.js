@@ -10,6 +10,7 @@ var gulp = require('gulp'),
 // list source files
 var jsSources = [
   'public/js/app.js',
+  'public/js/controllers/homeCtrl.js',
   'public/js/controllers/listCtrl.js',
   'public/js/controllers/detailsCtrl.js',
   'public/js/controllers/headerCtrl.js',
@@ -18,7 +19,7 @@ var jsSources = [
   'public/js/controllers/aboutCtrl.js',
   'public/js/services/utilitiesFactory.js',
   'public/js/services/socketFactory.js'
-]; 
+];
 var moduleSources = [
   'public/js/galaxyInfo.js'
 ];

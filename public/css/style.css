@@ -79,6 +79,11 @@ div label {
   padding-right: 20px;
   padding-left: 7px; }
 
+.textBlock {
+  background-color: black;
+  border: 0px solid #777;
+  border-radius: 10px; }
+
 .btn-link {
   color: #ba6fe8;
   text-decoration: none; }
@@ -129,8 +134,7 @@ div label {
   width: 150px;
   border: 2px solid #777;
   border-radius: 15px;
-  padding-bottom: 15px;
-  padding-top: 5px;
+  padding: 5px 5px 5px 2px;
   margin-top: 0px;
   background-color: black; }
 
@@ -311,7 +315,8 @@ select {
 
 /* ----------------------------------------------- */
 .videoPlayer {
-  padding-bottom: 50px; }
+  padding-bottom: 50px;
+  padding-top: 12px; }
 
 #navigationBar li {
   font-size: 0.7em; }
@@ -319,6 +324,9 @@ select {
 /* custom navbar class used for skinning the navbar */
 .navbar-custom {
   background: linear-gradient(#444, #111); }
+
+.navbar-header {
+  text-align: left; }
 
 .footer h4 {
   color: #777; }

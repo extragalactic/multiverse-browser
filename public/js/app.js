@@ -18,7 +18,7 @@ var myApp = angular.module('myApp', [
 .value('appVars', {
   searchTerms: {
     group: 'Virgo',
-    galaxyType: 'Elliptical', /* '' = all types */
+    galaxyType: '', /* '' = all types */
     orderBy: 'Distance',
     direction: '', /* '' = ascending */
     displayStyle: 'Tiles',
@@ -37,6 +37,10 @@ var myApp = angular.module('myApp', [
 .config(['$routeProvider', function ($routeProvider) {
   // ---- init Angular route provider ----
   $routeProvider.
+  when('/home', {
+    templateUrl: 'partials/home.html',
+    controller: 'HomeController'
+  }).
   when('/list', {
     templateUrl: 'partials/list.html',
     controller: 'ListController'
@@ -58,7 +62,7 @@ var myApp = angular.module('myApp', [
     controller: 'AboutController'
   }).
   otherwise({
-    redirectTo: '/list'
+    redirectTo: '/home'
   });
 }]);
 // TIP: Can define an application Constant var by appending the .constant
@@ -74,7 +78,8 @@ $(document).on('click', '.navbar-nav li', function (e) {
 });
 $(document).on('click', '.navbar-brand', function (e) {
   $(this).addClass('active');
-  $('.navbar-nav li:first').addClass('active').siblings().removeClass('active');
+  //$('.navbar-nav li:first').addClass('active').siblings().removeClass('active');
+  $('.navbar-nav li:first').removeClass('active').siblings().removeClass('active');
 });
 
 // init hamburger button
