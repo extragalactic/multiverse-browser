@@ -4,16 +4,9 @@
       <div class="row">
          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div>
-               <h1>Options</h1></br>
-               <label>Receive External Control:
-                  <select ng-model="allowExternalControl" ng-change="changeAllowExternalControl()">
-                     <option value="true">Yes</option>
-                     <option value="false">No</option>
-                  </select>
-               </label>
-               </br>
-               </br>
-               <label>Set as Controller Node:
+               <h1>Control Options</h1></br>
+
+               <label class="optionsText">Set as Controller Node:
                   <select ng-model="isControlNode" ng-change="changeIsControlNode()">
                      <option value="true">Yes</option>
                      <option value="false">No</option>
@@ -21,7 +14,15 @@
                </label>
                </br>
                </br>
-               <label>List Details Selection Style:
+               <label class="optionsText">Receive External Control:
+                  <select ng-model="allowExternalControl" ng-change="changeAllowExternalControl()">
+                     <option value="true">Yes</option>
+                     <option value="false">No</option>
+                  </select>
+               </label>
+               </br>
+               </br>
+               <label class="optionsText">List Selection Style:
                   <select ng-model="listSelectStyle" ng-change="changeListSelectStyle()">
                      <option value="SingleClick">Single-click</option>
                      <option value="DoubleClick">Double-click</option>

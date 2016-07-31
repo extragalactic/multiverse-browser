@@ -28,21 +28,6 @@ app.use(express.static("./../public"));
 // define handlers for all incoming messages
 io.on("connection", function(socket) {
 
-   // ----------------------------------------------------
-   socket.on("config", function (obj) {
-
-      console.log('configure OSC socket');
-      oscServer = new osc.Server(obj.server.port, obj.server.host);
-      oscClient = new osc.Client(obj.client.host, obj.client.port);
-    //  oscClient.send('/status', socket.sessionId + ' connected');
-
-      oscServer.on('message', function(msg, rinfo) {
-        var OSCmsg = msg[2][0]; // trim the data out of the message
-        console.log('OSC server received message: ' + OSCmsg);
-        io.emit("messageOSC", OSCmsg);
-      });
-    });
-
     // ----------------------------------------------------
     socket.on("messageOSC", function(message) {
         console.log('sending OSC message to Multiverse: ' + message);
@@ -122,25 +107,44 @@ io.on("connection", function(socket) {
       //io.emit("userlist", userList);
     });
 
+    // setup the OSC connection
+    initializeOSC();
+
     socket.emit("message", "[connected to server]");
 
 });
 
-// utility functions
-/*
-function getUserNameArray() {
-  var userNameArray = [];
-  userList.forEach(function(element, index, array) {
-      userNameArray.push(userList[index].name);
-  });
-  return userNameArray;
-}
-*/
+// initialize the OSC connection (for communication with Touch)
+function initializeOSC() {
 
+   var obj = {
+      server: {
+      port: 3333,
+      host: settings.MULTIVERSE_SERVER_IP
+      },
+      client: {
+      port: 3334,
+      host: settings.MULTIVERSE_SERVER_IP
+      }
+   }
+
+   console.log('configure OSC socket');
+   oscServer = new osc.Server(obj.server.port, obj.server.host);
+   oscClient = new osc.Client(obj.client.host, obj.client.port);
+//  oscClient.send('/status', socket.sessionId + ' connected');
+
+   oscServer.on('message', function(msg, rinfo) {
+    var OSCmsg = msg[2][0]; // trim the data out of the message
+    console.log('OSC server received message: ' + OSCmsg);
+    io.emit("messageOSC", OSCmsg);
+   });
+}
+
+// prepare the data returned from the DB (character substitutions, adding extra fields, etc.)
 function cleanData(data) {
     for(var i=0; i < data.length; i++) {
 
-      data[i]._Common_Name = data[i].Common_Name; // save version with "_"
+      data[i]._Common_Name = data[i].Common_Name; // save a version with "_"
       data[i].Common_Name = data[i].Common_Name.replace("_", " ");
       data[i].Council_Name = data[i].Council_Name.replace("-", "");
       data[i]._Group = data[i].Group;
@@ -148,7 +152,7 @@ function cleanData(data) {
       if(data[i].Group === '-') {
           data[i].Group = '(No Group)';
       }
-      data[i].ImageFileJPG = data[i].ImageFile;
+      data[i].ImageFileJPG = data[i].ImageFile; // create filename with .jpg extension
       data[i].ImageFileJPG = data[i].ImageFileJPG.replace(' ', '-');
       data[i].ImageFileJPG = data[i].ImageFileJPG.replace('.png', '.jpg');
     }

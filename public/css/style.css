@@ -79,10 +79,28 @@ div label {
   padding-right: 20px;
   padding-left: 7px; }
 
+.introText {
+  padding: 0px 80px 0px 20px; }
+
 .textBlock {
   background-color: black;
   border: 0px solid #777;
-  border-radius: 10px; }
+  border-radius: 6px; }
+
+.aboutText {
+  padding-bottom: 60px;
+  -webkit-column-count: 2;
+  -moz-column-count: 2;
+  column-count: 2;
+  -webkit-column-gap: 20px;
+  -moz-column-gap: 20px;
+  column-gap: 20px; }
+
+.textTitleCenter {
+  text-align: center; }
+
+.optionsText {
+  font-size: 1.0em; }
 
 .btn-link {
   color: #ba6fe8;
@@ -107,16 +125,27 @@ div label {
   float: left;
   min-width: 300px; }
 
+.searchBarMiddle {
+  float: left;
+  min-width: 200px; }
+
 .clearfix {
   overflow: auto;
   clear: both; }
 
 .returnToList {
-  padding-left: 25px;
-  padding-top: 8px; }
+  padding-left: 30px;
+  padding-top: 10px; }
+
+#searchResultsTitle {
+  margin-top: -10px;
+  padding-left: 3px;
+  font-size: 0.5em;
+  max-width: 100px; }
 
 .prevNextButtons {
-  margin-top: 15px; }
+  margin-top: 15px;
+  margin-bottom: 15px; }
 
 #backToTopButton {
   margin-top: 12px; }
@@ -148,6 +177,12 @@ div label {
   padding-right: 15px;
   margin-bottom: -10px; }
 
+.galaxyDetailsTitle-xs {
+  float: left;
+  min-width: 180px;
+  padding-right: 15px;
+  margin-bottom: -10px; }
+
 .galaxyDetailsRight {
   float: left;
   padding-top: 13px;
@@ -171,14 +206,17 @@ div label {
 
 .nextPrevControls {
   border: 2px solid #777;
-  border-radius: 10px;
+  border-radius: 6px;
   padding: 0px 8px 12px 8px; }
 
 .galaxyNextPrev {
-  padding-left: 15px; }
+  padding-left: 9px;
+  padding-top: 3px; }
 
 .searchDescriptor {
-  height: 2em; }
+  height: 2em;
+  margin-top: -8px;
+  padding-bottom: 4px; }
 
 .largeImageWrapper {
   padding-bottom: 30px;
@@ -338,9 +376,9 @@ select {
   background-image: -ms-linear-gradient(top, #3c1c4e, #281334);
   background-image: -o-linear-gradient(top, #3c1c4e, #281334);
   background-image: linear-gradient(to bottom, #3c1c4e, #281334);
-  -webkit-border-radius: 12;
-  -moz-border-radius: 12;
-  border-radius: 12px;
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
+  border-radius: 6px;
   font-family: 'Raleway', sans-serif;
   color: white;
   font-size: 0.7em;
@@ -358,6 +396,55 @@ select {
     background-image: linear-gradient(to bottom, #7d3ca3, #3c1c4e);
     text-decoration: none;
     color: white; }
+
+.carousel-fade .carousel-inner .item {
+  -webkit-transition: 0.5s ease-in-out left;
+  -moz-transition: 0.5s ease-in-out left;
+  -o-transition: 0.5s ease-in-out left;
+  transition: 0.5s ease-in-out left;
+  -webkit-transition-property: opacity;
+  transition-property: opacity; }
+
+.carousel-fade .carousel-inner .item,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  opacity: 0; }
+
+.carousel-fade .carousel-inner .active,
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1; }
+
+.carousel-fade .carousel-inner .next,
+.carousel-fade .carousel-inner .prev,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0); }
+
+.carousel-fade .carousel-control {
+  z-index: 2; }
+
+.carousel-large {
+  margin-top: 10px; }
+
+.carousel-mini {
+  display: none;
+  width: 150px;
+  position: absolute;
+  margin-top: -50px; }
+
+.carousel-mini .item {
+  height: 350px; }
+
+.carousel-mini img {
+  margin: auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 0; }
 
 atom-text-editor atom-text-editor-minimap, atom-text-editor::shadow atom-text-editor-minimap {
   display: none; }

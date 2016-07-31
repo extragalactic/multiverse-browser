@@ -1,10 +1,9 @@
 <section class="galaxyPage">
 
    <div class="container">
-
       <div class="row">
+         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 
-         <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
             <div class="search" ng-cloak>
                <h1>Galactic Directory</h1></br>
                <div class="searchBarLeft">
@@ -31,7 +30,7 @@
                   </label>
                   </br>
                   <label>Search: </label>
-                  <input ng-model="query" placeholder=" Enter search text" style="width:150px;">
+                  <input ng-model="query" placeholder=" Enter search text">
                   </br>
                </div>
                <div class="searchBarMiddle">
@@ -60,33 +59,25 @@
                      </select>
                   </label>
                </div>
-            </div>
-         </div>
-         <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
-            <div>
-               <div>
-                 <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides" no-pause="true" class="carousel-fade carousel-mini" template-url="templates/carousel/carousel.html" id="elf">
-                   <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
-                     <img ng-src="{{slide.image}}">
+               <div style="position: relative; width: 150px;">
+                  <div style="width: 150px; float:right; position:absolute;">
+                    <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides" template-url="templates/carousel/carousel.html" class="carousel-fade">
+                      <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                        <img ng-src="{{slide.image}}" style="margin:auto;">
+                      </div>
                    </div>
-                </div>
+                  </div>
                </div>
             </div>
-         </div>
-
-      </div>
-
-      <div class="row">
-
-         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="clearfix">
+               </br>
                <hr/>
                <h4>SEARCH RESULTS: {{numGalaxies}}</h4>
                <h4 ng-bind="showingTextBox"></h4>
                <div class="prevNextButtons">
                   <button class="btn" ng-click="prevPage()">
                      <span class="glyphicon glyphicon-menu-left"></span> Prev Page</button>
-                  <button class="btn" ng-click="nextPage()">Next Page <span class="glyphicon glyphicon-menu-right"></span></button>
+                        <button class="btn" ng-click="nextPage()">Next Page <span class="glyphicon glyphicon-menu-right"></span></button>
                </div>
 
             </div>
@@ -118,9 +109,7 @@
             </br></br>
             </div>
          </div>
-
       </div>
-
    </div>
 
 </section>

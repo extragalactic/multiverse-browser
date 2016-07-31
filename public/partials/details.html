@@ -6,13 +6,19 @@
 
             <div class="galaxy pull-left">
                <div class="galaxyDetailsTop">
-                  <div class="galaxyDetailsLeft">
+                  <div class="galaxyDetailsLeft hidden-xs">
                      <div class="galaxyDetailsThumbTitle">
                         <h1><span ng-bind="galaxyDetails.Common_Name"></span></h1>
                         <h4><span ng-bind="galaxyDetails.Council_Name"></span></h4>
                      </div>
                      <div class="galaxyDetailsThumb" style="display:none">
                         <img ng-src={{galaxyDetails.ImageFile_fulltext}} alt="">
+                     </div>
+                  </div>
+                  <div class="galaxyDetailsTitle-xs hidden-sm hidden-md hidden-lg">
+                     <div class="galaxyDetailsThumbTitle">
+                        <h1><span ng-bind="galaxyDetails.Common_Name"></span></h1>
+                        <h4><span ng-bind="galaxyDetails.Council_Name"></span></h4>
                      </div>
                   </div>
                   <div class="galaxyDetailsRight">
@@ -30,16 +36,19 @@
                      </div>
                      <div class="galaxyDetailsBox3">
                         <div class="nextPrevControls">
+                           <div id="searchResultsTitle" class="textBlock">
+                              SEARCH RESULTS
+                           </div>
                            <div class="searchDescriptor">
                               <h4><span class="textColourData2">{{galaxyDetails.searchDescriptor}}</span></h4>
                            </div>
                            <div class="galaxyNextPrev">
                               <button class="btn btn-primary raised" ng-click="prevGalaxy()">
-                                 < Prev</button>
-                              <button class="btn btn-primary raised" ng-click="nextGalaxy()">Next ></button>                                                            </div>
+                                 <span class="glyphicon glyphicon-menu-left"></span> Prev</button>
+                              <button class="btn btn-primary raised" ng-click="nextGalaxy()">Next <span class="glyphicon glyphicon-menu-right"></span></button>                                                            </div>
                         </div>
                         <div class="returnToList">
-                           <button id="backToListButton" type="button" class="btn btn-link" ng-click="returnToList()"><< Return to List</button>
+                           <button id="backToListButton" type="button" class="btn btn-link" ng-click="returnToList()"><span class="glyphicon glyphicon-th"></span> Return to List</button>
                         </div>
                      </div>
                   </div>

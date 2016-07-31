@@ -16,6 +16,12 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
 
   $scope.isControlNode = appVars.globalOptions.isControlNode;
 
+  // setup for the mini-slide carousel
+  $scope.myInterval = 0;
+  $scope.noWrapSlides = false;
+  $scope.slides=[];
+  $scope.active = 0;
+
   $scope.$on('$destroy', function (event) {
     appVars.scrollPos = $window.document.documentElement.scrollTop || $window.document.body.scrollTop;
 
@@ -75,6 +81,21 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     }
     // set default selected galaxy (for the Details page)
     appVars.defaultDetailsItem = $scope.galaxies[0]._Common_Name;
+
+    // update images for slides widget
+    $scope.slides.length=0;
+    for(var i=0; i < data.length; i++) {
+      $scope.slides[i] = {image: "images/galaxies 150/" + data[i].ImageFileJPG, id: i};
+    }
+    $scope.active = 0;
+
+    // a timeout is necessary since I couldn't resolve the weird flash that was happening on the initial load
+    var slideDisplayTimeout = setTimeout(function() {
+      $('.carousel-fade').fadeIn(500);
+      $scope.myInterval = 500;
+      $scope.$apply();
+      clearTimeout(slideDisplayTimeout);
+    }, 500);
 
   });
 
@@ -231,5 +252,5 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
 
   // begin by getting initial group list (which then calls the initial galaxy list request)
   socket.emit('galaxyGroupsRequest');
-  
+
 }]);
