@@ -91,11 +91,11 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
 
     // a timeout is necessary since I couldn't resolve the weird flash that was happening on the initial load
     var slideDisplayTimeout = setTimeout(function() {
-      $('.carousel-fade').fadeIn(500);
-      $scope.myInterval = 500;
+      $('.carousel-fade').fadeIn(300);
+      $scope.myInterval = 300;
       $scope.$apply();
       clearTimeout(slideDisplayTimeout);
-    }, 500);
+    }, 700);
 
   });
 
