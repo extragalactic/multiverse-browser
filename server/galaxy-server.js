@@ -9,7 +9,7 @@
 var express = require("express");
 var http = require("http");
 var app = express();
-var settings = require("./../public/serverIP");
+var settings = require("./../dist/serverIP");
 var server = http.createServer(app).listen(settings.MULTIVERSE_SERVER_PORT);
 var io = require("socket.io")(server);
 var fs = require("fs");
@@ -23,7 +23,7 @@ var userList = [];
 var oscServer, oscClient;
 
 // set root folder for Express web server
-app.use(express.static("./../public"));
+app.use(express.static("./../dist"));
 
 // define handlers for all incoming messages
 io.on("connection", function(socket) {

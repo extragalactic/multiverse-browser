@@ -24468,7 +24468,7 @@ require("angular-ui-bootstrap");
 var myApp = angular.module('myApp', [
   'ngRoute',
   'ui.bootstrap',
-  'ngAnimate'
+  'ngAnimate' 
 ])
 .run(['socket', function(socket) {
   socket.emit('login');
