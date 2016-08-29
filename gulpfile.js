@@ -7,7 +7,9 @@ var gulp = require('gulp'),
     minify = require('gulp-minify'),
     jshint = require('gulp-jshint'),
     sass = require('gulp-sass'),
+    yargs = require('yargs'),
     del = require('del'),
+    rename = require('gulp-rename'),
     fs = require('fs'),
     browserify = require('gulp-browserify');
 
@@ -23,9 +25,6 @@ var jsSources = [
   'src/js/controllers/aboutCtrl.js',
   'src/js/services/utilitiesFactory.js',
   'src/js/services/socketFactory.js'
-];
-var moduleSources = [
-  'src/js/galaxyInfo.js'
 ];
 var htmlSources = [
   'src/*.html'
@@ -43,13 +42,21 @@ var distFolders = [
   'dist/templates'
 ];
 
+// Check for --production flag
+const PRODUCTION = !!(yargs.argv.production);
 
-// cleans out the dist folder for new files
+// cleans out the dist folder
 // (except the images folder, which is quite large)
 gulp.task('clean', function(done) {
   del.sync(distFolders);
   done();
 });
+// cleans up working JS files
+gulp.task('cleanEnd', ['copyJS'], function(done) {
+  del.sync(['src/js/script.js', 'src/js/script-min.js']);
+  done();
+});
+
 // copy partials (html) into dist folder
 gulp.task('copyViews', function(done) {
   return gulp.src("src/partials/*.html")
@@ -61,11 +68,22 @@ gulp.task('copyLibraries', function(done) {
       .pipe(gulp.dest('dist/lib'));
 });
 // copy root files to dist folder
+gulp.task('copyServerConfig', function(done) {
+  if(PRODUCTION) {
+    return gulp.src("src/serverIP - production.js")
+        .pipe(rename('serverIP.js'))
+        .pipe(gulp.dest('./dist'));
+  } else {
+    return gulp.src("src/serverIP - local.js")
+        .pipe(rename('serverIP.js'))
+        .pipe(gulp.dest('./dist'));
+  }
+});
 gulp.task('copyHtmlRoot', function(done) {
-  return gulp.src(["src/index.html", "src/serverIP.js"])
+  return gulp.src("src/index.html")
       .pipe(gulp.dest('dist'));
 });
-// copy over the Bootstrap CSS files (locally intead of a CDN)
+// copy the Bootstrap CSS files
 gulp.task('copyBootstrapCSS', function(done) {
   return gulp.src("src/css/bootstrap/*")
       .pipe(gulp.dest('dist/css'));
@@ -75,16 +93,18 @@ gulp.task('copyTemplates', function(done) {
   return gulp.src("src/templates/**/*")
       .pipe(gulp.dest('dist/templates'));
 });
-// copy over the Bootstrap CSS files (locally intead of a CDN)
+// copy over any fonts (or glyphicons)
 gulp.task('copyFonts', function(done) {
   return gulp.src("src/fonts/*")
       .pipe(gulp.dest('dist/fonts'));
 });
+// put all the basic copy procedures into a single task
+gulp.task('copyFiles', ['copyViews', 'copyLibraries', 'copyHtmlRoot', 'copyServerConfig', 'copyBootstrapCSS', 'copyTemplates', 'copyFonts']);
 
 
-// check code for syntax errors
+// check javascript for syntax errors
 gulp.task('jshint', function() {
-  gulp.src(jsSources)
+  return gulp.src(jsSources)
     .pipe(jshint())
     .pipe(jshint.reporter('jshint-stylish-ex'))
     .pipe(jshint.reporter('fail'));
@@ -98,25 +118,45 @@ gulp.task('sass', function() {
 });
 
 // compile Javascript
-gulp.task('js', function() {
-  gulp.src(jsSources)
+gulp.task('js', ['jshint'], function() {
+  return gulp.src(jsSources)
     .pipe(concat('script.js'))
     .pipe(browserify())
-    .pipe(gulp.dest('dist/js'));
+    .pipe(gulp.dest('src/js'));
 });
 
 // minify code for production
-gulp.task('minify', function() {
-  gulp.src('src/js/script.js')
-    .pipe(minify())
-    .pipe(gulp.dest('dist/js'));
+gulp.task('minify', ['js'], function() {
+  if(!PRODUCTION) {
+    minify = require("gulp-empty");
+  }
+  return gulp.src('src/js/script.js')
+    .pipe(minify({
+      ext:{
+        src:'.js',
+        min:'-min.js'
+      }
+    }))
+    .pipe(gulp.dest('src/js'));
 });
 
-gulp.task('watch', function() {
-  gulp.watch(moduleSources, ['jshint', 'js']);
-  gulp.watch(jsSources, ['jshint', 'js']);
+// copy over JS code after possible minification
+gulp.task('copyJS', ['minify'], function() {
+  if(!PRODUCTION) {
+    return gulp.src('src/js/script.js')
+      .pipe(gulp.dest('dist/js'));
+  } else {
+    return gulp.src('src/js/script-min.js')
+      .pipe(rename('script.js'))
+      .pipe(gulp.dest('dist/js'));
+  }
+});
+
+// watch for changes to JS or Sass
+gulp.task('watch', ['copyJS'], function() {
+  gulp.watch(jsSources, ['jshint', 'js', 'minify', 'copyJS', 'cleanEnd']);
   gulp.watch(scssSources, ['sass']);
 });
 
 //  default task when running Gulp
-gulp.task('default', ['clean', 'jshint', 'sass', 'js', 'copyViews', 'copyLibraries', 'copyHtmlRoot', 'copyBootstrapCSS', 'copyTemplates', 'copyFonts', 'watch']);
+gulp.task('default', ['clean', 'jshint', 'sass', 'js', 'copyFiles', 'minify', 'copyJS', 'cleanEnd', 'watch']);

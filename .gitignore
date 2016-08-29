@@ -1,7 +1,9 @@
 node_modules/
 src/images/
 dist/
+lib/
 .DS_Store
+.gulp-scss-cache/
 .tmp
 .git
 multiverse-browser.git
