@@ -1,0 +1,66 @@
+
+// CSS to implement image fade transitions on the Home page carousel
+.carousel-mini .carousel-inner .item {
+    -webkit-transition: 0.5s ease-in-out left;
+    -moz-transition: 0.5s ease-in-out left;
+    -o-transition: 0.5s ease-in-out left;
+    transition: 0.5s ease-in-out left;
+
+    -webkit-transition-property: opacity;
+          transition-property: opacity;
+}
+.carousel-large .carousel-inner .item {
+    -webkit-transition: 1.5s ease-in-out left;
+    -moz-transition: 1.5s ease-in-out left;
+    -o-transition: 1.5s ease-in-out left;
+    transition: 1.5s ease-in-out left;
+
+    -webkit-transition-property: opacity;
+          transition-property: opacity;
+}
+.carousel-fade .carousel-inner .item,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  opacity: 0;
+}
+.carousel-fade .carousel-inner .active,
+.carousel-fade .carousel-inner .next.left,
+.carousel-fade .carousel-inner .prev.right {
+  opacity: 1;
+}
+.carousel-fade .carousel-inner .next,
+.carousel-fade .carousel-inner .prev,
+.carousel-fade .carousel-inner .active.left,
+.carousel-fade .carousel-inner .active.right {
+  left: 0;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+.carousel-fade .carousel-control {
+  z-index: 2;
+}
+
+.carousel-large {
+    margin-top: 10px;
+}
+
+// the mini-carousel auto fade animator, found on the List page
+.carousel-mini {
+    display: none;
+    width: 150px;
+    position:absolute;
+    margin-top: -50px;
+    height: 350px;
+    padding-right: 10px;
+}
+.carousel-mini .item {
+    height: 350px;
+}
+.carousel-mini img {
+    margin: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+}

@@ -1,0 +1,121 @@
+
+.galaxyInfo {
+    a {
+        color: $textColorLight;
+    }
+}
+
+#galaxyDetailsTop {
+    min-width: 350px;
+    opacity: 0.99;
+    z-index: 1;
+}
+
+.galaxyDetailsThumb {
+    width: 150px;
+    border: 2px solid $textColorDark;
+    border-radius: 15px;
+    padding: 5px 5px 5px 2px;
+    margin-top: 0px;
+    background-color: black;
+}
+
+.galaxyDetailsThumbTitle {
+    height: 30px;
+}
+
+.galaxyDetailsThumbTitle-xs {
+    height: 30px;
+    min-width: 175px;
+    float: left;
+}
+
+#galaxyDetailsLeft {
+    float: left;
+    min-width: 170px;
+    height: 200px;
+    padding-right: 15px;
+    margin-bottom: -10px;
+}
+
+#galaxyDetailsTitle-xs {
+    float: left;
+    min-width: 180px;
+    padding-right: 15px;
+    margin-bottom: -10px;
+}
+
+#galaxyDetailsRight {
+    float: left;
+    padding-top: 13px;
+    padding-left: 8px;
+    margin-bottom: 10px;
+    min-width: 365px;
+}
+
+#galaxyDetailsBox1 {
+    float: left;
+    width: 180px;
+    padding-right: 8px;
+}
+
+#galaxyDetailsBox2 {
+    min-width: 160px;
+    min-height: 115px;
+    float: left;
+}
+
+#galaxyDetailsBox3 {
+    width: 190px;
+    float: left;
+    margin-top: 12px;
+}
+
+.nextPrevControls {
+    border: 2px solid $textColorDark;
+    border-radius: 6px;
+    padding: 0px 8px 12px 8px;
+}
+
+.galaxyNextPrevList {
+    padding-left: 9px;
+    padding-top: 3px;
+    margin-bottom: 7px;
+    float: left;
+}
+.galaxyNextPrev {
+    float: left;
+}
+
+.galaxyNextPrevList-xs {
+    min-width: 160px;
+    padding-left: 2px;
+    margin-top: 17px;
+    margin-bottom: 7px;
+    float: right;
+}
+
+.returnToList {
+    padding-left: 28px;
+    margin-top: 13px;
+}
+
+#backToListButton-xs {
+}
+
+.searchDescriptor {
+    height: 2em;
+    margin-top: -8px;
+    padding-bottom: 4px;
+}
+
+.largeImageWrapper {
+    padding-right: 30px;
+    padding-bottom: 30px;
+    z-index: -10;
+}
+
+.largeImage {
+    border-radius: 30px;
+    border: 2px solid $textColorDark;
+}

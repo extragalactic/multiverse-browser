@@ -1,0 +1,151 @@
+
+* {
+    margin: 0;
+    padding: 0;
+}
+html {
+    overflow-x: hidden;
+}
+body {
+    background: black;
+    color: white;
+    font-size: 2.2em;
+    font-family: 'Raleway', sans-serif;
+    line-height: 90%;
+    padding: 0px 0px 0px 0px;
+    position: relative;
+    overflow-x: hidden;
+    margin-left: auto;
+    margin-right: auto;
+
+    label {
+        font-size: 0.6em;
+    }
+    input {
+        font-size: 0.8em;
+        color: black;
+        font-weight: bold;
+    }
+    a {
+        text-decoration: none;
+        color: $primaryColorLight;
+
+        &:hover {
+            text-decoration: none;
+            color: $complementaryColorLight;
+        }
+    }
+    p {
+        color: $textColorLight;
+        font-size: 0.7em;
+        line-height: 120%;
+    }
+}
+
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 1px solid $textColorDark;
+    margin: 1em 0;
+    padding: 0;
+}
+h1 {
+    color: white;
+    font-family: 'Arimo', sans-serif;
+    line-height: 100%;
+    font-size: 1.3em;
+}
+h2 {
+    font-size: 1.2em;
+    color: $textColorLight;
+    font-family: 'Arimo', sans-serif;
+}
+h3 {
+    color: $textColorLight;
+    font-size: 0.7em;
+    line-height: 120%;
+}
+h4 {
+    color: $textColorLight;
+    font-size: 0.7em;
+    line-height: 90%;
+}
+h5 {
+    color: $textColorLight;
+    font-size: 0.6em;
+}
+
+div {
+    button {
+        color: black;
+        font-size: 0.6em;
+        padding: 2px;
+    }
+    label {
+        font-size: 0.7em;
+    }
+}
+
+.main {
+    margin-top: -30px;
+    padding-right: 20px;
+    padding-left: 7px;
+}
+
+.textBlock {
+    background-color: black;
+    border: 0px solid $textColorDark;
+    border-radius: 6px;
+}
+
+.textTitleCenter {
+    text-align: center;
+}
+
+.optionsText {
+    font-size: 1.0em;
+}
+
+.textColourData {
+    color: $primaryColorLight;
+}
+.textColourData2 {
+    color: $primaryColorLight;
+    line-height: 1.3em;
+}
+
+.search {
+    padding: 0px 0px 15px 0px;
+
+    label {
+        font-size: 0.7em;
+    }
+}
+
+select {
+    color: white;
+    background-color: $backgroundColorMedium;
+}
+
+.galaxy.ng-enter.ng-enter-active, .galaxy.ng-leave {
+    opacity: 1;
+    height: 140px;
+    overflow: hidden;
+}
+.galaxy.ng-leave.ng-leave-active, .galaxy.ng-enter {
+    opacity: 0;
+    height: 0px;
+    overflow: hidden;
+}
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+.clearfix {
+    overflow: auto;
+    clear: both;
+}

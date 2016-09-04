@@ -1,0 +1,44 @@
+// Main SCSS file for Multiverse Browser
+
+// define site colours
+$primaryColorLight: #ba6fe8;
+$primaryColorMedium: #7d3ca3;
+$primaryColorDark: #3c1c4e;
+$primaryColorDarkest: #281334;
+$complementaryColorLight: complement($primaryColorLight);
+$textColorLight: #ddd;
+$textColorDark: #777;
+$backgroundColorLight: #444;
+$backgroundColorMedium: #222;
+$backgroundColorDark: #111;
+
+// load all other SCSS files
+@import 'base/base';
+@import 'base/buttons';
+@import 'base/carousel';
+
+@import 'pages/home';
+@import 'pages/list';
+@import 'pages/details';
+@import 'pages/about';
+@import 'pages/header';
+@import 'pages/footer';
+
+
+// --------------------------------
+// Options for the Atom text editor
+atom-text-editor {
+  &, &::shadow {
+    atom-text-editor-minimap {
+      display: none;
+    }
+  }
+
+  &.is-focused {
+    &, &::shadow {
+      atom-text-editor-minimap {
+        display: block;
+      }
+    }
+  }
+}

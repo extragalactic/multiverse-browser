@@ -1,0 +1,142 @@
+.multiList {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.galaxyList {
+    border-color: grey;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 30px;
+    padding-top: 32px;
+    padding-left: 20px;
+    padding-bottom: 10px;
+
+    -moz-column-gap: 0px;
+    -webkit-column-gap: 0px;
+    column-gap: 0px;
+
+    a {
+        display: block;
+        text-decoration: none;
+    }
+    li {
+        display: inline-block;
+        padding: 0px 0px 0px 0px;
+        margin: 0;
+        border: 1px solid black;
+        border-radius: 10px;
+
+        &:hover {
+            background: $backgroundColorDark;
+            border: 1px solid $primaryColorLight;
+        }
+    }
+}
+
+@media only screen and (max-width: 699px), only screen and (max-device-width: 699px) {
+    .galaxyList {
+        border-color: black;
+        margin-left: -20px;
+    }
+}
+
+@mixin setListFormat ($numCols:4, $width:800px) {
+    .galaxyList {
+        -moz-column-count: $numCols;
+        -webkit-column-count: $numCols;
+        column-count: $numCols;
+        width: $width;
+    }
+    .multiList {
+        width: $width;
+    }
+}
+
+@media only screen and (max-width: 1899px) {
+    @include setListFormat (6, 1100px);
+}
+@media only screen and (max-width: 1200px) {
+    @include setListFormat (5, 950px);
+}
+@media only screen and (max-width: 992px) {
+    @include setListFormat (4, 750px);
+}
+@media only screen and (max-width: 800px) {
+    @include setListFormat (3, 625px);
+}
+@media only screen and (max-width: 699px) {
+    @include setListFormat (2, 400px);
+}
+
+.galaxyListLinear {
+    width: 338px;
+    a {
+        display: block;
+        text-decoration: none;
+    }
+    li {
+        width: auto;
+        display: block;
+        padding: 0px 0px 0px 0px;
+        margin: 0;
+        border: 1px solid black;
+        border-radius: 10px;
+        opacity: 1;
+        -webkit-transition: all 0.3s ease-out;
+        -moz-transition: all 0.3s ease-out;
+        -o-transition: all 0.3s ease-out;
+        transition: all 0.3s ease-out;
+
+        &:hover {
+            background: $backgroundColorDark;
+            border: 1px solid $primaryColorLight;
+            -webkit-transform: scale(1.05);
+            -moz-transform: scale(1.05);
+            -o-transform: scale(1.05);
+            transform: scale(1.05);
+        }
+    }
+}
+
+#searchBarLeft {
+    float: left;
+    text-align: right;
+    min-width: 230px;
+}
+
+#searchBarMiddle {
+    float: left;
+    text-align: right;
+    min-width: 230px;
+}
+
+#resultsPerPageInfo {
+    padding-right: 6px;
+}
+
+#directoryTitle {
+    min-width: 300px;
+}
+
+#searchResultsTitle {
+    margin-top: -10px;
+    padding-left: 3px;
+    font-size: 0.5em;
+    max-width: 100px;
+}
+
+#backToTopButton {
+    margin-top: 12px;
+}
+
+.galaxyThumb {
+    min-height: 100px;
+    min-width: 150px;
+    float: left;
+}
+
+.prevNextButtons {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}

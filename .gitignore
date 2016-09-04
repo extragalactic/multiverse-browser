@@ -2,6 +2,7 @@ node_modules/
 src/images/
 dist/
 lib/
+_working/
 .DS_Store
 .gulp-scss-cache/
 .tmp

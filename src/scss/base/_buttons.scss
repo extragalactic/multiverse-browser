@@ -1,0 +1,43 @@
+
+.btn-link {
+    color: $primaryColorLight;
+    text-decoration: none;
+
+    &:hover {
+        color: white;
+        text-decoration: none;
+    }
+}
+
+.btn {
+  background: $primaryColorDark;
+  background-image: -webkit-linear-gradient(top, $primaryColorDark, $primaryColorDarkest);
+  background-image: -moz-linear-gradient(top, $primaryColorDark, $primaryColorDarkest);
+  background-image: -ms-linear-gradient(top, $primaryColorDark, $primaryColorDarkest);
+  background-image: -o-linear-gradient(top, $primaryColorDark, $primaryColorDarkest);
+  background-image: linear-gradient(to bottom, $primaryColorDark, $primaryColorDarkest);
+  -webkit-border-radius: 6;
+  -moz-border-radius: 6;
+  border-radius: 6px;
+  font-family: 'Raleway', sans-serif;
+  color: white;
+  font-size: 0.7em;
+  padding: 5px 10px 5px 10px;
+  border: solid #c8aed9 1px;
+  text-decoration: none;
+
+  &:focus {
+      color: white;
+  }
+
+  &:hover {
+    background: $primaryColorMedium;
+    background-image: -webkit-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
+    background-image: -moz-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
+    background-image: -ms-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
+    background-image: -o-linear-gradient(top, $primaryColorMedium, $primaryColorDark);
+    background-image: linear-gradient(to bottom, $primaryColorMedium, $primaryColorDark);
+    text-decoration: none;
+    color: white;
+  }
+}
