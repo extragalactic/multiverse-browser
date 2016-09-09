@@ -1,7 +1,42 @@
-.multiList {
+#searchControls {
+    padding: 0px 0px 15px 0px;
+
+    label {
+        font-size: 0.7em;
+    }
+
+    div#directoryTitle {
+        min-width: 300px;
+    }
+
+    div#searchBarLeft {
+        float: left;
+        text-align: right;
+        min-width: 230px;
+    }   
+
+    div#searchBarMiddle {
+        float: left;
+        text-align: right;
+        min-width: 230px;
+
+        div#resultsPerPageInfo {
+            padding-right: 6px;
+        }    
+    }    
+}
+
+
+#multiList {
     width: 1200px;
     margin: 0 auto;
 }
+
+.galaxyThumb {
+    min-height: 100px;
+    min-width: 150px;
+    float: left;
+}   
 
 .galaxyList {
     border-color: grey;
@@ -48,7 +83,7 @@
         column-count: $numCols;
         width: $width;
     }
-    .multiList {
+    #multiList {
         width: $width;
     }
 }
@@ -99,44 +134,11 @@
     }
 }
 
-#searchBarLeft {
-    float: left;
-    text-align: right;
-    min-width: 230px;
-}
-
-#searchBarMiddle {
-    float: left;
-    text-align: right;
-    min-width: 230px;
-}
-
-#resultsPerPageInfo {
-    padding-right: 6px;
-}
-
-#directoryTitle {
-    min-width: 300px;
-}
-
-#searchResultsTitle {
-    margin-top: -10px;
-    padding-left: 3px;
-    font-size: 0.5em;
-    max-width: 100px;
+#prevNextButtons {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
 
 #backToTopButton {
     margin-top: 12px;
-}
-
-.galaxyThumb {
-    min-height: 100px;
-    min-width: 150px;
-    float: left;
-}
-
-.prevNextButtons {
-    margin-top: 15px;
-    margin-bottom: 15px;
 }

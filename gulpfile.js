@@ -27,7 +27,8 @@ var jsSources = [
   'src/js/services/socketFactory.js'
 ];
 var htmlSources = [
-  'src/*.html'
+  'src/*.html',
+  'src/**/*.html'
 ];
 var scssSources = [
   'src/scss/**/*.scss'

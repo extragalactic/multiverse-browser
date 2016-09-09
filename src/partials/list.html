@@ -1,13 +1,15 @@
-<section class="galaxyPage">
-
+<section>
    <div class="container">
-
       <div class="row">
 
          <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
-            <div class="search" ng-cloak>
-               <h1 id="directoryTitle">Galactic Directory</h1></br>
-               <div id="searchBarLeft">
+            <div id="searchControls">
+
+               <div id="directoryTitle">
+                  <h1>Galactic Directory</h1> 
+               </div>
+
+               <div id="searchBarLeft" ng-cloak>
                   <label> Group:
                      <select ng-model="galaxyGroup" id="groupSelect" ng-change="changeGroupSelect()">
                         <option value="">All</option>
@@ -85,7 +87,7 @@
                <hr/>
                <h4>SEARCH RESULTS: {{numGalaxies}}</h4>
                <h4 ng-bind="showingTextBox"></h4>
-               <div class="prevNextButtons">
+               <div id="prevNextButtons">
                   <button class="btn" ng-click="prevPage()">
                      <span class="glyphicon glyphicon-menu-left"></span> Prev Page</button>
                   <button class="btn" ng-click="nextPage()">Next Page <span class="glyphicon glyphicon-menu-right"></span></button>
@@ -116,8 +118,9 @@
                </ul>
             </div>
             <div>
-               <button id="backToTopButton" type="button" class="btn btn-link" ng-click="returnToTop()"><span class="glyphicon glyphicon-arrow-up"></span> Back to Top</button>
-            </br></br>
+               <button id="backToTopButton" type="button" class="btn btn-link" ng-click="returnToTop()"><span class="glyphicon glyphicon-arrow-up"></span> Back to Top
+               </button>
+               </br></br>
             </div>
          </div>
 

@@ -1,4 +1,4 @@
-<section class="galaxyInfo">
+<section>
 
    <div class="container">
       <div class="row">
@@ -27,37 +27,37 @@
                            <button class="btn btn-primary raised" style="font-size: 0.9em;" ng-click="nextGalaxy()"> <span class="glyphicon glyphicon-menu-right"></span></button>&nbsp;&nbsp;
                         </div>
                         <div>
-                           <button id="backToListButton-xs" type="button" class="btn btn-link" ng-click="returnToList()">List</button>
+                           <button type="button" class="btn btn-link" ng-click="returnToList()">List</button>
                         </div>
                      </div>
                   </div>
                   <div id="galaxyDetailsRight">
                      <div id="galaxyDetailsBox1">
-                        <h4>Group: <span class="textColourData" ng-bind="galaxyDetails.Group"></span></h4>
-                        <h4>Diameter: <span class="textColourData"><span ng-bind="galaxyDetails.Diameter_fulltext"> </span></span></h4>
-                        <h4>Distance: <span class="textColourData"><span ng-bind="galaxyDetails.Distance_fulltext"></span></span></h4>
-                        <h4>Visual Mag: <span class="textColourData" ng-bind="galaxyDetails.VisualMag"></span></h4>
+                        <h4>Group: <span class="dataValueText" ng-bind="galaxyDetails.Group"></span></h4>
+                        <h4>Diameter: <span class="dataValueText"><span ng-bind="galaxyDetails.Diameter_fulltext"> </span></span></h4>
+                        <h4>Distance: <span class="dataValueText"><span ng-bind="galaxyDetails.Distance_fulltext"></span></span></h4>
+                        <h4>Visual Mag: <span class="dataValueText" ng-bind="galaxyDetails.VisualMag"></span></h4>
                      </div>
                      <div id="galaxyDetailsBox2">
-                        <h4>RA: <span class="textColourData"><span ng-bind="galaxyDetails.RA_fulltext"></span></span></h4>
-                        <h4>Decl: <span class="textColourData"><span ng-bind="galaxyDetails.Decl_fulltext"></span></span></h4>
-                        <h4>Type: <span class="textColourData" ng-bind="galaxyDetails.Type_Text"></span></h4>
-                        <h4><span class="textColourData"  ng-bind="galaxyDetails.Type"></span></h4>
+                        <h4>RA: <span class="dataValueText"><span ng-bind="galaxyDetails.RA_fulltext"></span></span></h4>
+                        <h4>Decl: <span class="dataValueText"><span ng-bind="galaxyDetails.Decl_fulltext"></span></span></h4>
+                        <h4>Type: <span class="dataValueText" ng-bind="galaxyDetails.Type_Text"></span></h4>
+                        <h4><span class="dataValueText"  ng-bind="galaxyDetails.Type"></span></h4>
                      </div>
                      <div id="galaxyDetailsBox3" class="hidden-xs">
                         <div class="nextPrevControls">
-                           <div id="searchResultsTitle" class="textBlock">
+                           <div id="searchResultsTitle" class="textTab">
                               SEARCH RESULTS
                            </div>
                            <div class="searchDescriptor">
-                              <h4><span class="textColourData2">{{galaxyDetails.searchDescriptor}}</span></h4>
+                              <h4><span class="searchDescriptorText">{{galaxyDetails.searchDescriptor}}</span></h4>
                            </div>
                            <div class="galaxyNextPrevList">
                               <button class="btn btn-primary raised" ng-click="prevGalaxy()">
                                  <span class="glyphicon glyphicon-menu-left"></span> Prev</button>
                               <button class="btn btn-primary raised" ng-click="nextGalaxy()">Next <span class="glyphicon glyphicon-menu-right"></span></button>
                             </div>
-                            <div class="returnToList">
+                            <div id="returnToList">
                                <button  type="button" class="btn btn-link" ng-click="returnToList()">Return to List</button>
                             </div>
                         </div>

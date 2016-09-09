@@ -1,47 +1,39 @@
 
-// CSS to implement image fade transitions on the Home page carousel
-.carousel-mini .carousel-inner .item {
-    -webkit-transition: 0.5s ease-in-out left;
-    -moz-transition: 0.5s ease-in-out left;
-    -o-transition: 0.5s ease-in-out left;
-    transition: 0.5s ease-in-out left;
+// modified carousel to support image fade transitions
+.carousel-fade {
 
-    -webkit-transition-property: opacity;
-          transition-property: opacity;
-}
-.carousel-large .carousel-inner .item {
-    -webkit-transition: 1.5s ease-in-out left;
-    -moz-transition: 1.5s ease-in-out left;
-    -o-transition: 1.5s ease-in-out left;
-    transition: 1.5s ease-in-out left;
+  .carousel-control {
+    z-index: 2;
+  }
 
-    -webkit-transition-property: opacity;
-          transition-property: opacity;
-}
-.carousel-fade .carousel-inner .item,
-.carousel-fade .carousel-inner .active.left,
-.carousel-fade .carousel-inner .active.right {
-  opacity: 0;
-}
-.carousel-fade .carousel-inner .active,
-.carousel-fade .carousel-inner .next.left,
-.carousel-fade .carousel-inner .prev.right {
-  opacity: 1;
-}
-.carousel-fade .carousel-inner .next,
-.carousel-fade .carousel-inner .prev,
-.carousel-fade .carousel-inner .active.left,
-.carousel-fade .carousel-inner .active.right {
-  left: 0;
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0);
-}
-.carousel-fade .carousel-control {
-  z-index: 2;
+  .carousel-inner {
+    .item, .active.left, .active.right {
+      opacity: 0;
+    }
+    .active, .next.left, .prev.right {
+     opacity: 1;
+    }
+    .next, .prev, .active.left, .active.right {
+      left: 0;
+      -webkit-transform: translate3d(0, 0, 0);
+              transform: translate3d(0, 0, 0);
+    }
+  }
 }
 
+// image carousel on the home page
 .carousel-large {
     margin-top: 10px;
+
+    .carousel-inner .item {
+      -webkit-transition: 1.5s ease-in-out left;
+      -moz-transition: 1.5s ease-in-out left;
+      -o-transition: 1.5s ease-in-out left;
+      transition: 1.5s ease-in-out left;
+
+      -webkit-transition-property: opacity;
+            transition-property: opacity;
+  }    
 }
 
 // the mini-carousel auto fade animator, found on the List page
@@ -49,18 +41,31 @@
     display: none;
     width: 150px;
     position:absolute;
-    margin-top: -50px;
+    margin-top: -70px;
     height: 350px;
     padding-right: 10px;
+
+    img {
+        margin: auto;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        top: 0;
+    }
+
+    .item {
+      height: 350px;
+    }
+
+    .carousel-inner .item {
+        -webkit-transition: 0.5s ease-in-out left;
+        -moz-transition: 0.5s ease-in-out left;
+        -o-transition: 0.5s ease-in-out left;
+        transition: 0.5s ease-in-out left;
+
+        -webkit-transition-property: opacity;
+              transition-property: opacity;
+    }
 }
-.carousel-mini .item {
-    height: 350px;
-}
-.carousel-mini img {
-    margin: auto;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    top: 0;
-}
+

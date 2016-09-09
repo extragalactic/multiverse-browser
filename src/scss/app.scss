@@ -12,6 +12,7 @@ $backgroundColorLight: #444;
 $backgroundColorMedium: #222;
 $backgroundColorDark: #111;
 
+
 // load all other SCSS files
 @import 'base/base';
 @import 'base/buttons';
@@ -24,21 +25,4 @@ $backgroundColorDark: #111;
 @import 'pages/header';
 @import 'pages/footer';
 
-
-// --------------------------------
-// Options for the Atom text editor
-atom-text-editor {
-  &, &::shadow {
-    atom-text-editor-minimap {
-      display: none;
-    }
-  }
-
-  &.is-focused {
-    &, &::shadow {
-      atom-text-editor-minimap {
-        display: block;
-      }
-    }
-  }
-}
+@import 'base/atom_settings';
