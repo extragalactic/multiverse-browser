@@ -118,6 +118,19 @@ gulp.task('sass', function() {
     .pipe(gulp.dest('dist/css'));
 });
 
+// Note: haven't got this working yet...
+gulp.task('autoprefixer', ['sass'], function () {
+    var postcss      = require('gulp-postcss');
+    var sourcemaps   = require('gulp-sourcemaps');
+    var autoprefixer = require('autoprefixer');
+
+    return gulp.src('dist/css/app.css')
+        .pipe(sourcemaps.init())
+        .pipe(postcss([ autoprefixer({ browsers: ['last 2 versions'] }) ]))
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest('dist'));
+});
+
 // compile Javascript
 gulp.task('js', ['jshint'], function() {
   return gulp.src(jsSources)

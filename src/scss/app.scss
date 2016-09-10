@@ -12,6 +12,29 @@ $backgroundColorLight: #444;
 $backgroundColorMedium: #222;
 $backgroundColorDark: #111;
 
+// setup the Sass-MQ breakpoint manager (for media queries) 
+$mq-responsive: true;
+$mq-breakpoints: (
+    media_size_xsm:  700px,
+    media_size_sm:  800px,
+    media_size_md: 990px,
+    media_size_lg: 1200px,
+    media_size_xlg: 1900px,
+
+    media_size_sm_mod: 768px 
+);
+
+$mq-static-breakpoint: media_size_lg;
+@import 'node_modules/sass-mq/mq';
+
+// modified values for breakpoints, used to resize the galaxy tiles-view list
+$list_size_xsm: calc(400px - 50px);
+$list_size_sm: calc(700px - 50px);
+$list_size_md: calc(800px - 50px);
+$list_size_lg: calc(990px - 50px);
+$list_size_xlg: calc(1200px - 50px);
+
+
 
 // load all other SCSS files
 @import 'base/base';

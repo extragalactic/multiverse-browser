@@ -69,7 +69,7 @@
     }
 }
 
-@media only screen and (max-width: 699px), only screen and (max-device-width: 699px) {
+@include mq ($until: media_size_xsm) {   
     .galaxyList {
         border-color: black;
         margin-left: -20px;
@@ -88,21 +88,24 @@
     }
 }
 
-@media only screen and (max-width: 1899px) {
-    @include setListFormat (6, 1100px);
+// uses the sass-mq component to simplify media queries
+@include mq ($until: media_size_xlg) {
+    @include setListFormat (6, $list_size_xlg);
 }
-@media only screen and (max-width: 1200px) {
-    @include setListFormat (5, 950px);
+@include mq ($until: media_size_lg) {
+    @include setListFormat (5, $list_size_lg);
 }
-@media only screen and (max-width: 992px) {
-    @include setListFormat (4, 750px);
+@include mq ($until: media_size_md) {
+    @include setListFormat (4, $list_size_md);
 }
-@media only screen and (max-width: 800px) {
-    @include setListFormat (3, 625px);
+@include mq ($until: media_size_sm) {
+    @include setListFormat (3, $list_size_sm);
 }
-@media only screen and (max-width: 699px) {
-    @include setListFormat (2, 400px);
+@include mq ($until: media_size_xsm) {
+    @include setListFormat (2, $list_size_xsm);
 }
+
+
 
 .galaxyListLinear {
     width: 338px;
