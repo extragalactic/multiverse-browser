@@ -4,15 +4,16 @@
 var gulp = require('gulp'),
     gutil = require('gulp-util'),
     concat = require('gulp-concat'),
+    minify = require('gulp-minify'),
     jshint = require('gulp-jshint'),
     sass = require('gulp-sass'),
     yargs = require('yargs'),
     del = require('del'),
     rename = require('gulp-rename'),
     fs = require('fs'),
-    uglify = require('gulp-uglify'),
     source = require('vinyl-source-stream'),
     buffer = require('vinyl-buffer'),    
+    //browserify = require('gulp-browserify'); // shouldn't be using the 'gulp' version
     browserify = require('browserify'); 
 
 // javascript source files
@@ -133,46 +134,52 @@ gulp.task('autoprefixer', ['sass'], function () {
         .pipe(gulp.dest('dist'));
 });
 
-// concatenate my Javascript files
-gulp.task('concat-js', ['jshint'], function() {
-  return gulp.src(jsSources)
+// compile Javascript
+gulp.task('js', ['jshint'], function() {
+
+    return gulp.src(jsSources)
         .pipe(concat('script.js'))
-        .pipe(gulp.dest('src/js'));
-});
-
-// run Browserify to add "require" modules
-gulp.task('browserify', ['concat-js'], function() {
-
-    return browserify('src/js/script.js')
+        .browserify('script.js')
         .bundle()
         .pipe(source('script.js'))
-        .pipe(buffer())
-        .pipe(gulp.dest('./src/js'));
+        //.pipe(buffer())
+        .pipe(gulp.dest('src/js'));
+
+
+//  var browserified = transform(function(filename) {
+//    var b = browserify(filename);
+//    return b.bundle();
+//  });
+//  
+//  return gulp.src(jsSources)
+//    .pipe(concat('script.js'))
+//    .pipe(browserified)
+//    .pipe(gulp.dest('src/js'));
+
+//  return gulp.src(jsSources)
+//    .pipe(concat('script.js'))
+//    .pipe(browserify())
+//    .pipe(gulp.dest('src/js'));
 });
 
 // minify code for production
-gulp.task('minify', ['browserify'], function() {
+gulp.task('minify', ['js'], function() {
   if(!PRODUCTION) {
-    uglify = require("gulp-empty");
+    minify = require("gulp-empty");
   }
   return gulp.src('src/js/script.js')
-    .pipe(uglify())
+    .pipe(minify({
+      ext:{
+        src:'.js',
+        min:'-min.js'
+      }
+    }))
     .pipe(gulp.dest('src/js'));
 });
 
-//  return gulp.src('src/js/script.js')
-//    .pipe(minify({
-//      ext:{
-//        src:'.js',
-//        min:'-min.js'
-//      }
-//    }))
-//    .pipe(gulp.dest('src/js'));
-
-
 // copy over JS code after possible minification
 gulp.task('copyJS', ['minify'], function() {
-  if(true) {
+  if(!PRODUCTION) {
     return gulp.src('src/js/script.js')
       .pipe(gulp.dest('dist/js'));
   } else {
@@ -184,10 +191,10 @@ gulp.task('copyJS', ['minify'], function() {
 
 // watch for changes to JS or Sass
 gulp.task('watch', ['copyJS'], function() {
-  gulp.watch(jsSources, ['jshint', 'concat-js', 'browserify', 'minify', 'copyJS', 'cleanEnd']);
+  gulp.watch(jsSources, ['jshint', 'js', 'minify', 'copyJS', 'cleanEnd']);
   gulp.watch(htmlSources, ['copyViews']);  
   gulp.watch(scssSources, ['sass']);
 });
 
 //  default task when running Gulp
-gulp.task('default', ['clean', 'sass', 'copyFiles', 'jshint', 'concat-js', 'browserify',  'minify', 'copyJS', 'cleanEnd', 'watch']);
+gulp.task('default', ['clean', 'jshint', 'sass', 'js', 'copyFiles', 'minify', 'copyJS', 'cleanEnd', 'watch']);

@@ -3,13 +3,16 @@
 // ----------------------------------------------------
 
 global.jQuery = $ = require('jquery');
-require("angular-ui-bootstrap");
+require('angular');
+require('angular-route');
+require('angular-animate');
+require('angular-ui-bootstrap');
 
 // create main Angular module
 var myApp = angular.module('myApp', [
   'ngRoute',
-  'ui.bootstrap',
-  'ngAnimate'
+  'ngAnimate',
+  'ui.bootstrap'
 ])
 .run(['socket', function(socket) {
   socket.emit('login'); 
@@ -72,6 +75,7 @@ var myApp = angular.module('myApp', [
 // Note: it appears that the ui-angular scripts are not fully working.
 // I must manually add behavior to the buttons.
 
+
 // initialize navbar button behavior
 $(document).on('click', '.navbar-nav li', function (e) {
   $(this).addClass('active').siblings().removeClass('active');
@@ -90,3 +94,4 @@ $(document).on('click', '#menuCollapseButton', function (e) {
     $('#navigationBar').addClass('collapse');
   }
 });
+

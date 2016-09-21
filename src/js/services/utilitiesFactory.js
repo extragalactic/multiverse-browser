@@ -1,4 +1,4 @@
-angular.module('myApp').factory('utilities', function ($rootScope) {
+angular.module('myApp').factory('utilities', ['$rootScope', function ($rootScope) {
    return {
      add: function (val1, val2) {
        return val1 + val2;
@@ -7,4 +7,4 @@ angular.module('myApp').factory('utilities', function ($rootScope) {
        return val1 - val2;
      }
    };
-});
+}]);

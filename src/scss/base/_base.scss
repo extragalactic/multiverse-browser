@@ -116,15 +116,17 @@ body {
     line-height: 1.3em;
 }
 
-.nav, .pagination, .carousel, .panel-title a {
-    cursor: pointer;
-}
-
 .clearfix {
     overflow: auto;
     clear: both;
 }
 
+// line for Angular-UI-Bootstrap
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
+
+// enables Angular cloak feature
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }

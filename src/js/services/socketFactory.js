@@ -1,6 +1,6 @@
 var socketio = require('socket.io-client');
 
-angular.module('myApp').factory('socket', function ($rootScope) {
+angular.module('myApp').factory('socket', ['$rootScope', function ($rootScope) {
   "use strict";
   
    var socketPath = "http://" + MULTIVERSE_SERVER_IP + ":" + MULTIVERSE_SERVER_PORT;
@@ -30,4 +30,5 @@ angular.module('myApp').factory('socket', function ($rootScope) {
        socket.removeAllListeners();
      }
   };
-});
+
+}]);

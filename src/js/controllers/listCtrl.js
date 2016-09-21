@@ -2,7 +2,7 @@
 //  ListController
 // ----------------------------------------------------
 
-global.jQuery = $ = require('jquery');
+//global.jQuery = $ = require('jquery');
 
 
 // ListController
@@ -21,6 +21,8 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
   $scope.noWrapSlides = false;
   $scope.slides=[];
   $scope.active = 0;
+
+  $scope.collapsed = false; // testing
 
   $scope.$on('$destroy', function (event) {
     appVars.scrollPos = $window.document.documentElement.scrollTop || $window.document.body.scrollTop;
