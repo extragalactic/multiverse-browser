@@ -1,14 +1,26 @@
-#navigationBar {
+.navbar-custom {
+    background: linear-gradient($backgroundColorLight, $backgroundColorDark);
+
+	.container {
+		padding-left: 0px;
+
+		.container-fluid {
+			float: left;
+		}
+		.navbar-brand img {
+			margin-top:-5px;
+		}
+	}
+}
+
+#navbarMenu {
     li {
         font-size: 0.7em;
     }
+    padding-left: 30px;    
 }
 
-/* custom navbar class used for skinning the navbar */
-.navbar-custom {
-    background: linear-gradient($backgroundColorLight, $backgroundColorDark);
-}
-
-.navbar-header-removed {
-    text-align: left;
+// hides scroll bar during menu open animation
+.navbar-collapse.in {
+	overflow-y: hidden;
 }

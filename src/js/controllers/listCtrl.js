@@ -22,7 +22,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
   $scope.slides=[];
   $scope.active = 0;
 
-  $scope.collapsed = false; // testing
+  $scope.isNavbarCollapsed = false;
 
   $scope.$on('$destroy', function (event) {
     appVars.scrollPos = $window.document.documentElement.scrollTop || $window.document.body.scrollTop;

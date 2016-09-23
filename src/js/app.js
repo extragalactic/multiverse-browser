@@ -15,7 +15,7 @@ var myApp = angular.module('myApp', [
   'ui.bootstrap'
 ])
 .run(['socket', function(socket) {
-  socket.emit('login'); 
+  socket.emit('login');
 }])
 // application 'globals' using Value
 .value('appVars', {
@@ -72,9 +72,10 @@ var myApp = angular.module('myApp', [
 // e.g.  ]).constant('APP_CONSTANT', 'some value');
 
 
-// Note: it appears that the ui-angular scripts are not fully working.
-// I must manually add behavior to the buttons.
 
+
+// Note: it appears that my ui-angular scripts are not fully working as expected.
+// I must manually add some behavior to the menu buttons.
 
 // initialize navbar button behavior
 $(document).on('click', '.navbar-nav li', function (e) {
@@ -86,12 +87,4 @@ $(document).on('click', '.navbar-brand', function (e) {
   $('.navbar-nav li:first').removeClass('active').siblings().removeClass('active');
 });
 
-// init hamburger button
-$(document).on('click', '#menuCollapseButton', function (e) {
-  if ($('#navigationBar').hasClass('collapse')) {
-    $('#navigationBar').removeClass('collapse');
-  } else {
-    $('#navigationBar').addClass('collapse');
-  }
-});
 

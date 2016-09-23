@@ -2,23 +2,23 @@
 <section>
    <nav class="navbar navbar-inverse navbar-fluid-top navbar-custom">
 
-      <div class="container" style="padding-left: 0px;">
+      <div class="container">
 
-         <div class="container-fluid" style="float: left;">
+         <div class="container-fluid">
             <div class="navbar-header">
-               <button id="menuCollapseButton" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navigationBar" aria-expanded="false" aria-controls="navbar">
+               <button id="menuCollapseButton" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbarMenu" aria-expanded="false" aria-controls="navbar" ng-click="isNavbarCollapsed = !isNavbarCollapsed">
                   <span class="sr-only">Toggle navigation</span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                </button>
                <a class="navbar-brand" href="#">
-                  <img style="margin-top:-5px;" src="images/multiverse-banner.jpg" width=160px>
+                  <img src="images/multiverse-banner.jpg" width=160px>
                </a>
             </div>
          </div>
 
-         <div id="navigationBar" class="collapse navbar-collapse">
+         <div id="navbarMenu" class="collapse navbar-collapse" uib-collapse="!isNavbarCollapsed">
             <ul class="nav navbar-nav">
                <li ng-class="{ active: isActive('/list') }" class="nav-item"><a class="nav-link" data-toggle="tab" href="#/list">List</a></li>
                <li ng-class="{ active: isActive('/details') }" class="nav-item"><a class="nav-link" data-toggle="tab" href="#/details">Details</a></li>

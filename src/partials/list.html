@@ -6,16 +6,27 @@
             <div id="searchControls">
 
                <div id="directoryTitle">
-                  <h1>Galactic Directory</h1> 
+                  <h1>Galactic Directory</h1>
                </div>
-
+<!--
+    <div class="btn-group" uib-dropdown is-open="status.isopen">
+      <button id="single-button" type="button" class="btn2 btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+        Galaxy Group <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+        <li ng-repeat="group in galaxyGroups" role="menuitem" value="{{group.name}}">{{group.name_cleaned}}</li>
+      </ul>
+    </div>
+-->
                <div id="searchBarLeft" ng-cloak>
                   <label> Group:
+
                      <select ng-model="galaxyGroup" id="groupSelect" ng-change="changeGroupSelect()">
                         <option value="">All</option>
                         <option value="-">No Group</option>
                         <option ng-repeat="group in galaxyGroups" value="{{group.name}}">{{group.name_cleaned}}</option>
                      </select>
+
                   </label>
                   </br>
                   <label> Type:
@@ -93,60 +104,6 @@
                   <button class="btn" ng-click="nextPage()">Next Page <span class="glyphicon glyphicon-menu-right"></span></button>
                </div>
             </div>
-
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-      <h4 class="panel-title">
-        <a href="#" ng-click="isCollapsed = !isCollapsed">
-          Collapsible Group Item #1
-        </a>
-      </h4>
-    </div>
-    <div collapse="isCollapsed">
-      <div class="panel-body"><p>Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.</p>
-      </div>
-    </div>
-</div>
-
-<div>
-    <button class="btn btn-default" ng-click="collapsed = !collapsed">Toggle</button>
-    <div collapse="collapsed">
-      <div>
-        <h1>Hello Plunker!</h1>
-      </div>
-    </div>
-</div>
-
-<div class="container">
-  <h2>Collapsible List Group</h2>
-  <div class="panel-group">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h4 class="panel-title">
-          <a data-toggle="collapse" href="#collapse1">Collapsible list group</a>
-        </h4>
-      </div>
-      <div id="collapse1" class="panel-collapse collapse">
-        <ul class="list-group">
-          <li class="list-group-item">One</li>
-          <li class="list-group-item">Two</li>
-          <li class="list-group-item">Three</li>
-        </ul>
-        <div class="panel-footer">Footer</div>
-      </div>
-    </div>
-  </div>
-</div>
-<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-  Button with data-target
-</button>
-<div class="collapse" id="collapseExample">
-  <div class="well">
-    <p>This is a test</p>
-  </div>
-</div>
-<div><p>Hello</p></div>
 
             <div class="multiList">
                <ul class="galaxyListLinear" ng-cloak>

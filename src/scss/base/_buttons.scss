@@ -41,3 +41,25 @@
     color: white;
   }
 }
+
+.btn2 {
+  @extend .btn;
+  background: $secondaryColorDark;
+  background-image: -webkit-linear-gradient(top, $secondaryColorDark, $secondaryColorDarkest);
+  background-image: -moz-linear-gradient(top, $secondaryColorDark, $secondaryColorDarkest);
+  background-image: -ms-linear-gradient(top, $secondaryColorDark, $secondaryColorDarkest);
+  background-image: -o-linear-gradient(top, $secondaryColorDark, $secondaryColorDarkest);
+  background-image: linear-gradient(to bottom, $secondaryColorDark, $secondaryColorDarkest);
+  border: solid $secondaryColorMedium 1px;
+
+
+  &:hover {
+    background: $secondaryColorMedium;
+    background-image: -webkit-linear-gradient(top, $secondaryColorMedium, $secondaryColorDark);
+    background-image: -moz-linear-gradient(top, $secondaryColorMedium, $secondaryColorDark);
+    background-image: -ms-linear-gradient(top, $secondaryColorMedium, $secondaryColorDark);
+    background-image: -o-linear-gradient(top, $secondaryColorMedium, $secondaryColorDark);
+    background-image: linear-gradient(to bottom, $secondaryColorMedium, $secondaryColorDark);
+
+  }
+}
