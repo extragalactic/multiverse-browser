@@ -22,7 +22,13 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
   $scope.slides=[];
   $scope.active = 0;
 
-  $scope.isNavbarCollapsed = false;
+  $scope.isNavbarCollapsed = false; // is required?
+
+
+  // Note: move this cleaning script into a utilities class (that is available to client and server)
+  // init vars to track the dropdown selections
+  $scope.selectedGroup = { value: { name_cleaned: appVars.searchTerms.group.replace(/_/g, ' ')  } };
+  $scope.selectedType = { value: appVars.searchTerms.galaxyType };
 
   $scope.$on('$destroy', function (event) {
     appVars.scrollPos = $window.document.documentElement.scrollTop || $window.document.body.scrollTop;
@@ -82,7 +88,8 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
       });
     }
     // set default selected galaxy (for the Details page)
-    appVars.defaultDetailsItem = $scope.galaxies[0]._Common_Name;
+    if($scope.galaxies.length > 0)
+      appVars.defaultDetailsItem = $scope.galaxies[0]._Common_Name;
 
     // update images for slides widget
     $scope.slides.length=0;
@@ -103,13 +110,16 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
 
   socket.on("galaxyTypes", function (data) {
     $scope.galaxyTypes = [];
+    $scope.galaxyTypes[0] = 'All';
+
     for (var i = 0; i < data.length; i++) {
       $scope.galaxyTypes.push(data[i]);
     }
     $scope.galaxyType = appVars.searchTerms.galaxyType;
 
     console.log('client requesting galaxy list');
-    socket.emit('galaxyListRequest', $scope.galaxyGroup, $scope.galaxyType);
+    var type = $scope.galaxyType==='All' ? '' : $scope.galaxyType;
+    socket.emit('galaxyListRequest', $scope.galaxyGroup, type);
   });
 
   // currently this is used during initialization only
@@ -117,8 +127,12 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
   socket.on("galaxyGroups", function (data) {
     $scope.galaxyGroups = [];
     //
-    // .... TODO: this backslash remover should be inside a "utils" service, since i need to use it in the detailsCtrl file
+    // .... TODO: this backslash remover should be inside a "utils" service, since i need to use it in the detailsCtrl file (and the server)
     //
+
+    $scope.galaxyGroups[0] = {name: '', name_cleaned: 'All'};
+    $scope.galaxyGroups[1] = {name: '-', name_cleaned: '(No Group)'};
+
     for (var i = 0; i < data.length; i++) {
       var item = {
         name: data[i],
@@ -169,12 +183,22 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     }
   };
 
+  // old version
   $scope.changeGroupSelect = function () {
     resetPageScrollPos = true;
     appVars.searchTerms.group = $scope.galaxyGroup;
     appVars.searchTerms.resultsStartPosition = 0;
     socket.emit('galaxyListRequest', $scope.galaxyGroup, $scope.galaxyType);
   };
+  $scope.changeGroupSelect2 = function (selectedItem) {
+    $scope.galaxyGroup = selectedItem.name;
+    resetPageScrollPos = true;
+    appVars.searchTerms.group = $scope.galaxyGroup;
+    appVars.searchTerms.resultsStartPosition = 0;
+    var type = $scope.galaxyType==='All' ? '' : $scope.galaxyType;    
+    socket.emit('galaxyListRequest', $scope.galaxyGroup, type);
+  };
+
 
   $scope.changeTypeSelect = function () {
     resetPageScrollPos = true;
@@ -183,6 +207,18 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     appVars.searchTerms.resultsStartPosition = 0;
     socket.emit('galaxyListRequest', $scope.galaxyGroup, $scope.galaxyType);
   };
+  $scope.changeTypeSelect2 = function (selectedItem) {
+    $scope.galaxyType = selectedItem;
+
+    console.log('Galaxy type requested: ' +  $scope.galaxyType);
+    resetPageScrollPos = true;
+    appVars.searchTerms.galaxyType = $scope.galaxyType;
+    appVars.searchTerms.resultsStartPosition = 0;
+    
+    var type = $scope.galaxyType==='All' ? '' : $scope.galaxyType;
+    socket.emit('galaxyListRequest', $scope.galaxyGroup, type);
+  };
+
 
   $scope.changeSortDirection = function () {
     resetPageScrollPos = true;

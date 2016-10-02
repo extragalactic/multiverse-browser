@@ -7,12 +7,17 @@ require('angular');
 require('angular-route');
 require('angular-animate');
 require('angular-ui-bootstrap');
+require('angular-sanitize');
+require('ui-select');
+
 
 // create main Angular module
 var myApp = angular.module('myApp', [
   'ngRoute',
   'ngAnimate',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ui.select', 
+  'ngSanitize'
 ])
 .run(['socket', function(socket) {
   socket.emit('login');
@@ -21,7 +26,7 @@ var myApp = angular.module('myApp', [
 .value('appVars', {
   searchTerms: {
     group: 'Virgo',
-    galaxyType: '', /* '' = all types */
+    galaxyType: 'All', /* '' = all types */
     orderBy: 'Distance',
     direction: '', /* '' = ascending */
     displayStyle: 'Tiles',
@@ -33,8 +38,8 @@ var myApp = angular.module('myApp', [
     allowExternalControl: 'true',
     isControlNode: 'true'
   },
-  galaxyList: [],
-  defaultDetailsItem: '',
+    galaxyList: [],
+    defaultDetailsItem: '',
   scrollPos: 0
 })
 .config(['$routeProvider', function ($routeProvider) {

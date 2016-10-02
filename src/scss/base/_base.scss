@@ -121,6 +121,41 @@ body {
     clear: both;
 }
 
+.ui-select {
+
+}
+
+.ui-select-choices {
+    color: #fff;
+    background-color: #222;
+    cursor: pointer;
+    padding-left: 10px;
+
+}
+.ui-select-bootstrap, .ui-select-toggle, .ui-select-highlight, .btn-default-focus, .ui-select-toggle {
+  font-weight: bold;
+  background-color: #006;
+}
+.ui-select-bootstrap > .ui-select-match > .btn, .ui-select-toggle {
+  font-weight: bold;
+  background-color: #006;
+
+}
+
+.ui-select-toggle, .ui-select-bootstrap {
+  width: 170px; 
+}
+
+input.ui-select-search {
+  background-color: #222;
+  color: #ddd;
+}
+
+// this fixes a resize bug with ui-select
+.ui-select-search {
+    width: 100% !important;
+}
+
 // line for Angular-UI-Bootstrap
 .nav, .pagination, .carousel, .panel-title a {
     cursor: pointer;
