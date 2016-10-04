@@ -3,24 +3,28 @@
       <div class="row">
 
          <div class="col-xs-8 col-sm-9 col-md-10 col-lg-10">
+
             <div id="searchControls">
 
-              <div id="directoryTitle">
-                <h1>Galactic Directory</h1>
+               <div id="directoryTitle">
+                <img src="images/spiral-icon-white.png" width="35" style="float:left; margin-top: 8px; margin-right: 3px; opacity: 0.4;"">
+                <img src="images/title-galaxy-search.png" height="30" style="margin-top: 5px; padding-bottom: 2px; opacity: 0.8; overflow-x: auto;">
               </div>
 
               <div id="searchBarLeft" ng-cloak>
 
-                <h5 class="listDropdownTitle">Group:</h5>
-                <div class="listDropdown">
-                  <ui-select ng-model="selectedGroup.value" theme="bootstrap" append-to-body="true" search-enabled="false" on-select="changeGroupSelect2($item)">
-                      <ui-select-match placeholder="Select group...">
-                          <span ng-bind="$select.selected.name_cleaned"></span>
-                      </ui-select-match>
-                      <ui-select-choices repeat="group in galaxyGroups">
-                          <span ng-bind="group.name_cleaned"></span>
-                      </ui-select-choices>
-                  </ui-select>
+               <div class="controlsLine clearfix">
+                  <h5 class="controlsTitle">Group:</h5>
+                  <div class="listDropdown">
+                    <ui-select ng-model="selectedGroup.value" theme="bootstrap" append-to-body="true" search-enabled="false" on-select="changeGroupSelect2($item)">
+                        <ui-select-match placeholder="Select group...">
+                            <span ng-bind="$select.selected.name_cleaned"></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="group in galaxyGroups">
+                            <span ng-bind="group.name_cleaned"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                  </div>
                 </div>
                   <!--             
                   <label> Group:
@@ -33,16 +37,18 @@
                   -->
                   </br>
 
-                  <h5 class="listDropdownTitle clearfix">Type:</h5>
-                  <div class="listDropdown">
-                    <ui-select ng-model="selectedType.value" theme="bootstrap" append-to-body="true" search-enabled="false" on-select="changeTypeSelect2($item)">
-                        <ui-select-match placeholder="Select type...">
-                            <span ng-bind="$select.selected"></span>
-                        </ui-select-match>
-                        <ui-select-choices repeat="type in galaxyTypes">
-                            <span ng-bind="type"></span>
-                        </ui-select-choices>
-                    </ui-select>
+                 <div class="controlsLine ">
+                    <h5 class="controlsTitle clearfix">Type:</h5>
+                    <div class="listDropdown">
+                      <ui-select ng-model="selectedType.value" theme="bootstrap" append-to-body="true" search-enabled="false" on-select="changeTypeSelect2($item)">
+                          <ui-select-match placeholder="Select type...">
+                              <span ng-bind="$select.selected"></span>
+                          </ui-select-match>
+                          <ui-select-choices repeat="type in galaxyTypes">
+                              <span ng-bind="type"></span>
+                          </ui-select-choices>
+                      </ui-select>
+                    </div>
                   </div>
 
                   <!--  
@@ -54,17 +60,14 @@
                   </label>
                   -->
 
-                  </br>
-
-                  <label>Display style:
-                     <select ng-model="selectedListStyle" ng-change="changeListStyle()">
-                        <option value="List">List</option>
-                        <option value="Tiles">Tiles</option>
-                     </select>
-                  </label>
-                  </br>
-                  <label>Search: </label>
-                  <input ng-model="query" placeholder=" enter text" style="width:150px;">
+                 
+                  <div class="searchField">
+                    </br>
+                    <h5 class="controlsTitle clearfix">Search: </h5>
+                    <div class="listSearchField">                  
+                      <input ng-model="query" placeholder=" enter text">
+                    </div>
+                  </div>
                   </br>
                </div>
                <div id="searchBarMiddle">
@@ -94,6 +97,15 @@
                         </select>
                      </label>
                   </div>
+
+                  <label>Display Style:
+                     <select ng-model="selectedListStyle" ng-change="changeListStyle()">
+                        <option value="List">List</option>
+                        <option value="Tiles">Tiles</option>
+                     </select>
+                  </label>
+                  </br>
+
                </div>
             </div>
          </div>
@@ -111,12 +123,14 @@
 
       </div>
 
+      <div class="responsiveHR">
+        <hr/>
+      </div>
       <div class="row">
 
          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="clearfix">
-               <hr/>
-               <h4>SEARCH RESULTS: {{numGalaxies}}</h4>
+               <h4>SEARCH RESULTS: {{numGalaxies}} ({{resultRatio}}%)</h4>
                <h4 ng-bind="showingTextBox"></h4>
                <div id="prevNextButtons">
                   <button class="btn" ng-click="prevPage()">

@@ -21,7 +21,8 @@ body {
     margin-right: auto;
 
     label {
-        font-size: 0.6em;
+        font-size: 0.7em;
+        font-weight: normal;
     }
     input {
         font-size: 0.8em;
@@ -58,9 +59,10 @@ body {
         font-size: 1.3em;
     }
     h2 {
-        font-size: 1.2em;
+        font-size: 1.4em;
+        font-family: 'Arimo', sans-serif;        
         color: $textColorLight;
-        font-family: 'Arimo', sans-serif;
+        font-variant: small-caps;
     }
     h3 {
         color: $textColorLight;
@@ -71,6 +73,9 @@ body {
         color: $textColorLight;
         font-size: 0.7em;
         line-height: 90%;
+    }
+    h5 {
+        font-size: 0.7em;       
     }
 
     div {

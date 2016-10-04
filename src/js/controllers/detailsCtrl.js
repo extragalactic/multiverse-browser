@@ -36,7 +36,8 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
 
     // build the search descriptor line of text
     if(appVars.galaxyList.length > 0) {
-      galaxy.searchDescriptor = appVars.galaxyList.length + ' ' + appVars.searchTerms.galaxyType + ' galaxies';
+      var typeText = appVars.searchTerms.galaxyType === 'All' ? '' : appVars.searchTerms.galaxyType;
+      galaxy.searchDescriptor = appVars.galaxyList.length + ' ' + typeText + ' galaxies';
       console.log('search group: ' + appVars.searchTerms.group);
       if(appVars.searchTerms.group !== '') {
         galaxy.searchDescriptor += ' in ';

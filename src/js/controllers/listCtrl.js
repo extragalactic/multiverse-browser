@@ -22,6 +22,8 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
   $scope.slides=[];
   $scope.active = 0;
 
+  $scope.resultRatio = 0;
+
   $scope.isNavbarCollapsed = false; // is required?
 
 
@@ -59,6 +61,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     $scope.galaxies = data;
     appVars.galaxyList = data;
     $scope.numGalaxies = data.length;
+    $scope.resultRatio = Math.round($scope.numGalaxies / 480 * 1000)/10;
 
     $scope.galaxyOrder = appVars.searchTerms.orderBy;
     $scope.changeOrderBy();

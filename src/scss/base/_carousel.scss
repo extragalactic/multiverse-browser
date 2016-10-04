@@ -41,9 +41,10 @@
     display: none;
     width: 150px;
     position:absolute;
-    margin-top: -70px;
+    margin-top: -60px;
     height: 350px;
     padding-right: 10px;
+    z-index: -100;
 
     img {
         margin: auto;
@@ -59,10 +60,10 @@
     }
 
     .carousel-inner .item {
-        -webkit-transition: 0.5s ease-in-out left;
-        -moz-transition: 0.5s ease-in-out left;
-        -o-transition: 0.5s ease-in-out left;
-        transition: 0.5s ease-in-out left;
+        -webkit-transition: 0.2s ease-in-out left;
+        -moz-transition: 0.2s ease-in-out left;
+        -o-transition: 0.2s ease-in-out left;
+        transition: 0.2s ease-in-out left;
 
         -webkit-transition-property: opacity;
               transition-property: opacity;

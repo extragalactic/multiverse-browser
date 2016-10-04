@@ -1,18 +1,56 @@
+
+
 #searchControls {
-    padding: 0px 0px 15px 0px;
+    padding: 10px 0px 15px 0px;
 
     label {
         font-size: 0.7em;
     }
 
     div#directoryTitle {
-        min-width: 300px;
+        min-width: 330px;
+        max-width: 470px;
+        height: 40px;
+        padding-left: 8px;
+        margin-bottom: 15px;
+        background-color: #222;
+
+        border-style: solid solid solid hidden;
+        border-width: 1px;
+        border-color: $thirdColorMedium;
+        border-radius: 8px;
+
+        background: -webkit-gradient(linear, left top, right top, from($thirdColorDarkest), to($thirdColorDark));
+        background: -webkit-linear-gradient(left, $thirdColorDark, $backgroundColorDark);
+        background: -moz-linear-gradient(left, $thirdColorDark, $thirdColorDarkest);
+        background: -ms-linear-gradient(left, $thirdColorDark, $thirdColorDarkest);
+        background: -o-linear-gradient(left, $thirdColorDark, $thirdColorDarkest);
+
+        h2 {
+            padding-bottom: 4px;
+        }
     }
 
     div#searchBarLeft {
         float: left;
         text-align: right;
         min-width: 230px;
+
+        .searchField {
+            margin-top: 25px;
+            margin-bottom: 20px;    
+             
+            .listSearchField {
+                width: 165px;
+                margin-top: 5px;
+                margin-left: 10px;
+                float: left;
+
+                input {
+                    width: 165px;
+                }
+            }
+        }
     }   
 
     div#searchBarMiddle {
@@ -23,15 +61,25 @@
         div#resultsPerPageInfo {
             padding-right: 6px;
         }    
-    }  
+    } 
+    .controlsLine {
+        margin-top: -2px;
+        margin-bottom: -8px;
+    }   
     .listDropdown {
         float: right;
     }  
-    .listDropdownTitle {
+    .controlsTitle {
         float: left;
+        overflow-y: hidden;
     }  
+
 }
 
+.responsiveHR {
+        min-width: 330px;
+        max-width: 470px;
+}
 
 #multiList {
     width: 1200px;
@@ -68,7 +116,11 @@
         border: 1px solid black;
         border-radius: 10px;
 
+        a {
+
+        }
         &:hover {
+            cursor: pointer;
             background: $backgroundColorDark;
             border: 1px solid $primaryColorLight;
         }
