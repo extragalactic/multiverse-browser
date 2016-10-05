@@ -2,7 +2,7 @@
 // DetailsController
 // ----------------------------------------------------
 
-angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$routeParams', 'appVars', 'socket', function ($scope, $http, $routeParams, appVars, socket) {
+angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$routeParams', '$document', 'appVars', 'socket', function ($scope, $http, $routeParams, $document, appVars, socket) {
   "use strict";
 
   this.appVars = appVars;
@@ -16,6 +16,8 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
   };
 
   $scope.allowExternalControl = appVars.globalOptions.allowExternalControl;
+  $scope.isGalaxyListEmpty = true;
+  $scope.showThumbnailImage = false; // delays showing image until loaded
 
   $scope.$on('$destroy', function (event) {
     socket.removeAllListeners();
@@ -27,18 +29,19 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
   socket.on("galaxyDetails", function (data) {
 
     $scope.galaxyDetails = data[0];
-    var galaxy =   $scope.galaxyDetails;
+    var galaxy = $scope.galaxyDetails;
     galaxy.Diameter_fulltext = galaxy.Diameter + ' kly';
     galaxy.Distance_fulltext = galaxy.Distance + ' mly';
     galaxy.RA_fulltext = galaxy.RA_h + 'h ' + galaxy.RA_m + 'm ' + galaxy.RA_s + 's';
     galaxy.Decl_fulltext = galaxy.Decl_h + 'd ' + galaxy.Decl_m + "' " + galaxy.Decl_s + '""';
     galaxy.ImageFile_fulltext = 'images/galaxies 150 (png)/' + galaxy.ImageFile;
 
+    $scope.isGalaxyListEmpty = appVars.galaxyList.length > 0 ? false : true;
+
     // build the search descriptor line of text
-    if(appVars.galaxyList.length > 0) {
+    if(!$scope.isGalaxyListEmpty) {
       var typeText = appVars.searchTerms.galaxyType === 'All' ? '' : appVars.searchTerms.galaxyType;
       galaxy.searchDescriptor = appVars.galaxyList.length + ' ' + typeText + ' galaxies';
-      console.log('search group: ' + appVars.searchTerms.group);
       if(appVars.searchTerms.group !== '') {
         galaxy.searchDescriptor += ' in ';
         galaxy.searchDescriptor += appVars.searchTerms.group==='-'? "No Group": appVars.searchTerms.group;
@@ -53,9 +56,7 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
     $scope.extraHTML = '<< Back to List';
 
     // find the next & previous galaxies in the search list (if it exists)
-    if(appVars.galaxyList.length > 0) {
-      $('.nextPrevControls').removeClass('hidden');
-      $('.galaxyNextPrev').removeClass('hidden');
+    if(!$scope.isGalaxyListEmpty) {  
 
       for (var i = 0, len = appVars.galaxyList.length; i < len; i++) {
         if(appVars.galaxyList[i].Common_Name == $scope.galaxyDetails.Common_Name) {
@@ -67,9 +68,6 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
           break;
         }
       }
-    } else {
-      $('.nextPrevControls').addClass('hidden');
-      $('.galaxyNextPrev').addClass('hidden');
     }
 
     if (appVars.globalOptions.isControlNode === 'true') {
@@ -77,7 +75,7 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
     }
 
     // to prevent visual flash, the picture thumbnail element is by default hidden, then shown once the data is loaded
-    $('.galaxyDetailsThumb').show();
+    $scope.showThumbnailImage = true;
 
   });
 
@@ -91,8 +89,6 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
 
 
   $scope.returnToList = function () {
-    // Manually set the navbar to List (this is a hack; I shouldn't be modifying the DOM)
-    $('.navbar-nav li:first').addClass('active').siblings().removeClass('active');
     window.location.href = '#/list/';
   };
 

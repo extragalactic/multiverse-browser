@@ -26,8 +26,17 @@
         background: -ms-linear-gradient(left, $thirdColorDark, $thirdColorDarkest);
         background: -o-linear-gradient(left, $thirdColorDark, $thirdColorDarkest);
 
-        h2 {
-            padding-bottom: 4px;
+        #titleIcon {
+            float:left; 
+            margin-top: 9px; 
+            margin-right: 3px; 
+            opacity: 0.4;
+        }
+        #titleImage {
+            margin-top: 5px; 
+            padding-bottom: 2px; 
+            opacity: 0.8; 
+            overflow-x: auto;   
         }
     }
 
@@ -162,7 +171,6 @@
 @include mq ($until: media_size_xsm) {
     @include setListFormat (2, $list_size_xsm);
 }
-
 
 
 .galaxyListLinear {

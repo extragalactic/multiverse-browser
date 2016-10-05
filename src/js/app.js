@@ -2,7 +2,6 @@
 //  Main application script for Galaxy Browser
 // ----------------------------------------------------
 
-global.jQuery = $ = require('jquery');
 require('angular');
 require('angular-route');
 require('angular-animate');
@@ -25,8 +24,8 @@ var myApp = angular.module('myApp', [
 // application 'globals' using Value
 .value('appVars', {
   searchTerms: {
-    group: 'Virgo',
-    galaxyType: 'All', /* '' = all types */
+    group: '',
+    galaxyType: 'All', 
     orderBy: 'Distance',
     direction: '', /* '' = ascending */
     displayStyle: 'Tiles',
@@ -76,20 +75,5 @@ var myApp = angular.module('myApp', [
 // TIP: Can define an application Constant var by appending the .constant
 // e.g.  ]).constant('APP_CONSTANT', 'some value');
 
-
-
-
-// Note: it appears that my ui-angular scripts are not fully working as expected.
-// I must manually add some behavior to the menu buttons.
-
-// initialize navbar button behavior
-$(document).on('click', '.navbar-nav li', function (e) {
-  $(this).addClass('active').siblings().removeClass('active');
-});
-$(document).on('click', '.navbar-brand', function (e) {
-  $(this).addClass('active');
-  //$('.navbar-nav li:first').addClass('active').siblings().removeClass('active');
-  $('.navbar-nav li:first').removeClass('active').siblings().removeClass('active');
-});
 
 

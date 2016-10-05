@@ -25,7 +25,6 @@ angular.module('myApp').controller('HomeController', ['$scope', '$http', 'appVar
   $scope.slides = slides;
 
   $scope.gotoList = function () {
-    $('.navbar-nav li:first').addClass('active').siblings().removeClass('active');
     window.location.href = '#/list/';
   };
 }]);

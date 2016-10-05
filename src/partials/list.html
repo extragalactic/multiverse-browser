@@ -6,9 +6,9 @@
 
             <div id="searchControls">
 
-               <div id="directoryTitle">
-                <img src="images/spiral-icon-white.png" width="35" style="float:left; margin-top: 8px; margin-right: 3px; opacity: 0.4;"">
-                <img src="images/title-galaxy-search.png" height="30" style="margin-top: 5px; padding-bottom: 2px; opacity: 0.8; overflow-x: auto;">
+              <div id="directoryTitle">
+                <img id="titleIcon" src="images/spiral-icon-white.png" width="35">
+                <img id="titleImage" src="images/title-galaxy-search.png" height="30">
               </div>
 
               <div id="searchBarLeft" ng-cloak>
@@ -16,7 +16,7 @@
                <div class="controlsLine clearfix">
                   <h5 class="controlsTitle">Group:</h5>
                   <div class="listDropdown">
-                    <ui-select ng-model="selectedGroup.value" theme="bootstrap" append-to-body="true" search-enabled="false" on-select="changeGroupSelect2($item)">
+                    <ui-select ng-model="selectedGroup.value" theme="bootstrap" append-to-body="true" search-enabled="false" on-select="changeGroupSelect($item)">
                         <ui-select-match placeholder="Select group...">
                             <span ng-bind="$select.selected.name_cleaned"></span>
                         </ui-select-match>
@@ -40,7 +40,7 @@
                  <div class="controlsLine ">
                     <h5 class="controlsTitle clearfix">Type:</h5>
                     <div class="listDropdown">
-                      <ui-select ng-model="selectedType.value" theme="bootstrap" append-to-body="true" search-enabled="false" on-select="changeTypeSelect2($item)">
+                      <ui-select ng-model="selectedType.value" theme="bootstrap" append-to-body="true" search-enabled="false" on-select="changeTypeSelect($item)">
                           <ui-select-match placeholder="Select type...">
                               <span ng-bind="$select.selected"></span>
                           </ui-select-match>
@@ -89,7 +89,7 @@
                   </br>
                   <div id="resultsPerPageInfo">
                      <label>Results per Page:
-                        <select ng-model="resultsPerPage"   ng-change="changeResultsPerPage()">
+                        <select ng-model="resultsPerPage" ng-change="changeResultsPerPage()">
                            <option value="10">10</option>
                            <option value="20">20</option>
                            <option value="40">40</option>
@@ -112,8 +112,8 @@
          <div class="col-xs-4 col-sm-3 col-md-2 col-lg-2">
             <div>
                <div>
-                 <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides" no-pause="true" class="carousel-fade carousel-mini" template-url="templates/carousel/carousel.html">
-                   <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                 <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides" no-pause="true" class="carousel-fade carousel-mini hideMe" template-url="templates/carousel/carousel.html">
+                   <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id" >
                      <img ng-src="{{slide.image}}">
                    </div>
                 </div>
@@ -132,7 +132,7 @@
             <div class="clearfix">
                <h4>SEARCH RESULTS: {{numGalaxies}} ({{resultRatio}}%)</h4>
                <h4 ng-bind="showingTextBox"></h4>
-               <div id="prevNextButtons">
+               <div id="prevNextButtons" ng-class="hideNextPrevButtons ? 'hidden': ''">
                   <button class="btn" ng-click="prevPage()">
                      <span class="glyphicon glyphicon-menu-left"></span> Prev Page</button>
                   <button class="btn" ng-click="nextPage()">Next Page <span class="glyphicon glyphicon-menu-right"></span></button>
@@ -140,13 +140,13 @@
             </div>
 
             <div class="multiList">
-               <ul class="galaxyListLinear" ng-cloak>
+               <ul ng-class="selectedListStyle==='List' ? 'galaxyListLinear': 'galaxyList'">
                   <li tooltip-placement="top-left" uib-tooltip="{{item.Common_Name}}" ng-animate="animate" class="galaxyListItem clearfix" ng-repeat="item in filtered = (galaxies | filter: {Common_Name:query} | orderBy: galaxyOrder:direction | limitTo:limitNum:limitStart)">
                      <a ng-href="" ng-click="onGalaxyClicked(item._Common_Name);" style="cursor:pointer;">
                         <div class="galaxyThumb">
                            <img ng-src="images/galaxies 150/{{item.ImageFileJPG}}" alt="">
                         </div>
-                        <div class="info" ng-show="showFlags.all">
+                        <div class="info" ng-class="selectedListStyle==='List' ? '': 'hidden'">
                            <h2>{{item.Common_Name}}</h2>
                            <h4>{{item.Council_Name}}</h4>
                            <div ng-show="showFlags.distance">

@@ -11,7 +11,7 @@
                         <h1><span ng-bind="galaxyDetails.Common_Name"></span></h1>
                         <!--<h4><span ng-bind="galaxyDetails.Council_Name"></span></h4> -->
                      </div>
-                     <div class="galaxyDetailsThumb" style="display:none">
+                     <div class="galaxyDetailsThumb" ng-class="showThumbnailImage ? '':'hidden'">
                         <img ng-src={{galaxyDetails.ImageFile_fulltext}} alt="">
                      </div>
                   </div>
@@ -21,7 +21,7 @@
                         <!--<h4><span ng-bind="galaxyDetails.Council_Name"></span></h4> -->
                      </div>
                      <div class="galaxyNextPrevList-xs">
-                        <div class="galaxyNextPrev">
+                        <div class="galaxyNextPrev" ng-class="isGalaxyListEmpty ? 'hidden': ''">
                            <button class="btn btn-primary raised" style="font-size: 0.9em;" ng-click="prevGalaxy()">
                            <span class="glyphicon glyphicon-menu-left"></span> </button>
                            <button class="btn btn-primary raised" style="font-size: 0.9em;" ng-click="nextGalaxy()"> <span class="glyphicon glyphicon-menu-right"></span></button>&nbsp;&nbsp;
@@ -45,7 +45,7 @@
                         <h4><span class="dataValueText"  ng-bind="galaxyDetails.Type"></span></h4>
                      </div>
                      <div id="galaxyDetailsBox3" class="hidden-xs">
-                        <div class="nextPrevControls">
+                        <div class="nextPrevControls" ng-class="isGalaxyListEmpty ? 'hidden': ''">
                            <div id="searchResultsTitle" class="textTab">
                               SEARCH RESULTS
                            </div>

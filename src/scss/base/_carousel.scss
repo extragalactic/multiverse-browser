@@ -20,16 +20,26 @@
     }
   }
 }
+.hideMe {
+  opacity: 0;
+}
+.fadeMe {
+  -webkit-transition: opacity 1.5s ease-in-out;
+     -moz-transition: opacity 1.5s ease-in-out;
+      -ms-transition: opacity 1.5s ease-in-out;
+       -o-transition: opacity 1.5s ease-in-out;
+          transition: opacity 1.5s ease-in-out;  
+}
 
 // image carousel on the home page
 .carousel-large {
     margin-top: 10px;
 
     .carousel-inner .item {
-      -webkit-transition: 1.5s ease-in-out left;
-      -moz-transition: 1.5s ease-in-out left;
-      -o-transition: 1.5s ease-in-out left;
-      transition: 1.5s ease-in-out left;
+      -webkit-transition: 1.0s ease-in-out left;
+      -moz-transition: 1.0s ease-in-out left;
+      -o-transition: 1.0s ease-in-out left;
+      transition: 1.0s ease-in-out left;
 
       -webkit-transition-property: opacity;
             transition-property: opacity;
@@ -38,7 +48,7 @@
 
 // the mini-carousel auto fade animator, found on the List page
 .carousel-mini {
-    display: none;
+
     width: 150px;
     position:absolute;
     margin-top: -60px;

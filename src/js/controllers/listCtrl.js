@@ -2,11 +2,8 @@
 //  ListController
 // ----------------------------------------------------
 
-//global.jQuery = $ = require('jquery');
-
-
 // ListController
-angular.module('myApp').controller('ListController', ['$scope', '$http', '$window', '$timeout', 'socket', 'appVars', function ($scope, $http, $window, $timeout, socket, appVars) {
+angular.module('myApp').controller('ListController', ['$scope', '$http', '$window', '$timeout', '$document', 'socket', 'appVars', function ($scope, $http, $window, $timeout, $document, socket, appVars) {
   "use strict";
 
   this.socket = socket;
@@ -15,26 +12,30 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
   var resetPageScrollPos = false;
 
   $scope.isControlNode = appVars.globalOptions.isControlNode;
+  $scope.hideNextPrevButtons = false;
+  $scope.resultRatio = 0; // the percentage of galaxies returned from a search
 
   // setup for the mini-slide carousel
   $scope.myInterval = 0;
   $scope.noWrapSlides = false;
   $scope.slides=[];
   $scope.active = 0;
+  $scope.initialLoadComplete = false; // flag used for mini-carousel
 
-  $scope.resultRatio = 0;
 
   $scope.isNavbarCollapsed = false; // is required?
 
-
-  // Note: move this cleaning script into a utilities class (that is available to client and server)
   // init vars to track the dropdown selections
-  $scope.selectedGroup = { value: { name_cleaned: appVars.searchTerms.group.replace(/_/g, ' ')  } };
+  $scope.selectedGroup = { 
+      value: {
+        name: appVars.searchTerms.group,
+        name_cleaned: appVars.searchTerms.group.replace(/_/g, ' ')  
+    } 
+  };
   $scope.selectedType = { value: appVars.searchTerms.galaxyType };
 
   $scope.$on('$destroy', function (event) {
     appVars.scrollPos = $window.document.documentElement.scrollTop || $window.document.body.scrollTop;
-
     socket.removeAllListeners();
   });
 
@@ -74,11 +75,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     $scope.limitStart = appVars.searchTerms.resultsStartPosition;
     $scope.changeResultsPerPage();
 
-    if ($scope.numGalaxies < $scope.limitNum) {
-      $('.prevNextButtons').addClass('hidden');
-    } else {
-      $('.prevNextButtons').removeClass('hidden');
-    }
+    $scope.hideNextPrevButtons = $scope.numGalaxies < $scope.limitNum;
 
     $scope.direction = appVars.searchTerms.direction;
 
@@ -99,17 +96,21 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     for(var i=0; i < data.length; i++) {
       $scope.slides[i] = {image: "images/galaxies 150/" + data[i].ImageFileJPG, id: i};
     }
-    $scope.active = 0;
+    $scope.myInterval = 300;
 
-    // a timeout is necessary since I couldn't resolve the weird flash that was happening on the initial load
-    var slideDisplayTimeout = setTimeout(function() {
-      $('.carousel-fade').fadeIn(300);
-      $scope.myInterval = 300;
-      $scope.$apply();
-      clearTimeout(slideDisplayTimeout);
-    }, 700);
+    // Hack: a timeout is used to init the mini-carousel since I couldn't resolve the weird flash that was happening on the initial load
+    if(!$scope.initialLoadComplete) {
+      var slideDisplayTimeout = setTimeout(function() {
+        angular.element($document[0].querySelector('.carousel-mini')).toggleClass('hideMe');    
+        angular.element($document[0].querySelector('.carousel-mini')).toggleClass('fadeMe');    
+        $scope.initialLoadComplete = true; 
+        $scope.$apply();
+        clearTimeout(slideDisplayTimeout);
+      }, 500);
+    }
 
   });
+
 
   socket.on("galaxyTypes", function (data) {
     $scope.galaxyTypes = [];
@@ -126,13 +127,12 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
   });
 
   // currently this is used during initialization only
-  // (which triggers a call to get the Local Group galaxies list, and sets view start values)
+  // (which triggers a call to get the default galaxies list, and sets view start values)
   socket.on("galaxyGroups", function (data) {
     $scope.galaxyGroups = [];
     //
-    // .... TODO: this backslash remover should be inside a "utils" service, since i need to use it in the detailsCtrl file (and the server)
+    // .... TODO: the backslash remover should be inside a "utils" service, since i need to use it in the detailsCtrl file (and the server)
     //
-
     $scope.galaxyGroups[0] = {name: '', name_cleaned: 'All'};
     $scope.galaxyGroups[1] = {name: '-', name_cleaned: '(No Group)'};
 
@@ -158,16 +158,6 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
 
   $scope.changeListStyle = function () {
     appVars.searchTerms.displayStyle = $scope.selectedListStyle;
-
-    if ($scope.selectedListStyle === 'List') {
-      $('.multiList ul').removeClass('galaxyList');
-      $('.multiList ul').addClass('galaxyListLinear');
-      $scope.showFlags.all = true;
-    } else {
-      $('.multiList ul').removeClass('galaxyListLinear');
-      $('.multiList ul').addClass('galaxyList');
-      $scope.showFlags.all = false;
-    }
   };
 
   $scope.changeOrderBy = function () {
@@ -187,13 +177,15 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
   };
 
   // old version
+  /*
   $scope.changeGroupSelect = function () {
     resetPageScrollPos = true;
     appVars.searchTerms.group = $scope.galaxyGroup;
     appVars.searchTerms.resultsStartPosition = 0;
     socket.emit('galaxyListRequest', $scope.galaxyGroup, $scope.galaxyType);
   };
-  $scope.changeGroupSelect2 = function (selectedItem) {
+  */
+  $scope.changeGroupSelect = function (selectedItem) {
     $scope.galaxyGroup = selectedItem.name;
     resetPageScrollPos = true;
     appVars.searchTerms.group = $scope.galaxyGroup;
@@ -202,7 +194,8 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     socket.emit('galaxyListRequest', $scope.galaxyGroup, type);
   };
 
-
+  // old version
+  /*
   $scope.changeTypeSelect = function () {
     resetPageScrollPos = true;
     console.log('galaxy type: ' + $scope.galaxyType);
@@ -210,9 +203,9 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     appVars.searchTerms.resultsStartPosition = 0;
     socket.emit('galaxyListRequest', $scope.galaxyGroup, $scope.galaxyType);
   };
-  $scope.changeTypeSelect2 = function (selectedItem) {
+  */
+  $scope.changeTypeSelect = function (selectedItem) {
     $scope.galaxyType = selectedItem;
-
     console.log('Galaxy type requested: ' +  $scope.galaxyType);
     resetPageScrollPos = true;
     appVars.searchTerms.galaxyType = $scope.galaxyType;
@@ -231,6 +224,9 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
   $scope.changeResultsPerPage = function () {
     appVars.searchTerms.resultsPerPage = $scope.resultsPerPage;
     $scope.limitNum = parseInt(appVars.searchTerms.resultsPerPage);
+    $scope.hideNextPrevButtons = $scope.numGalaxies < $scope.limitNum;
+
+    // ToDo: update the "(showing 21 of 37)" text...
 
     var showingEndValue = $scope.limitStart + $scope.limitNum;
     if (showingEndValue > $scope.galaxies.length) {
@@ -273,8 +269,6 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
         }
       }
     }
-    // Manually set the navbar to Details (this is a hack; I shouldn't be modifying the DOM)
-    $('.navbar-nav li:first').next().addClass('active').siblings().removeClass('active');
   };
 
   // when the user clicks the Return to Top button

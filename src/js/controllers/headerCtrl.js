@@ -2,12 +2,12 @@
 // HeaderController
 // ----------------------------------------------------
 
-angular.module('myApp').controller('HeaderController', ['$scope', '$http', function ($scope, $http) {
+angular.module('myApp').controller('HeaderController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
   "use strict";
   
   // create functionality for nav buttons
   $scope.isActive = function (viewLocation) {
-    var active = (viewLocation === $location.path());
+    var active = ($location.path().indexOf(viewLocation) !== -1);
     return active;
   };
 }]);
