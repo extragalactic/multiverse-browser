@@ -71,6 +71,13 @@
                   </br>
                </div>
                <div id="searchBarMiddle">
+                  <label>
+                     <input type="radio" ng-model="direction" name="direction" value="" ng-change="changeSortDirection()"> ascending
+                  </label>
+                  <label>
+                     <input type="radio" ng-model="direction" name="direction" value="reverse" ng-change="changeSortDirection()"> descending
+                  </label>
+                  </br>
                   <label>Order by:
                      <select ng-model="galaxyOrder" ng-change="changeOrderBy()">
                         <option value="Common_Name">Name</option>
@@ -79,14 +86,7 @@
                         <option value="Diameter">Size</option>
                      </select>
                   </label>
-                  </br>
-                  <label>
-                     <input type="radio" ng-model="direction" name="direction" value="" ng-change="changeSortDirection()"> ascending
-                  </label>
-                  <label>
-                     <input type="radio" ng-model="direction" name="direction" value="reverse" ng-change="changeSortDirection()"> descending
-                  </label>
-                  </br>
+                  </br>                  
                   <div id="resultsPerPageInfo">
                      <label>Results per Page:
                         <select ng-model="resultsPerPage" ng-change="changeResultsPerPage()">
@@ -124,12 +124,14 @@
       </div>
 
       <div class="responsiveHR">
+        <h5>With the 480 largest galaxies within 100 million light years.</h5>
         <hr/>
       </div>
+
       <div class="row">
 
          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="clearfix">
+            <div id="searchResultsSection" class="clearfix">
                <h4>SEARCH RESULTS: {{numGalaxies}} ({{resultRatio}}%)</h4>
                <h4 ng-bind="showingTextBox"></h4>
                <div id="prevNextButtons" ng-class="hideNextPrevButtons ? 'hidden': ''">

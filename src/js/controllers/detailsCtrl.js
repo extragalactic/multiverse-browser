@@ -51,8 +51,6 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
       galaxy.searchDescriptor = "";
     }
 
-    console.log(galaxy.searchDescriptor);
-
     $scope.extraHTML = '<< Back to List';
 
     // find the next & previous galaxies in the search list (if it exists)
@@ -74,11 +72,12 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
       $scope.sendOSC();
     }
 
-    // to prevent visual flash, the picture thumbnail element is by default hidden, then shown once the data is loaded
+    // To prevent a visual flash, the picture thumbnail element is by default hidden, then shown once the data is loaded
     $scope.showThumbnailImage = true;
 
   });
 
+  // client receives an OSC message (from TouchDesigner)
   socket.on("messageOSC", function (message) {
     var galaxyName = message.substring(1, message.length);
     console.log('OSC message received by client: ' + galaxyName);
@@ -87,29 +86,34 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
     }
   });
 
+  // ----------------------------------------------------------
+  // Listen for messages from view
 
+  // user clicks the Return to List button
   $scope.returnToList = function () {
     window.location.href = '#/list/';
   };
 
-  // ----------------------------------------------------------
-  // Listen for messages from view
-
+  // previous galaxy
   $scope.prevGalaxy = function () {
     if(appVars.galaxyList.length === 0) return;
-
     var itemName = appVars.galaxyList[indexPointers.prev]._Common_Name;
     window.location.href = '#/details/' + itemName;
   };
 
+  // next galaxy
   $scope.nextGalaxy = function () {
     if(appVars.galaxyList.length === 0) return;
-
-    console.log(appVars.galaxyList.length, indexPointers.prev, indexPointers.current, indexPointers.next);
     var itemName = appVars.galaxyList[indexPointers.next]._Common_Name;
     window.location.href = '#/details/' + itemName;
   };
 
+
+  // ----------------------------------------------------------
+  // Private functions
+  // (note: must refactor how private functions are handled)
+
+  // Send the selected galaxy info out via OSC (to TouchDesigner)
   $scope.sendOSC = function () {
     var msgOSC = '/' + $scope.galaxyDetails._Common_Name;
     console.log('send msg to server, requesting OSC send');

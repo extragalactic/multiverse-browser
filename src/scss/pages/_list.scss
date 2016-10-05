@@ -125,12 +125,14 @@
         border: 1px solid black;
         border-radius: 10px;
 
-        a {
-
-        }
+        -webkit-transition: border-color 0.2s ease-out; /* Saf3.2+, Chrome */
+           -moz-transition: border-color 0.2s ease-out; /* FF3.7+ */
+             -o-transition: border-color 0.2s ease-out; /* Opera 10.5 */
+                transition: border-color 0.2s ease-out;
+       
         &:hover {
             cursor: pointer;
-            background: $backgroundColorDark;
+            background: #000;
             border: 1px solid $primaryColorLight;
         }
     }
@@ -201,6 +203,9 @@
             transform: scale(1.05);
         }
     }
+}
+#searchResultsSection {
+    margin-top: -20px;
 }
 
 #prevNextButtons {

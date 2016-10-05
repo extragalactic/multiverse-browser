@@ -24,7 +24,7 @@ var myApp = angular.module('myApp', [
 // application 'globals' using Value
 .value('appVars', {
   searchTerms: {
-    group: '',
+    group: 'Ursa_Major',
     galaxyType: 'All', 
     orderBy: 'Distance',
     direction: '', /* '' = ascending */
@@ -41,8 +41,9 @@ var myApp = angular.module('myApp', [
     defaultDetailsItem: '',
   scrollPos: 0
 })
+  // ---- init Angular route provider ---
 .config(['$routeProvider', function ($routeProvider) {
-  // ---- init Angular route provider ----
+
   $routeProvider.
   when('/home', {
     templateUrl: 'partials/home.html',
@@ -74,6 +75,4 @@ var myApp = angular.module('myApp', [
 }]);
 // TIP: Can define an application Constant var by appending the .constant
 // e.g.  ]).constant('APP_CONSTANT', 'some value');
-
-
 

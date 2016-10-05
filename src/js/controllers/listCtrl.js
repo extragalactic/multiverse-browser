@@ -2,7 +2,6 @@
 //  ListController
 // ----------------------------------------------------
 
-// ListController
 angular.module('myApp').controller('ListController', ['$scope', '$http', '$window', '$timeout', '$document', 'socket', 'appVars', function ($scope, $http, $window, $timeout, $document, socket, appVars) {
   "use strict";
 
@@ -22,9 +21,6 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
   $scope.active = 0;
   $scope.initialLoadComplete = false; // flag used for mini-carousel
 
-
-  $scope.isNavbarCollapsed = false; // is required?
-
   // init vars to track the dropdown selections
   $scope.selectedGroup = { 
       value: {
@@ -32,6 +28,10 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
         name_cleaned: appVars.searchTerms.group.replace(/_/g, ' ')  
     } 
   };
+  // Note: this is not the most elegant way to populate these dropdown values
+  if ($scope.selectedGroup.value.name ==='') $scope.selectedGroup.value.name_cleaned = 'All';
+  if ($scope.selectedGroup.value.name ==='-') $scope.selectedGroup.value.name_cleaned = '(No Group)';
+
   $scope.selectedType = { value: appVars.searchTerms.galaxyType };
 
   $scope.$on('$destroy', function (event) {
@@ -42,7 +42,8 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
   // ---------------------------------------------------
   // listen for socket messages from server
 
-  // hmmm... this logic is suspicious since it will do a config for every client connection
+/*
+  // This is now handled server-side (test this before removing)
   socket.on('connect', function () {
     // sends to socket.io server the host/port of oscServer and oscClient
     socket.emit('config', {
@@ -56,6 +57,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
       }
     });
   });
+*/
 
   // get returned list of galaxies
   socket.on("galaxyList", function (data) {
@@ -98,7 +100,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     }
     $scope.myInterval = 300;
 
-    // Hack: a timeout is used to init the mini-carousel since I couldn't resolve the weird flash that was happening on the initial load
+    // Hack: a timeout followed by a fade-in is used to init the mini-carousel since I couldn't resolve the weird flash that was happening on the initial load
     if(!$scope.initialLoadComplete) {
       var slideDisplayTimeout = setTimeout(function() {
         angular.element($document[0].querySelector('.carousel-mini')).toggleClass('hideMe');    
@@ -111,7 +113,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
 
   });
 
-
+  // return after galaxy type request
   socket.on("galaxyTypes", function (data) {
     $scope.galaxyTypes = [];
     $scope.galaxyTypes[0] = 'All';
@@ -126,7 +128,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     socket.emit('galaxyListRequest', $scope.galaxyGroup, type);
   });
 
-  // currently this is used during initialization only
+  // currently this is used during initialization only...
   // (which triggers a call to get the default galaxies list, and sets view start values)
   socket.on("galaxyGroups", function (data) {
     $scope.galaxyGroups = [];
@@ -190,7 +192,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     resetPageScrollPos = true;
     appVars.searchTerms.group = $scope.galaxyGroup;
     appVars.searchTerms.resultsStartPosition = 0;
-    var type = $scope.galaxyType==='All' ? '' : $scope.galaxyType;    
+    var type = $scope.galaxyType==='All' ? '' : $scope.galaxyType;
     socket.emit('galaxyListRequest', $scope.galaxyGroup, type);
   };
 
@@ -210,7 +212,6 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     resetPageScrollPos = true;
     appVars.searchTerms.galaxyType = $scope.galaxyType;
     appVars.searchTerms.resultsStartPosition = 0;
-    
     var type = $scope.galaxyType==='All' ? '' : $scope.galaxyType;
     socket.emit('galaxyListRequest', $scope.galaxyGroup, type);
   };
