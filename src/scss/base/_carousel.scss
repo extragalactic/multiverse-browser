@@ -53,7 +53,7 @@
     @include mq ($until: media_size_xsm) {
        width: 100px;      
     }    
-    position:absolute;
+    position:relative;
     margin-top: -45px;
     height: 350px;
     padding: 0px 10px 0px 20px;
@@ -83,3 +83,12 @@
     }
 }
 
+ .miniGalaxyOverlay {
+   position: absolute;
+   top: 22px; 
+   left: 20px;
+   @include mq ($until: media_size_xsm) {
+     top: 60px; 
+     left: 20px;
+   }
+ }

@@ -171,3 +171,34 @@ input.ui-select-search {
     display: none !important;
 }
 
+
+
+.polygon-outer {
+  display: inline-block;
+  position: relative;
+  width: 150px;
+  height: 150px;
+  background: red;
+  box-sizing: border-box;
+  -webkit-clip-path: url(#clipper);
+  -moz-clip-path: url(#clipper);
+  clip-path: url(#clipper);
+}
+.polygon-inner {
+  position: absolute;
+  top: 2px;  /* equal to border thickness */
+  left: 2px;  /* equal to border thickness */
+  width: 146px;  /* container height - (border thickness * 2) */
+  height: 146px;  /* container height - (border thickness * 2) */
+  -webkit-clip-path: url(#clipper);
+  -moz-clip-path: url(#clipper);
+  clip-path: url(#clipper);
+}
+
+.clip-circle {
+    -webkit-clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+  
+  //clip-path: circle(20px at center);
+}
+
