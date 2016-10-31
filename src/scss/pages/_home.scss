@@ -1,7 +1,21 @@
 
+#homePage {
+	@include mq ($until: media_size_xsm) {	
+		margin-left: -15px;
+
+		h1 {
+			font-size: 1.0em;
+		}
+	}
+
+}
+
 #introText {
-    padding: 0px 80px 0px 10px;
+    padding: 0px 80px 30px 10px;
     min-width: 390px;
+   	@include mq ($until: media_size_xsm) {	
+   		min-width: 430px;
+	}
 }
 
 #homepageThumb {
@@ -10,6 +24,9 @@
     margin-top: 15px;
 }
 
-#enterButton {
-	padding: 0px 20px 0px 20px;
+#buttonContainer {
+	margin-top: 20px;
+	#enterButton {
+		padding: 0px 20px 0px 20px;
+	}
 }

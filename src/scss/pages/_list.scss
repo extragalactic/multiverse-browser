@@ -18,7 +18,7 @@ $thumbHeightSmall: 60px;
         background-color: #222;
         margin-bottom: 15px;
 
-        margin-left: -10px;
+        margin-left: -15px;
         padding-left: 8px;
         max-width: 470px;
         min-width: 330px;
@@ -80,7 +80,8 @@ $thumbHeightSmall: 60px;
     div#searchBarMiddle {
         float: left;
         text-align: right;
-        min-width: 230px;
+        min-width: 160px;
+        padding-left: 20px;
 
         div#resultsPerPageInfo {
             padding-right: 6px;
@@ -104,7 +105,7 @@ $thumbHeightSmall: 60px;
     min-width: 330px;
     max-width: 470px;
     @include mq ($from: media_size_xsm) {
-        margin-top: -80px;
+        margin-top: 0px;
     }
 }
 
@@ -194,13 +195,16 @@ $thumbHeightSmall: 60px;
     @include setListFormat (4, $list_size_md);
 }
 @include mq ($until: media_size_sm) {
-    @include setListFormat (3, $list_size_sm);
+    @include setListFormat (4, $list_size_sm);
 }
 @include mq ($until: media_size_xsm) {
     @include setListFormat (6, $list_size_xsm);
 }
 @include mq ($until: media_size_xxsm) {
     @include setListFormat (3, $list_size_xxsm);
+}
+@include mq ($until: media_size_xxxsm) {
+    @include setListFormat (3, $list_size_xxxsm);
 }
 
 .galaxyListLinear {

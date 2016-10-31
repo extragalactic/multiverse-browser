@@ -1,4 +1,15 @@
 
+
+#aboutPage {
+	@include mq ($until: media_size_xsm) {	
+		margin-left: -15px;
+
+		h1 {
+			font-size: 1.0em;
+		}
+	}
+}
+
 .videoPlayer {
     padding-bottom: 50px;
     padding-top: 12px;

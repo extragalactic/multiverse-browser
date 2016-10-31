@@ -1,4 +1,10 @@
 
+#detailsPage {
+    @include mq ($until: media_size_xsm) {  
+        margin-left: -15px;
+    }
+}
+
 #galaxyDetailsTop {
     min-width: 350px;
     opacity: 0.99;
@@ -121,11 +127,11 @@
 }
 
 .largeImageWrapper {
-    padding-right: 30px;
+    padding-right: 10px;
     padding-bottom: 30px;
     z-index: -10;
     @include mq ($from: media_size_sm_mod, $until: media_size_md) {
-        padding-left: 15px;
+        padding-left: 0px;
     }
 
     img.largeImage {
