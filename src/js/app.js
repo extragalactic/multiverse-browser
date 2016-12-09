@@ -61,6 +61,10 @@ var myApp = angular.module('myApp', [
     templateUrl: 'partials/details.html',
     controller: 'DetailsController'
   }).
+  when('/video', {
+    templateUrl: 'partials/video.html',
+    controller: 'VideoController'
+  }).  
   when('/options', {
     templateUrl: 'partials/options.html',
     controller: 'OptionsController'

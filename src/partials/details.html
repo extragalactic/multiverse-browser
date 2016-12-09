@@ -10,7 +10,7 @@
                      <div class="galaxyDetailsThumbTitle">
                         <h1><span ng-bind="galaxyDetails.Common_Name"></span></h1>
                      </div>
-                     <div class="galaxyDetailsThumb" ng-class="showThumbnailImage ? '':'hidden'">
+                     <div class="galaxyDetailsThumb" ng-class="showHiddenImages ? '':'hidden'">
                         <img ng-src={{galaxyDetails.ImageFile_fulltext}} alt="">
                      </div>
                   </div>
@@ -25,7 +25,7 @@
                            <button class="btn btn-primary raised" style="font-size: 0.9em;" ng-click="nextGalaxy()"> <span class="glyphicon glyphicon-menu-right"></span></button>&nbsp;&nbsp;
                         </div>
                         <div>
-                           <button type="button" class="btn btn-link" ng-click="returnToList()"><span id="listButton">List</span></button>
+                           <button type="button" class="btn btn-link buttonFat" ng-click="returnToList()"><span id="listButton">List</span></button>
                         </div>
                      </div>
                   </div>

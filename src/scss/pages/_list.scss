@@ -4,9 +4,18 @@ $thumbHeightNormal: 100px;
 $thumbWidthSmall: 90px;
 $thumbHeightSmall: 60px;
 
+#searchControlsContainer {
+    margin-left: -15px;
+    background: url(../images/search_panel.jpg) no-repeat 0 100%;
+    padding-bottom: 210px;
+    @include mq ($until: media_size_xxsm) {
+        background: url(../images/search_panel_small.jpg) no-repeat 0 100%;
+        padding-bottom: 380px;
+    }
+}
 
 #searchControls {
-    padding: 10px 0px 15px 0px;
+    padding: 10px 0px 15px 15px;
 
     label {
         font-size: 0.7em;
@@ -18,7 +27,7 @@ $thumbHeightSmall: 60px;
         background-color: #222;
         margin-bottom: 15px;
 
-        margin-left: -15px;
+        margin-left: -10px;
         padding-left: 8px;
         max-width: 470px;
         min-width: 330px;
@@ -59,6 +68,7 @@ $thumbHeightSmall: 60px;
         float: left;
         text-align: right;
         min-width: 230px;
+        margin-top: 90px;
 
         .searchField {
             margin-top: 25px;
@@ -82,6 +92,7 @@ $thumbHeightSmall: 60px;
         text-align: right;
         min-width: 160px;
         padding-left: 20px;
+        margin-top: 90px;       
 
         div#resultsPerPageInfo {
             padding-right: 6px;
@@ -97,22 +108,24 @@ $thumbHeightSmall: 60px;
     .controlsTitle {
         float: left;
         overflow-y: hidden;
+        background-color: #000;
     }  
 
 }
 
 .responsiveHR {
+
     min-width: 330px;
     max-width: 470px;
     @include mq ($from: media_size_xsm) {
         margin-top: 0px;
     }
+
 }
 
-#multiList {
-    width: 1200px;
-    margin: 0 auto;
-}
+//#multiList {
+//    margin: 0 auto;
+//}
 
 .galaxyThumb {
     min-height: $thumbHeightSmall;
@@ -135,7 +148,7 @@ $thumbHeightSmall: 60px;
 .galaxyList {
     border: 2px solid $backgroundColorLight;
     border-radius: 30px;
-    padding: 5px 0px 10px 20px;
+    padding: 5px 0px 10px 25px;
 
     -moz-column-gap: 0px;
     -webkit-column-gap: 0px;
@@ -237,12 +250,30 @@ $thumbHeightSmall: 60px;
     }
 }
 #searchResultsSection {
-    margin-top: -20px;
+    background: url(../images/results.jpg) no-repeat 0 100%;
+    background-position: top left;
+    padding-bottom: 10px;
+
+    #searchResultInfo {
+        padding-top: 40px;
+    }
+
+}
+
+.galaxyResultInfo {
+
+    float:left;
 }
 
 #prevNextButtons {
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+.footerButtonContainer {
+    background: url(../images/footer-button-background.jpg) no-repeat 0 100%;
+    background-position: top left;
+    padding-bottom: 10px;    
 }
 
 #backToTopButton {

@@ -52,7 +52,6 @@
   background-image: linear-gradient(to bottom, $secondaryColorDark, $secondaryColorDarkest);
   border: solid $secondaryColorMedium 1px;
 
-
   &:hover {
     background: $secondaryColorMedium;
     background-image: -webkit-linear-gradient(top, $secondaryColorMedium, $secondaryColorDark);
@@ -62,4 +61,8 @@
     background-image: linear-gradient(to bottom, $secondaryColorMedium, $secondaryColorDark);
 
   }
+}
+
+.buttonFat {
+  height: 40px;
 }

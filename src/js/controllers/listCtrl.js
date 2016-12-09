@@ -39,32 +39,21 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     socket.removeAllListeners();
   });
 
-  // ---------------------------------------------------
-  // listen for socket messages from server
-
-/*
-  // This is now handled server-side (test this before removing)
-  socket.on('connect', function () {
-    // sends to socket.io server the host/port of oscServer and oscClient
-    socket.emit('config', {
-      server: {
-        port: 3333,
-        host: MULTIVERSE_SERVER_IP
-      },
-      client: {
-        port: 3334,
-        host: MULTIVERSE_SERVER_IP
-      }
-    });
-  });
-*/
 
   // get returned list of galaxies
   socket.on("galaxyList", function (data) {
     $scope.galaxies = data;
     appVars.galaxyList = data;
     $scope.numGalaxies = data.length;
-    $scope.resultRatio = Math.round($scope.numGalaxies / 480 * 1000)/10;
+    var ratio = $scope.numGalaxies / 480 * 1000 / 10;
+    if(ratio === 0) {
+      $scope.resultRatio = "0";      
+    } 
+    else if(ratio < 1.0) {
+      $scope.resultRatio = "<1";       
+    } else {
+      $scope.resultRatio = Math.round(ratio);
+    }
 
     $scope.galaxyOrder = appVars.searchTerms.orderBy;
     $scope.changeOrderBy();
@@ -187,6 +176,7 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     socket.emit('galaxyListRequest', $scope.galaxyGroup, $scope.galaxyType);
   };
   */
+
   $scope.changeGroupSelect = function (selectedItem) {
     $scope.galaxyGroup = selectedItem.name;
     resetPageScrollPos = true;
@@ -196,16 +186,6 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     socket.emit('galaxyListRequest', $scope.galaxyGroup, type);
   };
 
-  // old version
-  /*
-  $scope.changeTypeSelect = function () {
-    resetPageScrollPos = true;
-    console.log('galaxy type: ' + $scope.galaxyType);
-    appVars.searchTerms.galaxyType = $scope.galaxyType;
-    appVars.searchTerms.resultsStartPosition = 0;
-    socket.emit('galaxyListRequest', $scope.galaxyGroup, $scope.galaxyType);
-  };
-  */
   $scope.changeTypeSelect = function (selectedItem) {
     $scope.galaxyType = selectedItem;
     console.log('Galaxy type requested: ' +  $scope.galaxyType);
@@ -215,7 +195,6 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     var type = $scope.galaxyType==='All' ? '' : $scope.galaxyType;
     socket.emit('galaxyListRequest', $scope.galaxyGroup, type);
   };
-
 
   $scope.changeSortDirection = function () {
     resetPageScrollPos = true;
@@ -286,7 +265,8 @@ angular.module('myApp').controller('ListController', ['$scope', '$http', '$windo
     size: false
   };
 
-  // begin by getting initial group list (which then calls the initial galaxy list request)
+  // -------------------------------------------------
+  // Start page by getting initial group list (which then calls the initial galaxy list request)
   socket.emit('galaxyGroupsRequest');
 
 }]);

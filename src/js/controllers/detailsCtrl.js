@@ -16,8 +16,8 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
   };
 
   $scope.allowExternalControl = appVars.globalOptions.allowExternalControl;
-  $scope.isGalaxyListEmpty = true;
-  $scope.showThumbnailImage = false; // delays showing image until loaded
+  $scope.isGalaxyListEmpty = false;
+  $scope.showHiddenImages = false; // delays showing image until loaded
 
   $scope.$on('$destroy', function (event) {
     socket.removeAllListeners();
@@ -37,6 +37,10 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
     galaxy.ImageFile_fulltext = 'images/galaxies 150 (png)/' + galaxy.ImageFile;
 
     $scope.isGalaxyListEmpty = appVars.galaxyList.length > 0 ? false : true;
+
+    // To prevent a visual flash, the picture thumbnail element is by default hidden, then shown once the data is loaded
+    $scope.showHiddenImages = true;
+
 
     // build the search descriptor line of text
     if(!$scope.isGalaxyListEmpty) {
@@ -72,8 +76,7 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
       $scope.sendOSC();
     }
 
-    // To prevent a visual flash, the picture thumbnail element is by default hidden, then shown once the data is loaded
-    $scope.showThumbnailImage = true;
+
 
   });
 

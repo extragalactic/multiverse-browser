@@ -55,7 +55,7 @@
             }
             // ... not working
             #listButton {
-                padding: 8px 5px 8px 5px;
+                padding: 18px 5px 18px 5px;
             }
         }  
     }
@@ -67,9 +67,11 @@
         margin-bottom: 10px;
         min-width: 365px;
 
-        //border-style: solid;
-        //border-color: #333;
-        //border-width: 0px 0px 2px 0px;
+        background: url(../images/details-info-background.jpg) no-repeat 0 100%;
+        background-position: top left;
+        padding-bottom: 20px;
+
+        
 
         div#galaxyDetailsBox1 {
             float: left;
