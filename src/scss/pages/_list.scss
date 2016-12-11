@@ -113,15 +113,14 @@ $thumbHeightSmall: 60px;
 
 }
 
-.responsiveHR {
-
+.middleDivider {
     min-width: 330px;
     max-width: 470px;
     @include mq ($from: media_size_xsm) {
         margin-top: 0px;
     }
-
 }
+
 
 //#multiList {
 //    margin: 0 auto;
@@ -261,9 +260,12 @@ $thumbHeightSmall: 60px;
 }
 
 .galaxyResultInfo {
-
     float:left;
+    margin-left: 50px;
+    margin-right: 15px;
+    font-size: 35px;
 }
+
 
 #prevNextButtons {
     margin-top: 15px;
@@ -279,3 +281,4 @@ $thumbHeightSmall: 60px;
 #backToTopButton {
     margin-top: 12px;
 }
+

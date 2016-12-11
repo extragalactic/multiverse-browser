@@ -67,11 +67,15 @@
         margin-bottom: 10px;
         min-width: 365px;
 
-        background: url(../images/details-info-background.jpg) no-repeat 0 100%;
-        background-position: top left;
-        padding-bottom: 20px;
+        div#containerBox {
+            float: left;
 
-        
+            background: url(../images/details-info-background.jpg) no-repeat 0 100%;
+            background-position: top left;
+            padding-bottom: 20px;
+            padding-top: 50px;
+
+        }
 
         div#galaxyDetailsBox1 {
             float: left;

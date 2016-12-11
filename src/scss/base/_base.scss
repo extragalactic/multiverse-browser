@@ -103,7 +103,7 @@ body {
 }
 
 .textTab {
-    background-color: black;
+    background-color: #000;
     border: 0px solid $textColorDark;
     border-radius: 6px;
 }
@@ -113,7 +113,9 @@ body {
 }
 
 .dataValueText {
+    padding: 1px 3px 1px 3px;
     color: $primaryColorLight;
+    background-color: #000;
 }
 
 .searchDescriptorText {
@@ -124,6 +126,17 @@ body {
 .clearfix {
     overflow: auto;
     clear: both;
+}
+
+.readable {
+    background-color: #000;  
+}
+
+.indented-sm {
+    padding-left: 5px;
+}
+.indented-md {
+    padding-left: 10px;
 }
 
 .ui-select {

@@ -62,13 +62,6 @@
                   </br>
                </div>
                <div id="searchBarMiddle">
-                  <label>
-                     <input type="radio" ng-model="direction" name="direction" value="" ng-change="changeSortDirection()"><span class="controlsTitle">ascending</span>
-                  </label>
-                  <label>
-                     <input type="radio" ng-model="direction" name="direction" value="reverse" ng-change="changeSortDirection()"><span class="controlsTitle">descending</span>
-                  </label>
-                  </br>
                   <label><span class="controlsTitle">Order by:</span>
                      <select ng-model="galaxyOrder" ng-change="changeOrderBy()">
                         <option value="Common_Name">Name</option>
@@ -77,6 +70,13 @@
                         <option value="Diameter">Size</option>
                      </select>
                   </label>
+                  </br>                  
+                  <label>
+                     <input type="radio" ng-model="direction" name="direction" value="" ng-change="changeSortDirection()"><span class="controlsTitle">ascending</span>
+                  </label>
+                  <label>
+                     <input type="radio" ng-model="direction" name="direction" value="reverse" ng-change="changeSortDirection()"><span class="controlsTitle">descending</span>
+                  </label>                  
                   </br>                  
                   <div id="resultsPerPageInfo">
                      <label><span class="controlsTitle">Results per Page:</span>
@@ -126,15 +126,15 @@
       <div class="row">
          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
       
-            <div class="responsiveHR">
-              <h5>Search includes 480 of the largest galaxies within 100 million light years.</h5>
+            <div class="middleDivider">
+              <h5 class="indented-md">Search 480 of the largest galaxies within 100 million light years of the Milky Way. Select a Group and a Type, then click on each galaxy for details.</h5>
               
               <img src="images/star-divider.jpg"/>
             </div>    
 
             <div id="searchResultsSection" class="clearfix">
               <div id="searchResultInfo">
-               <h1 class="galaxyResultInfo"> {{numGalaxies}}</h1><h3>Galaxies ({{resultRatio}}%)</h3>
+               <h1 class="galaxyResultInfo readable"> {{numGalaxies}}</h1><h3 class=""> Galaxies ({{resultRatio}}%)</h3>
                <h4 ng-bind="showingTextBox"></h4>
                <div id="prevNextButtons" ng-class="hideNextPrevButtons ? 'hidden': ''">
                   <button class="btn" ng-click="prevPage()">

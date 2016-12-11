@@ -30,8 +30,10 @@
                      </div>
                   </div>
                   <div id="galaxyDetailsRight">
+                     <div id="containerBox">
                      <div id="galaxyDetailsBox1">
                         <h4>Group: <span class="dataValueText" ng-bind="galaxyDetails.Group"></span></h4>
+                        <!--<h4 class="readable">Group: <span class="dataValueText" ng-bind="galaxyDetails.Group"></span></h4>-->
                         <h4>Diameter: <span class="dataValueText"><span ng-bind="galaxyDetails.Diameter_fulltext"> </span></span></h4>
                         <h4>Distance: <span class="dataValueText"><span ng-bind="galaxyDetails.Distance_fulltext"></span></span></h4>
                         <h4>Visual Mag: <span class="dataValueText" ng-bind="galaxyDetails.VisualMag"></span></h4>
@@ -41,6 +43,7 @@
                         <h4>Decl: <span class="dataValueText"><span ng-bind="galaxyDetails.Decl_fulltext"></span></span></h4>
                         <h4>Type: <span class="dataValueText" ng-bind="galaxyDetails.Type_Text"></span></h4>
                         <h4><span class="dataValueText"  ng-bind="galaxyDetails.Type"></span></h4>
+                     </div>
                      </div>
                      <div id="galaxyDetailsBox3" class="hidden-xs">
                         <div class="nextPrevControls" ng-class="isGalaxyListEmpty ? 'hidden': ''">
