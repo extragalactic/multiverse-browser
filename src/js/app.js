@@ -49,7 +49,7 @@ var myApp = angular.module('myApp', [
     templateUrl: 'partials/home.html',
     controller: 'HomeController'
   }).
-  when('/list', {
+  when('/galaxies', {
     templateUrl: 'partials/list.html',
     controller: 'ListController'
   }).

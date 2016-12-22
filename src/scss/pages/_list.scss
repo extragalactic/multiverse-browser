@@ -10,7 +10,7 @@ $thumbHeightSmall: 60px;
     padding-bottom: 210px;
     @include mq ($until: media_size_xxsm) {
         background: url(../images/search_panel_small.jpg) no-repeat 0 100%;
-        padding-bottom: 380px;
+        padding-bottom: 300px;
     }
 }
 
@@ -65,10 +65,16 @@ $thumbHeightSmall: 60px;
     }
 
     div#searchBarLeft {
-        float: left;
         text-align: right;
+
+        float: right;
         min-width: 230px;
-        margin-top: 90px;
+        margin-top: 65px;
+        @include mq ($from: media_size_xxsm) {
+            float: left;
+            min-width: 230px;  
+            margin-top: 90px;      
+        }
 
         .searchField {
             margin-top: 25px;
@@ -88,11 +94,18 @@ $thumbHeightSmall: 60px;
     }   
 
     div#searchBarMiddle {
-        float: left;
         text-align: right;
-        min-width: 160px;
-        padding-left: 20px;
-        margin-top: 90px;       
+       
+        float: right;       
+        min-width: 300px;
+        margin-top: 3px; 
+        padding-left: 30px;      
+        @include mq ($from: media_size_xxsm) {
+            float: left;
+            min-width: 160px;            
+            margin-top: 90px;
+            padding-left: 20px;
+        }  
 
         div#resultsPerPageInfo {
             padding-right: 6px;
@@ -114,6 +127,7 @@ $thumbHeightSmall: 60px;
 }
 
 .middleDivider {
+    padding-right: 10px;
     min-width: 330px;
     max-width: 470px;
     @include mq ($from: media_size_xsm) {

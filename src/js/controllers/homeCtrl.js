@@ -25,6 +25,6 @@ angular.module('myApp').controller('HomeController', ['$scope', '$http', 'appVar
   $scope.slides = slides;
 
   $scope.gotoList = function () {
-    window.location.href = '#/list/';
+    window.location.href = '#/galaxies/';
   };
 }]);

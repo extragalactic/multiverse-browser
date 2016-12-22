@@ -94,7 +94,7 @@ angular.module('myApp').controller('DetailsController', ['$scope', '$http', '$ro
 
   // user clicks the Return to List button
   $scope.returnToList = function () {
-    window.location.href = '#/list/';
+    window.location.href = '#/galaxies/';
   };
 
   // previous galaxy
