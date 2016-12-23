@@ -8,7 +8,7 @@
                <div id="galaxyDetailsTop">
                   <div id="galaxyDetailsLeft" class="hidden-xs">
                      <div class="galaxyDetailsThumbTitle">
-                        <img src="images/details-title.png">
+                        <h1><span ng-bind="galaxyDetails.Common_Name"></span></h1>
                      </div>
                      <div class="galaxyDetailsThumb" ng-class="showHiddenImages ? '':'hidden'">
                         <img ng-src={{galaxyDetails.ImageFile_fulltext}} alt="">
@@ -16,7 +16,7 @@
                   </div>
                   <div id="galaxyDetailsTitle-xs" class="hidden-sm hidden-md hidden-lg">
                      <div class="galaxyDetailsThumbTitle-xs">
-                        <img src="images/details-title.png">
+                        <h1><span ng-bind="galaxyDetails.Common_Name"></span></h1>
                      </div>
                      <div class="galaxyNextPrevList-xs">
                         <div class="galaxyNextPrev" ng-class="isGalaxyListEmpty ? 'hidden': ''">
@@ -31,9 +31,6 @@
                   </div>
                   <div id="galaxyDetailsRight">
                      <div id="containerBox">
-                     <div id="galaxyTitleBox">
-                        <h1><span ng-bind="galaxyDetails.Common_Name"></span></h1>
-                     </div>
                      <div id="galaxyDetailsBox1">
                         <h4>Group: <span class="dataValueText" ng-bind="galaxyDetails.Group"></span></h4>
                         <!--<h4 class="readable">Group: <span class="dataValueText" ng-bind="galaxyDetails.Group"></span></h4>-->
